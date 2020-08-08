@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 	{
 		path: '/',
 		name: 'Nav',
-		component: () => import('@/views/Nav.vue'),
+		// component: () => import('@/views/Nav.vue'),
 		meta: {
 			title: '导航',
 			back: 1,
