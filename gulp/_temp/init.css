@@ -1,0 +1,28 @@
+#app {
+  max-width: 750px;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.container.flex-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.container.flex-wrapper .flex-grow {
+  flex-grow: 1;
+  position: relative;
+}
+body,
+html {
+  background: transparent;
+  overflow: hidden;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"],
+input[type="tel"] {
+  -moz-appearance: textfield;
+}

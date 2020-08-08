@@ -1,0 +1,78 @@
+.header-top .title {
+  text-align: center;
+  line-height: 0.9rem;
+  box-shadow: 0 0.02rem 0.05rem rgba(0,0,0,0.1);
+}
+.sell-page {
+  height: 100%;
+  padding-top: 0.6rem;
+}
+.sell-page h2 {
+  text-align: center;
+  font-size: 0.36rem;
+}
+.sell-page ul {
+  float: left;
+  width: 100%;
+  margin-top: 0.6rem;
+}
+.sell-page ul li {
+  padding: 0 4%;
+  height: 1.04rem;
+  margin-top: 0.2rem;
+}
+.sell-page ul li span {
+  float: left;
+  line-height: 1.04rem;
+}
+.sell-page ul li .box {
+  float: left;
+  margin-left: 0.32rem;
+}
+.sell-page ul li .box p {
+  line-height: 1.04rem;
+}
+.sell-page ul li .add {
+  float: left;
+  margin-left: 0.32rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #3048ff;
+}
+.sell-page .tips {
+  float: left;
+  width: 100%;
+  padding: 0 10%;
+  margin-top: 1rem;
+}
+.sell-page .tips .box {
+  background: rgba(0,0,0,0.6);
+  border-radius: 0.1rem;
+  padding: 0.25rem 0;
+}
+.sell-page .tips .box h4 {
+  text-align: center;
+  font-size: 0.3rem;
+  color: #fff;
+  padding-bottom: 0.2rem;
+}
+.sell-page .tips .box p {
+  color: #fff;
+  padding: 0 0.4rem;
+  line-height: 1.5;
+}
+.pub-button {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0 0.52rem 1.04rem;
+}
+.pub-button button {
+  height: 1.05rem;
+  border-radius: 0.1rem;
+  background: #3048ff;
+  color: #fff;
+  width: 100%;
+}

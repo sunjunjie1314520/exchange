@@ -1,0 +1,396 @@
+
+back(FileName,size=cover)
+    background url(FileName) center top no-repeat
+    background-size size
+    
+back1(FileName,width=null)
+    if width
+        background url(FileName) center/width no-repeat
+    else
+        background url(FileName) center no-repeat
+
+back2(FileName,width=null)
+    if width
+        background url(FileName) right center/width no-repeat
+    else
+        background url(FileName) right center no-repeat
+        
+backi(FileName,prvalue=true,prvalueright=0px)
+    if prvalue
+        padding-left prvalue
+        background url(FileName) left center no-repeat
+    else
+        padding-right prvalueright
+        background url(FileName) right center no-repeat
+
+backico(FileName,Fwidth)
+    background url(FileName) 'calc(100% - %s) center no-repeat' % Fwidth
+
+fixed()
+    z-index 3
+    position fixed
+    left 0
+    top 0
+    width 100%
+    height 100%
+    background-color rgba(#000,arguments[1])
+    if arguments[0]==1
+        display block
+    else
+        display none
+
+widthC(width)
+    width 'calc(100% - %s)' % width
+    float right unless @float
+
+margin-topC(height)
+    margin-top 'calc((100vh - %s)/2)' % height
+
+margin-topV(height,ohei)
+    margin-top ((height - ohei) /2)
+    
+heightL(height)
+    height height
+    line-height height
+
+heightC(height)
+    height 'calc((100vh - %s))' % height
+        
+backgroundL(a=#f60,b=#f0f,f=top)
+    background -webkit-linear-gradient(f,a,b)
+
+abs(v=1)
+    if v==0
+        display none
+    position absolute
+    left 0
+    top 0
+    width 100%
+    height 100%
+    
+widthZ(val,pic=false,wauto=false)
+    width val
+    height val
+    if pic
+        border-radius 50%
+        overflow hidden
+        display block
+        if wauto
+            margin 0 auto
+        navigator
+        a
+            display block
+            width 100%
+            height 100%
+            if pic
+                border-radius 50%
+                overflow hidden
+        img
+        image
+            width 100%
+            height 100%
+    
+inputW(color=#a9a9a9)
+    &::-webkit-input-placeholder
+        color color
+
+fc(a)
+    position relative
+    &:nth-child({a}n+1)
+        &:after
+            display none
+        &:before
+            display none
+            
+border-topN(val,three=null)
+    if three
+        &:nth-child({three}n+1)
+            border-top none
+    else
+        &:first-child
+            border-top none
+        
+border-leftN(val,three=null)
+    if three
+        &:nth-child({three}n+1)
+            border-left none
+    else
+        &:first-child
+            border-left none
+
+dm()
+    display block
+    margin 0 auto
+    
+
+mt(v,t=-1,b=-1)
+    if t>0
+        &:nth-child(n+{t})
+            margin-top v
+    else
+        if b>0
+            &:nth-last-child(n+{b})
+                margin-top v
+        else
+            &:nth-of-type(1)
+                margin-top v
+    
+
+            
+pl(v)
+    &:first-child
+        padding-left v
+
+ml(v,t=-1)
+    if t>=0
+        &:nth-child({t}n+1)
+            margin-left v
+    else
+        &:nth-of-type(1)
+            margin-left v
+            
+ac(fontColor,back=transparent,Ele=null)
+    if Ele
+        &.acti
+            {Ele}
+                color fontColor
+                background-color back
+    else
+        &.acti
+            border-color back
+            color fontColor
+            background-color back
+
+pos(v)
+    position absolute
+    top 50%
+    &.prev
+        left v
+    &.next
+        right v
+
+hover(color,back=transparent,obj=null)
+    if obj
+        transition .2s
+        {obj}
+            transition .2s
+        &:hover
+            background back
+            {obj}
+                transition .2s
+                border-color back
+                color color
+    else
+        transition .2s
+        &:hover
+            color color
+            border-color back
+            background back
+            
+
+even(marginLeft)
+    &:nth-child(even)
+        margin-left marginLeft
+
+// 偶数右浮动
+fre()
+    &:nth-child(even)
+        float right
+    
+center(v)
+    position absolute
+    if v==1
+        left 50%
+        transform translate(-50%,0)
+    if v==2
+        top 50%
+        transform translate(0,-50%)
+    if v==3
+        left 50%
+        top 50%
+        transform translate(-50%,-50%)
+        
+
+
+displayC(v=1)
+    display block
+    text-align center
+    if v!=1
+        margin-top v
+        
+ov(num)
+    if num==1
+        white-space nowrap
+    else
+        -webkit-line-clamp num
+        display:-webkit-box;
+        word-wrap:break-word;
+
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    -webkit-box-orient:vertical;
+    
+//背景透明
+backgroundR(Color,Alpha)
+    background rgba(Color,Alpha)
+
+last()
+    &:last-child
+        border-bottom none
+
+focus(color)
+    transition .2s
+    &:focus
+        border-color color
+
+check(filename,img='img')
+    &:checked
+        background url('../'+img+'/'+filename)
+        border none	
+fd()
+    overflow hidden
+    img
+        transition .3s
+    &:hover
+        img
+            transform scale(1.1)
+lca()
+    &:last-child
+        width auto
+
+ro()
+    transition .3s
+    cursor pointer
+    &:hover
+        transform rotate(180deg)
+ls(v)
+    text-indent v
+    letter-spacing v
+    
+opacity(v)
+    opacity v
+    filter unquote('alpha(opacity=%s)' % (v*100))
+
+bt()
+    border 1px solid transparent	
+
+
+oh(wid)
+    width wid
+    height wid
+    border-radius 50%
+    overflow hidden
+    image
+    img
+        width 100%
+        min-height 100%
+        
+active(bgcolor)
+    &:active
+        background bgcolor
+
+vh(hei,min=0)
+    height (hei/10.8) vh
+    if min
+        min-height (hei/10.8) vh
+        
+col(nums,marl)
+    width 'calc((100% / %s) - %s)' % (nums marl)
+    margin-left marl
+
+borderS(val,bg)
+    if val==1
+        &:after
+            content ""
+            background bg
+            position absolute
+            height 1px
+            transform-origin  0 0
+            transform scale(.5, .5)
+            width 200%
+            top 0
+            left 0
+    if val==2
+        &:before
+            content ""
+            background bg
+            position absolute
+            width 1px
+            transform-origin right 0
+            transform scale(.15, .15)
+            height 667%
+            top 0
+            right 0
+    if val==3
+        &:after
+            content ""
+            background bg
+            position absolute
+            height 1px
+            transform-origin  0 bottom
+            transform scale(.15, .15)
+            width 667%
+            bottom 0
+            left 0
+    if val==4
+        &:before
+            content ""
+            background bg
+            position absolute
+            width 1px
+            transform-origin 0 0
+            transform scale(.15, .15)
+            height 667%
+            top 0
+            left 0
+            
+media-width(v1,v2=1200)
+    width (v1/v2*100) %
+
+
+line(w=30px,h=4px,bgcolor=#000,axis=2)
+    position relative
+    &:after
+        content ''
+        position absolute
+        background bgcolor
+        width w
+        height h
+        left 50%
+        transform translate(-50%,0)
+        pointer-events none
+        if axis==1
+            top 0
+        else
+            bottom 0
+
+df(val, hor=1)
+    display flex
+    if hor==1
+        flex-direction row
+    else
+        flex-direction column
+    if val==1
+        align-items center
+    if val==2
+        justify-content center
+    if val==3
+        align-items center
+        justify-content center
+    if val==4
+        justify-content space-between
+    if val==5
+        justify-content space-around
+    
+
+fw()
+    float left
+    width 100%
+
+touch()
+    -webkit-overflow-scrolling touch
+
+filter()
+    &.active
+        filter blur(1px)
