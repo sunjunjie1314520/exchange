@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<AppBar>1052</AppBar>
+		<AppBar></AppBar>
 		<transition :name="transitionName"> 
 			<router-view class="app-router" />
 		</transition>

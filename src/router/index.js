@@ -39,6 +39,43 @@ Vue.use(VueRouter)
 			title: '购买音豆',
 			back: 2,
 		}
+	},
+	{
+		path: '/changePass',
+		name: 'ChangePass',
+		component: () => import('@/views/ChangePass.vue'),
+		meta: {
+			title: '修改交易密码',
+			back: 3,
+		}
+	},
+	{
+		path: '/order',
+		name: 'Order',
+		component: () => import('@/views/Order.vue'),
+		meta: {
+			title: '订单记录',
+			back: 2,
+			right: 1,
+		}
+	},
+	{
+	    path: '/set',
+	    name: 'Set',
+	    component: () => import('@/views/Set.vue'),
+	    meta: {
+	        title: '设置',
+	        back: 2
+	    }
+	},
+	{
+	    path: '/bind',
+	    name: 'Bind',
+	    component: () => import('@/views/Bind.vue'),
+	    meta: {
+	        title: '绑定帐户信息',
+	        back: 3
+	    }
 	}
 ]
 

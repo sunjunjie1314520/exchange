@@ -16,9 +16,7 @@
             <div class="title" v-else-if="AppBar.type==2 && !showTitle">{{playGroupId | DetailName}}</div>
 
             <div class="fr">
-                <div v-if="AppBar.type==2" @click="h2(!alertConfig.Choose)" :class="['select-color', {'active': alertConfig.Choose}]">选择彩种</div>
-                <div v-if="AppBar.type==3" class="money">余额:<var>{{MyInfo.balance | moneyFixed(2)}}</var> <span></span></div>
-                <div v-if="AppBar.dawprize" class="money" @click="h3">{{drawFtitle}}</div>
+                <div class="filter-text" @click="h2(!alertConfig.Order)" v-if="AppBar.right==1">筛选</div>
             </div>
         </div>
         <!-- <div class="header-null"></div> -->
@@ -69,12 +67,7 @@
                 this.$store.commit('Betting/SET_ALERT_CONFIG', {SelectMode: is})
             },
             h2(is){
-                this.$store.commit('Betting/SET_ALERT_CONFIG', {Choose: is})
-            },
-            h3(){
-                let { id } =  this.$route.params;
-                id = id == 1 ? 2 : 1;
-                this.$router.replace(`/dawprize/2/2/${id}`)
+                this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is})
             },
         }
     }

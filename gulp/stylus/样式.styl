@@ -25,6 +25,14 @@
         line-height 100px
         box-shadow 0 2px 5px rgba(#000, .1)
         font-size 34px
+    .fr
+        position absolute
+        right 0
+        top 0
+        padding 0 20px
+        .filter-text
+            line-height 100px
+            float left
 
 .sell-page
     height 100%
@@ -123,3 +131,156 @@
         &:active
             background themea
 
+
+.change-pass
+    fw 1
+    padding 0 30px
+    ul
+        fw 1
+        li
+            fw 1
+            border-bottom 1px solid #ccc
+            padding 20px 0
+            span
+                float left
+                width 140px
+                line-height 60px
+            .fr
+                widthC 140px
+                height 60px
+                input
+                    height 60px
+                    border none
+                    width 100%
+                    float left
+                    &.short
+                        width 50%
+                b
+                    float right
+                    line-height 60px
+    .tips
+        fw 1
+        margin-top 20px
+        p
+            line-height 1.6
+            color #f00
+
+.order-page
+    .tabs
+        fw 1
+        border-bottom 1px solid #f7f7f7
+        ul
+            li
+                width 50%
+                float left
+                text-align center
+                line-height 100px
+                &.active
+                    position relative
+                    &:after
+                        content ''
+                        width 44px
+                        height 8px
+                        background theme
+                        border-radius 10px
+                        center 1
+                        bottom 0
+    .null-data1
+        fw 1
+        text-align center
+        padding-top 300px
+        img
+            width 80px
+            opacity .5
+        span
+            display block
+            margin-top 20px
+            color #999
+
+.filter
+    position fixed
+    left 0
+    right 0
+    .layout
+        background #2e3649
+        fw 1
+        ul
+            display flex
+            justify-content space-between
+            flex-wrap wrap
+            li
+                width 188px
+                height 84px
+                border-radius 10px
+                border 1px solid #ccc
+                color #fff
+                df 1
+                justify-content center
+                margin-top 31px
+                &.active
+                    background rgba(#000, .3)
+        .confirm
+            fw 1
+            justify-content space-between
+            display flex
+            padding 60px 104px
+            button
+                width 188px
+                height 84px
+                border-radius 10px
+                background theme
+                color #fff
+        
+.set-page
+    ul
+        padding 0 20px
+        li
+            fw 1
+            line-height 120px
+            border-bottom 1px solid #ccc
+            background url('../../src/static/img/958761_128x128.png') right center/30px no-repeat
+            a
+                fw 1
+    .out-login
+        position absolute
+        left 0
+        right 0
+        bottom 120px
+        text-align center
+        button
+            width 310px
+            height 102px
+            color #fff
+            border-radius 10px
+            background theme
+
+.pub-upload
+    widthZ 140px
+    border 1px solid #999
+    position relative
+    back1 '../../src/static/img/774498_162x128.png' 60px
+    input
+        position absolute
+        width 100%
+        height 100%
+        opacity 0
+        left 0
+        top 0
+
+
+.bind-page
+    fw 1
+    ul
+        li
+            fw 1
+            border-bottom 1px solid #f1f1f1
+            padding 25px 30px
+            span
+                float left
+                width 220px
+                line-height 90px
+            .fr
+                widthC 220px
+                input[type="text"]
+                    height 90px
+                    border none

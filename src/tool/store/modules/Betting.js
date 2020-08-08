@@ -22,6 +22,7 @@ const state = {
         alertNotePlate: false,
         SelectMode: false,
         Choose: false,
+        Order: false
     },
     // 模式配置
     mode_config: {},
