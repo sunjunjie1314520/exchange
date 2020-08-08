@@ -9,7 +9,8 @@ Vue.use(VueRouter)
 		name: 'Nav',
 		component: () => import('@/views/Nav.vue'),
 		meta: {
-			title: '导航'
+			title: '导航',
+			back: 1,
 		}
 	},
 	{
@@ -17,7 +18,8 @@ Vue.use(VueRouter)
 	    name: 'Home',
 	    component: () => import('@/views/Home.vue'),
 	    meta: {
-	        title: '首页'
+			title: '首页',
+			back: 2,
 	    }
 	},
 	{
@@ -25,13 +27,18 @@ Vue.use(VueRouter)
 	    name: 'Sell',
 	    component: () => import('@/views/Sell.vue'),
 	    meta: {
-	        title: '出售音豆'
+			title: '出售音豆',
+			back: 2,
 	    }
 	},
 	{
-		path: '/about',
-		name: 'About',
-		component: () => import('@/views/About.vue')
+		path: '/buy',
+		name: 'Buy',
+		component: () => import('@/views/Buy.vue'),
+		meta: {
+			title: '购买音豆',
+			back: 2,
+		}
 	}
 ]
 
@@ -44,8 +51,7 @@ const router = new VueRouter({
 router.afterEach(to => {
     var config = {
         type: 1,
-        ...to.meta,
-        back: to.path.match(/\//ig).length,
+        ...to.meta
     }
     router.app.$options.store.commit('Betting/SET_TITLE_CONFIG', config);
 })

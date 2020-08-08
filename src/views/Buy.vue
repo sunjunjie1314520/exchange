@@ -1,28 +1,37 @@
 <template>
 	<div class="app">
 		<div class="sell-page">
-			<h2>可出售余额: 0.00 音豆</h2>
+			<h2>单价$0.7- 1.5</h2>
 			<ul>
 				<li>
-					<span>单价</span>
-					<div class="box">
-						<p>$0.7 (昨日均价-51%</p>
+					<div class="fl">
+						<span class="add i1"></span>
+					</div>
+					<div class="box1">
+						<p>1.5(昨日均价+6% )</p>
+					</div>
+					<div class="fl ml32">
+						<span class="add i2"></span>
 					</div>
 				</li>
 				<li>
 					<span>数量</span>
-					<div class="box">
-						<p>888.00</p>
+					<div class="box1">
+						<input type="text" placeholder="请输入交易数量">
 					</div>
 				</li>
 				<li>
 					<span>总价</span>
-					<div class="box">
-						<p>$ 621.6 =￥4351.2</p>
+					<div class="box1">
+						<input type="text" placeholder="请输入交易数量">
 					</div>
 				</li>
 			</ul>
 			<div class="tips">
+				<div class="money">
+					<p>单笔交易额s1000BFX</p>
+					<p>每日可交易s300OBFX (不含手续费)</p>
+				</div>
 				<div class="box">
 					<h4>温馨提示:</h4>
 					<p>1.交易开放时间为8:00-22:00</p>

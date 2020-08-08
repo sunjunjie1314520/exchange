@@ -2,10 +2,29 @@
 @import "theme.styl"
 
 .header-top
+    position fixed
+    left 0
+    right 0
+    top 0
+    z-index 98
+    .fl
+        display block
+        height h = 100px
+        position absolute
+        left 0
+        top 0
+        padding 0 20px
+        span
+            line-height h
+            text-align center
+            display inline-block
+            backi '../../src/static/img/70675f_128x128.png' 36px
+            background-size 30px
     .title
         text-align center
-        line-height 90px
+        line-height 100px
         box-shadow 0 2px 5px rgba(#000, .1)
+        font-size 34px
 
 .sell-page
     height 100%
@@ -17,7 +36,7 @@
         fw 1
         margin-top 60px
         li
-            padding 0 4%
+            padding 0 64px
             height 104px
             margin-top 20px
             span
@@ -28,19 +47,52 @@
                 margin-left 32px
                 p
                     line-height 104px
-            .add
+            .box1
                 float left
                 margin-left 32px
-                width 60px
-                height 60px
-                border-radius 50%
-                background #3048ff
+                height 104px
+                background #ccc
+                width 438px
+                border-radius 10px
+                p
+                    color #3048ff
+                    line-height 104px
+                    text-align center
+                input
+                    border none
+                    height 100%
+                    border-radius 10px
+                    width 100%
+                    padding 0 25px
+            .fl
+                margin-top 22px
+                .add
+                    float left
+                    width 60px
+                    height 60px
+                    border-radius 50%
+                    &.i1
+                        back1 '../../src/static/img/c3b057_128x128.png' 30px
+                        background-color #3048ff
+                    &.i2
+                        back1 '../../src/static/img/dd6594_128x128.png' 30px
+                        background-color #3048ff
+
+            .ml32
+                margin-left 32px
 
     .tips
         fw 1
-        padding 0 10%
-        margin-top 100px
+        padding 0 159px
+        margin-top 25px
+        .money
+            display block
+            p
+                line-height 1.6
+                font-size 26px
+
         .box
+            margin-top 56px
             background rgba(#000, .6)
             border-radius 10px
             padding 25px 0
@@ -51,8 +103,10 @@
                 padding-bottom 20px
             p
                 color #fff
-                padding 0 40px
+                padding 0 20px
                 line-height 1.5
+                font-size 26px
+                white-space nowrap
 
 .pub-button
     position fixed
@@ -66,4 +120,6 @@
         background #3048ff
         color #fff
         width 100%
+        &:active
+            background themea
 

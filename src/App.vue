@@ -16,8 +16,10 @@
 		},
 		watch:{
 			'$route' (to, from) {
-				const toDepth = to.path.split('/').length
-				const fromDepth = from.path.split('/').length
+				// const toDepth = to.path.split('/').length
+				// const fromDepth = from.path.split('/').length
+				const toDepth = to.meta.back
+				const fromDepth = from.meta.back
 				this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
 			}
 		},
@@ -66,7 +68,7 @@
 
 <style lang="stylus">
 .app-router
-	padding-top .95rem
+	padding-top 1rem
 	position absolute
 	left 0
 	top 0

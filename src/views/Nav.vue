@@ -17,3 +17,13 @@ export default {
 	}
 }
 </script>
+
+<style scoped lang="stylus">
+	h3
+		text-align center
+		line-height .9rem
+		background rgba(#000, .1)
+		margin-top 10px
+		a
+			display block
+</style>
