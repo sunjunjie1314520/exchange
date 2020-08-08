@@ -1,6 +1,11 @@
 <template>
 	<div class="app">
-		首页
+		<div class="home-page">
+            <div class="banner">
+
+            </div>
+            
+        </div>
 	</div>
 </template>
 
