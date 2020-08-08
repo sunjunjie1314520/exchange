@@ -8,6 +8,9 @@
 				<li>
 					<router-link to="/bind">绑定帐户信息</router-link>
 				</li>
+				<li>
+					<router-link to="/bind">交易规则</router-link>
+				</li>
 			</ul>
 
 			<div class="out-login">
