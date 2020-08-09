@@ -121,7 +121,7 @@
     left 0
     bottom 0
     right 0
-    padding 0 52px 104px
+    padding 0 52px 24px
     button
         height 105px
         border-radius 10px
@@ -139,7 +139,7 @@
         fw 1
         li
             fw 1
-            border-bottom 1px solid #ccc
+            border-bottom .1px solid #ccc
             padding 20px 0
             span
                 float left
@@ -237,7 +237,7 @@
         li
             fw 1
             line-height 120px
-            border-bottom 1px solid #ccc
+            border-bottom .1px solid #ccc
             background url('../../src/static/img/958761_128x128.png') right center/30px no-repeat
             a
                 fw 1
@@ -273,7 +273,7 @@
     ul
         li
             fw 1
-            border-bottom 1px solid #f1f1f1
+            border-bottom .1px solid #f1f1f1
             padding 25px 30px
             span
                 float left
@@ -287,7 +287,13 @@
 
 .rule-page
     fw 1
-    padding 0 30px
+    
+    overflow hidden
+    position relative
+    height 100%
+    .wrapper
+        padding 0 30px 30px
+        fw 1
     .title
         fw 1
         padding-top 20px

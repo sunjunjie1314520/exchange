@@ -82,7 +82,7 @@
   padding: 0.44rem 0;
   position: relative;
 }
-.home-page .data .today .itemafter {
+.home-page .data .today .item:after {
   content: '';
   position: absolute;
   top: 50%;
@@ -92,7 +92,7 @@
   height: 0.84rem;
   background-color: #3f4656;
 }
-.home-page .data .today .itemlast-childafter {
+.home-page .data .today .item:last-child:after {
   display: none;
 }
 .home-page .data .today .item .tit {
@@ -123,7 +123,7 @@
   padding: 0.44rem 0;
   position: relative;
 }
-.home-page .data .deal .itemafter {
+.home-page .data .deal .item:after {
   content: '';
   position: absolute;
   top: 50%;
@@ -133,7 +133,7 @@
   height: 0.84rem;
   background-color: #3f4656;
 }
-.home-page .data .deal .itemlast-childafter {
+.home-page .data .deal .item:last-child:after {
   display: none;
 }
 .home-page .data .deal .item .tit {
@@ -260,7 +260,7 @@
   left: -0.3rem;
   min-height: 1rem;
   padding-bottom: 0.4rem;
-  border-bottom: 0.02rem solid #47577a;
+  border-bottom: 0.1px solid #47577a;
 }
 .home-page .details .list .item .user {
   width: 100%;
@@ -386,11 +386,12 @@
 .menu-slide .assets .item {
   width: 100%;
   padding-bottom: 0.1rem;
-  border-bottom: 0.02rem solid #31384b;
+  border-bottom: 0.1px solid #31384b;
   margin-bottom: 0.2rem;
 }
-.menu-slide .assets .itemlast-child {
+.menu-slide .assets .item:last-child {
   border-bottom: none;
+  margin-bottom: 0;
 }
 .menu-slide .assets .item .tits {
   width: 100%;

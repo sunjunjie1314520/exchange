@@ -5,10 +5,10 @@
 				<div class="wrapper">
 					<div class="head">
 						<div class="text">
-							
+							首页
 						</div>
 						<div class="home-user" @click="show=true">
-							<img src="../../src/static/img/bab103_77x77.jpg" alt="">
+							<img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=251289958,1860898046&fm=26&gp=0.jpg" alt="">
 						</div>
 						<div class="func">
 							<div class="ico"><router-link to="/buy">买</router-link></div>
@@ -16,8 +16,8 @@
 						</div>
 					</div>
 
-					<div id="myChart" :style="{width: '320px', height: '200px'}"></div>
-
+					<!-- 图表 -->
+					<div id="myChart" :style="{width: $width, height: '200px'}"></div>
 
 					<div class="banner" v-if="false">
 						<img src="../../src/static/img/0fc7e1_690x335.jpg" alt="">
@@ -213,6 +213,7 @@ export default {
 	data(){
 		return {
 			show: false,
+			$width: 0,
 		}
 	},
 	
@@ -227,6 +228,9 @@ export default {
 			deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
 			bounce: true //是否启用回弹
 		})
+		var a = this.$assist.getScreenInfo()
+		this.$width = `${a.width}px`
+		console.log(this.$width);
 	},
 	methods: {
 		drawLine(){
@@ -237,11 +241,13 @@ export default {
 				color: ['#45cfae'],
 				grid: {
 					top: 20,
-					bottom: 40
+					bottom: 40,
+					left: 20,
+					right: 0
 				},
 				tooltip: {},
 				xAxis: {
-					data: ['2020/8/9', '2020/8/9', '2020/8/9'],
+					data: ['8/8', '8/9', '8/10', '8/11', '8/12', '8/13'],
 					axisLine: {
 						lineStyle: {
 							color: "#fff",
@@ -256,10 +262,10 @@ export default {
 					}
 				},
 				series: [{
-					name: '销量',
+					name: '价格',
 					type: 'line',
-					data: [1, 10, 22, 60]
-				}]
+					data: [1, 8, 18, 30, 42, 60]
+				}],
 			});
 		}
 	}
