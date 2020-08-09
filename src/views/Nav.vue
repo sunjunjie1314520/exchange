@@ -15,7 +15,7 @@ export default {
 	name: 'Home',
 	data(){
 		return {
-
+            title: '这是vue项目'
 		}
 	}
 }

@@ -284,6 +284,7 @@
                 input[type="text"]
                     height 90px
                     border none
+<<<<<<< HEAD
 
 .rule-page
     fw 1
@@ -302,3 +303,374 @@
             line-height 1.5
             margin-top 6px
     
+=======
+.home-page
+    width 100%
+    min-height: 150vh
+    background-color #1c222e
+    float left
+    overflow-y: scroll
+    padding: 0 30px
+    box-sizing: border-box
+    .head
+        width 100%
+        height 114px
+        position relative
+        .text
+            width 100%
+            line-height 114px
+            font-size 34px
+            color #fff
+            text-align center
+        .func
+            position absolute
+            right: 0
+            top: 0
+            height 114px
+            display flex
+            justify-content space-between
+            align-items center
+            .ico
+                width 64px
+                height 64px
+                background-color #2e3649
+                border-radius: 32px
+                text-align center
+                line-height 64px
+                color #fff
+                font-size 26px
+                margin-left 30px
+        .home-user
+            width 74px
+            height 74px
+            position absolute
+            left 0
+            top: 50%
+            margin-top -37px
+            border-radius: 37px
+            img
+                width 100%
+                height 100%
+                border-radius: 37px
+    .banner
+        width 100%
+        img
+            width 100%
+    .data
+        width 100%
+        min-height: 100px
+        background-color #2e3649
+        margin-top 20px
+        .today
+            width 100%
+            display flex
+            justify-content space-between
+            border-bottom: 2px solid #1b212f
+            .item
+                width 33.3%
+                padding: 44px 0
+                position relative
+                &:after
+                    content: ''
+                    position absolute
+                    top 50%
+                    margin-top -42px
+                    right: 0
+                    width 2px
+                    height 84px
+                    background-color #3f4656
+                &:last-child
+                    &:after
+                        display none
+                .tit
+                    width 100%
+                    text-align center
+                    line-height 44px
+                    font-size 26px
+                    color #9aa6c8
+                .number
+                    width 100%
+                    padding-top 12px
+                    line-height 46px
+                    text-align center
+                    color #45cfae
+                    font-size 32px
+                    font-weight bold
+                    font-family: Arial, Helvetica, sans-serif
+        .deal
+            width 100%
+            min-height: 100px
+            display flex
+            justify-content space-between
+            .item
+                width 50%
+                padding: 44px 0
+                position relative
+                &:after
+                    content: ''
+                    position absolute
+                    top 50%
+                    margin-top -42px
+                    right: 0
+                    width 2px
+                    height 84px
+                    background-color #3f4656
+                &:last-child
+                    &:after
+                        display none
+                .tit
+                    width 100%
+                    text-align center
+                    line-height 44px
+                    font-size 26px
+                    color #9aa6c8
+                .number
+                    width 100%
+                    padding-top 12px
+                    line-height 46px
+                    text-align center
+                    color #45cfae
+                    font-size 32px
+                    font-weight bold
+                    font-family: Arial, Helvetica, sans-serif
+    .search
+        width 100%
+        height 74px
+        background-color #2e3649
+        border-radius: 8px
+        margin-top 20px
+        padding: 0 32px
+        display flex
+        justify-content space-between
+        .ico
+            width 38px
+            height 100%
+            display flex
+            justify-content center
+            align-items center
+            img
+                height 30px
+        .text
+            width calc(100% - 38px)
+            display flex
+            justify-content space-between
+            input
+                width 70%
+                height 74px
+                border: none
+                font-size 28px
+                color #fff
+                padding-left 12px
+            button
+                width 74px
+                line-height 74px
+                font-size 28px
+                color #cac8c6
+                height 74px
+    .details
+        width 100%
+        padding-top 30px
+        .tabs
+            width 100%
+            display flex
+            justify-content space-between
+            .item
+                width calc(100% / 3)
+                height 72px
+                display flex
+                justify-content center
+                align-items center
+                .txt
+                    font-size 28px
+                    color #fff
+                .sta
+                    height 72px
+                    position relative
+                    .tops
+                        width 0
+                        height 0
+                        border-right:6px solid transparent;
+                        border-left:6px solid transparent;
+                        border-bottom:10px solid #FFF;
+                        position absolute
+                        left 10px
+                        top: 50%
+                        margin-top -13px
+                    .bots
+                        width 0
+                        height 0
+                        border-right:6px solid transparent;
+                        border-left:6px solid transparent;
+                        border-top:10px solid #FFF;
+                        position absolute
+                        left 10px
+                        bottom: 50%
+                        margin-bottom -13px
+        .list
+            width 100%
+            padding-top 20px
+            .item
+                width 750px
+                position relative
+                padding: 0 30px
+                float left
+                left -30px
+                min-height: 100px
+                padding-bottom 40px
+                border-bottom: 2px solid #47577a
+                .user
+                    width 100%
+                    display flex
+                    float left
+                    justify-content space-between
+                    .text
+                        height 142px
+                        display flex
+                        justify-content flex-start
+                        align-items center
+                        .imgs
+                            width 64px
+                            height 64px
+                            img
+                                width 100%
+                                height 100%
+                                border-radius: 50%
+                        .label
+                            height 142px
+                            display flex
+                            justify-content space-between
+                            align-items center
+                            padding-left 25px
+                            .txt
+                                font-size 28px
+                                color #fff
+                                padding-right 10px
+                            .pays
+                                height 142px
+                                display flex
+                                justify-content center
+                                align-items center
+                                img
+                                    height 34px
+                    .price
+                        padding-top 50px
+                        .tit
+                            line-height 32px
+                            font-size 24px
+                            color #9caaca
+                            text-align right
+                        .num
+                            line-height 52px
+                            font-size 34px
+                            color #fff
+                            font-family: Arial, Helvetica, sans-serif
+            .inform
+                width 100%
+                min-height: 100px
+                float left
+                padding-top 10px
+                .text
+                    .p
+                        line-height 40px
+                        font-size 26px
+                        color #b4c3e9
+                .link
+                    padding-top 15px
+                    button
+                        width 136px
+                        height 58px
+                        background-color #3048ff
+                        color #fff
+                        border-radius: 6px
+                        text-align center
+                        line-height 58px
+    .menu-slide
+        width 100vw
+        height 100vh
+        background-color rgba(#000,.8)
+        position fixed
+        left 0
+        top: 0
+        z-index 9
+        .menu-content
+            width 545px
+            height 100vh
+            padding: 0 50px
+            background-color #2e3649
+            padding-top 80px
+        .id
+            width 100%
+            line-height 148px
+            font-size 34px
+            color #fff
+            font-family: Arial, Helvetica, sans-serif
+        .assets
+            width 100%
+            background-color #1c222e
+            border-radius: 10px
+            padding: 20px 30px
+            .item
+                width 100%
+                padding-bottom 10px
+                border-bottom: 2px solid #31384b
+                margin-bottom 20px
+                &:last-child
+                    border-bottom: none
+                .tits
+                    width 100%
+                    height 46px
+                    line-height 46px
+                    font-size 28px
+                    color #fff
+                    display flex
+                    justify-content flex-start
+                    align-items center
+                    background url(../../src/static/img/a40dc2_15x23.png)right center no-repeat
+                    background-size 15px 23px
+                    img
+                        height 32px
+                        margin-left 10px
+                .num
+                    width 100%
+                    line-height 44px
+                    font-size 30px
+                    color #4bdbb8
+                .func
+                    height 54px
+                    display flex
+                    justify-content flex-start
+                    align-items center
+                    .txt
+                        font-size 24px
+                        color #8fa7de
+                        padding-right 10px
+                    .ico
+                        img
+                            height 32px
+        .list
+            width 100%
+            min-height: 100px
+            float left
+            padding-top 100px
+            ul
+                width 100%
+                li
+                    width 100%
+                    display flex
+                    justify-content flex-start
+                    align-items center
+                    background url(../../src/static/img/919ae7_18x26.png) right no-repeat
+                    background-size 18px 26px
+                    .ico
+                        width 78px
+                        height 94px
+                        display flex
+                        justify-content flex-start
+                        align-items center
+                        img
+                            height 44px
+                    .text
+                        color #fff
+                        font-size 30px
+                        padding-left 5px
+>>>>>>> 6e476c5536b697e6c2e6ae07eafcee8b593e7e84
