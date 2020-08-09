@@ -14,22 +14,22 @@ Vue.use(VueRouter)
 		}
 	},
 	{
-	    path: '/home',
-	    name: 'Home',
-	    component: () => import('@/views/Home.vue'),
-	    meta: {
+		path: '/home',
+		name: 'Home',
+		component: () => import('@/views/Home.vue'),
+		meta: {
 			title: '首页',
 			back: 2,
-	    }
+		}
 	},
 	{
-	    path: '/sell',
-	    name: 'Sell',
-	    component: () => import('@/views/Sell.vue'),
-	    meta: {
+		path: '/sell',
+		name: 'Sell',
+		component: () => import('@/views/Sell.vue'),
+		meta: {
 			title: '出售音豆',
 			back: 2,
-	    }
+		}
 	},
 	{
 		path: '/buy',
@@ -60,22 +60,31 @@ Vue.use(VueRouter)
 		}
 	},
 	{
-	    path: '/set',
-	    name: 'Set',
-	    component: () => import('@/views/Set.vue'),
-	    meta: {
-	        title: '设置',
-	        back: 2
-	    }
+		path: '/set',
+		name: 'Set',
+		component: () => import('@/views/Set.vue'),
+		meta: {
+			title: '设置',
+			back: 2
+		}
 	},
 	{
-	    path: '/bind',
-	    name: 'Bind',
-	    component: () => import('@/views/Bind.vue'),
-	    meta: {
-	        title: '绑定帐户信息',
-	        back: 3
-	    }
+		path: '/bind',
+		name: 'Bind',
+		component: () => import('@/views/Bind.vue'),
+		meta: {
+			title: '绑定帐户信息',
+			back: 3
+		}
+	},
+	{
+		path: '/rule',
+		name: 'Rule',
+		component: () => import('@/views/Rule.vue'),
+		meta: {
+			title: '交易规则',
+			back: 3
+		}
 	}
 ]
 
@@ -86,11 +95,11 @@ const router = new VueRouter({
 })
 
 router.afterEach(to => {
-    var config = {
-        type: 1,
-        ...to.meta
-    }
-    router.app.$options.store.commit('Betting/SET_TITLE_CONFIG', config);
+	var config = {
+		type: 1,
+		...to.meta
+	}
+	router.app.$options.store.commit('Betting/SET_TITLE_CONFIG', config);
 })
 
 export default router

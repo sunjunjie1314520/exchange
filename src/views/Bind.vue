@@ -11,13 +11,13 @@
 				<li>
 					<span>开户银行：</span>
 					<div class="fr">
-						<input type="text" placeholder="请输入开户姓名">
+						<input type="text" placeholder="请输入开户银行">
 					</div>
 				</li>
 				<li>
 					<span>开户账号：</span>
 					<div class="fr">
-						<input type="text" placeholder="请输入开户姓名">
+						<input type="text" placeholder="请输入开户账号">
 					</div>
 				</li>
 				<li>
