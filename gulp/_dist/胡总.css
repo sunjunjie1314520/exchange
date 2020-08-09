@@ -1,11 +1,14 @@
 .home-page {
   width: 100%;
-  min-height: 150vh;
+  height: 100%;
   background-color: #1c222e;
   float: left;
-  overflow-y: scroll;
-  padding: 0 0.3rem;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+.home-page .wrapper {
+  padding: 0 0.3rem;
 }
 .home-page .head {
   width: 100%;
@@ -76,7 +79,7 @@
   padding: 0.44rem 0;
   position: relative;
 }
-.home-page .data .today .item:after {
+.home-page .data .today .itemafter {
   content: '';
   position: absolute;
   top: 50%;
@@ -86,7 +89,7 @@
   height: 0.84rem;
   background-color: #3f4656;
 }
-.home-page .data .today .item:last-child:after {
+.home-page .data .today .itemlast-childafter {
   display: none;
 }
 .home-page .data .today .item .tit {
@@ -117,7 +120,7 @@
   padding: 0.44rem 0;
   position: relative;
 }
-.home-page .data .deal .item:after {
+.home-page .data .deal .itemafter {
   content: '';
   position: absolute;
   top: 50%;
@@ -127,7 +130,7 @@
   height: 0.84rem;
   background-color: #3f4656;
 }
-.home-page .data .deal .item:last-child:after {
+.home-page .data .deal .itemlast-childafter {
   display: none;
 }
 .home-page .data .deal .item .tit {
@@ -214,9 +217,9 @@
 .home-page .details .tabs .item .sta .tops {
   width: 0;
   height: 0;
-  border-right: 0.06rem solid transparent;
-  border-left: 0.06rem solid transparent;
-  border-bottom: 0.1rem solid #fff;
+  border-right6px: solid transparent;
+  border-left6px: solid transparent;
+  border-bottom10px: solid #fff;
   position: absolute;
   left: 0.1rem;
   top: 50%;
@@ -225,9 +228,9 @@
 .home-page .details .tabs .item .sta .bots {
   width: 0;
   height: 0;
-  border-right: 0.06rem solid transparent;
-  border-left: 0.06rem solid transparent;
-  border-top: 0.1rem solid #fff;
+  border-right6px: solid transparent;
+  border-left6px: solid transparent;
+  border-top10px: solid #fff;
   position: absolute;
   left: 0.1rem;
   bottom: 50%;
@@ -362,7 +365,7 @@
   border-bottom: 0.02rem solid #31384b;
   margin-bottom: 0.2rem;
 }
-.home-page .menu-slide .assets .item:last-child {
+.home-page .menu-slide .assets .itemlast-child {
   border-bottom: none;
 }
 .home-page .menu-slide .assets .item .tits {
