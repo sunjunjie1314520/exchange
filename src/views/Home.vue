@@ -15,7 +15,11 @@
 							<div class="ico"><router-link to="/sell">卖</router-link></div>
 						</div>
 					</div>
-					<div class="banner">
+
+					<div id="myChart" :style="{width: '320px', height: '200px'}"></div>
+
+
+					<div class="banner" v-if="false">
 						<img src="../../src/static/img/0fc7e1_690x335.jpg" alt="">
 					</div>
 					<div class="data">
@@ -155,18 +159,18 @@
 						<div class="num">
 							0.00
 						</div>
-						<div class="func">
+						<!-- <div class="func">
 							<div class="txt">
 								冻结
 							</div>
 							<div class="ico">
 								<img src="../../src/static/img/81730a_32x32.png" alt="">
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="item">
 						<div class="tits">
-							BDF <img src="../../src/static/img/371bdd_32x33.png" alt="">
+							冻结 <img src="../../src/static/img/371bdd_32x33.png" alt="">
 						</div>
 						<div class="num">
 							0.00
@@ -211,7 +215,9 @@ export default {
 			show: false,
 		}
 	},
+	
 	mounted(){
+		this.drawLine();
 		this.mui(".home-page").scroll({
 			scrollY: true, //是否竖向滚动
 			scrollX: false, //是否横向滚动
@@ -221,6 +227,41 @@ export default {
 			deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
 			bounce: true //是否启用回弹
 		})
+	},
+	methods: {
+		drawLine(){
+			// 基于准备好的dom，初始化echarts实例
+			let myChart = this.$echarts.init(document.getElementById('myChart'))
+			// 绘制图表
+			myChart.setOption({
+				color: ['#45cfae'],
+				grid: {
+					top: 20,
+					bottom: 40
+				},
+				tooltip: {},
+				xAxis: {
+					data: ['2020/8/9', '2020/8/9', '2020/8/9'],
+					axisLine: {
+						lineStyle: {
+							color: "#fff",
+						}
+					}
+				},
+				yAxis: {
+					axisLine: {
+						lineStyle: {
+							color: "#fff",
+						}
+					}
+				},
+				series: [{
+					name: '销量',
+					type: 'line',
+					data: [1, 10, 22, 60]
+				}]
+			});
+		}
 	}
 }
 </script>

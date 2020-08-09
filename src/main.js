@@ -75,6 +75,10 @@ Vue.component('AppBar', AppBar);
 // Vue.component('PriceNews', PriceNews);
 // Vue.component('PriceNews2', PriceNews2);
 
+// 引入echarts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
 // 自定义插件
 import scroll from "@/tool/plug/scroll";
 import mixins from "@/tool/plug/mixins";
