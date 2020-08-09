@@ -20,6 +20,7 @@ Vue.use(VueRouter)
 		meta: {
 			title: '首页',
 			back: 2,
+			full: true,
 		}
 	},
 	{
@@ -28,7 +29,7 @@ Vue.use(VueRouter)
 		component: () => import('@/views/Sell.vue'),
 		meta: {
 			title: '出售音豆',
-			back: 2,
+			back: 3,
 		}
 	},
 	{
@@ -37,7 +38,7 @@ Vue.use(VueRouter)
 		component: () => import('@/views/Buy.vue'),
 		meta: {
 			title: '购买音豆',
-			back: 2,
+			back: 3,
 		}
 	},
 	{
@@ -46,7 +47,7 @@ Vue.use(VueRouter)
 		component: () => import('@/views/ChangePass.vue'),
 		meta: {
 			title: '修改交易密码',
-			back: 3,
+			back: 4,
 		}
 	},
 	{
@@ -55,7 +56,7 @@ Vue.use(VueRouter)
 		component: () => import('@/views/Order.vue'),
 		meta: {
 			title: '订单记录',
-			back: 2,
+			back: 4,
 			right: 1,
 		}
 	},
@@ -65,7 +66,7 @@ Vue.use(VueRouter)
 		component: () => import('@/views/Set.vue'),
 		meta: {
 			title: '设置',
-			back: 2
+			back: 3
 		}
 	},
 	{
@@ -74,7 +75,7 @@ Vue.use(VueRouter)
 		component: () => import('@/views/Bind.vue'),
 		meta: {
 			title: '绑定帐户信息',
-			back: 3
+			back: 4
 		}
 	},
 	{
@@ -83,7 +84,7 @@ Vue.use(VueRouter)
 		component: () => import('@/views/Rule.vue'),
 		meta: {
 			title: '交易规则',
-			back: 3
+			back: 4
 		}
 	}
 ]

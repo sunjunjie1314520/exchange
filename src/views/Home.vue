@@ -7,16 +7,12 @@
 						<div class="text">
 							
 						</div>
-						<div class="home-user">
+						<div class="home-user" @click="show=true">
 							<img src="../../src/static/img/bab103_77x77.jpg" alt="">
 						</div>
 						<div class="func">
-							<div class="ico">
-								买
-							</div>
-							<div class="ico">
-								卖
-							</div>
+							<div class="ico"><router-link to="/buy">买</router-link></div>
+							<div class="ico"><router-link to="/sell">卖</router-link></div>
 						</div>
 					</div>
 					<div class="banner">
@@ -29,7 +25,7 @@
 									均价(昨/今)
 								</div>
 								<div class="number">
-									$ 1.42/1.23
+									￥1.42/1.23
 								</div>
 							</div>
 							<div class="item">
@@ -37,7 +33,7 @@
 									最高(昨/今)
 								</div>
 								<div class="number">
-									$ 1.50/1.50
+									￥1.50/1.50
 								</div>
 							</div>
 							<div class="item">
@@ -45,14 +41,14 @@
 									当前底价
 								</div>
 								<div class="number">
-									$ 0.29
+									￥0.29
 								</div>
 							</div>
 						</div>
 						<div class="deal">
 							<div class="item">
 								<div class="tit">
-									买量(BFX)
+									买量(音豆)
 								</div>
 								<div class="number">
 									10259046
@@ -60,7 +56,7 @@
 							</div>
 							<div class="item">
 								<div class="tit">
-								成交(BFX)(昨/今)
+								成交(音豆)(昨/今)
 								</div>
 								<div class="number">
 									1564365/632891
@@ -82,7 +78,7 @@
 							<div class="item">
 								<div class="txt">时间</div>
 								<div class="sta">
-									<div class="tops"></div>
+									<div class="tops active"></div>
 									<div class="bots"></div>
 								</div>
 							</div>
@@ -122,16 +118,16 @@
 											单价
 										</div>
 										<div class="num">
-											$ 1.35
+											￥1.35
 										</div>
 									</div>
 								</div>
 								<div class="inform">
 									<div class="text">
 										<div class="p">
-											数量 1000 BFX
+											数量 1000 音豆
 										</div>
-										<div class="P">
+										<div class="p">
 											最近7日成交3笔
 										</div>
 									</div>
@@ -144,60 +140,65 @@
 					</div>
 				</div>
 			</div>
-            <div class="menu-slide" v-if="show">
-                <div class="menu-content">
-                    <div class="id">
-                        18665348631
-                    </div>
-                    <div class="assets">
-                        <div class="item">
-                            <div class="tits">
-                                账户资产(BFX)
-                            </div>
-                            <div class="num">
-                                0.00
-                            </div>
-                            <div class="func">
-                                <div class="txt">
-                                    冻结
-                                </div>
-                                <div class="ico">
-                                    <img src="../../src/static/img/81730a_32x32.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="tits">
-                                BDF <img src="../../src/static/img/371bdd_32x33.png" alt="">
-                            </div>
-                            <div class="num">
-                                0.00
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list">
-                        <ul>
-                            <li>
-                                <div class="ico">
-                                    <img src="../../src/static/img/a9d150_40x44.png" alt="">
-                                </div>
-                                <div class="text">
-                                    菜单管理
-                                </div>
-                            </li>
-                            <li>
-                                <div class="ico">
-                                    <img src="../../src/static/img/8fa11d_42x45.png" alt="">
-                                </div>
-                                <div class="text">
-                                    设置
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
+		<div :class="['menu-slide', {active: show}]" v-if="show">
+			<div class="menu-content">
+				<div class="close" @click="show=false;">关闭</div>
+				<div class="id">
+					18665348631
+				</div>
+				<div class="assets">
+					<div class="item">
+						<div class="tits">
+							账户资产(音豆)
+						</div>
+						<div class="num">
+							0.00
+						</div>
+						<div class="func">
+							<div class="txt">
+								冻结
+							</div>
+							<div class="ico">
+								<img src="../../src/static/img/81730a_32x32.png" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="tits">
+							BDF <img src="../../src/static/img/371bdd_32x33.png" alt="">
+						</div>
+						<div class="num">
+							0.00
+						</div>
+					</div>
+				</div>
+				<div class="list">
+					<ul>
+						<li>
+							<router-link to="/order">
+								<div class="ico">
+									<img src="../../src/static/img/a9d150_40x44.png" alt="">
+								</div>
+								<div class="text">
+									菜单管理
+								</div>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/set">
+								<div class="ico">
+									<img src="../../src/static/img/8fa11d_42x45.png" alt="">
+								</div>
+								<div class="text">
+									设置
+								</div>
+							</router-link>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 

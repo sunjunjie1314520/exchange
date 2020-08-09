@@ -1,8 +1,8 @@
 <template>
 	<div id="app">
-		<AppBar></AppBar>
+		<AppBar v-if="!full"></AppBar>
 		<transition :name="transitionName"> 
-			<router-view class="app-router" />
+			<router-view :class="['app-router', {'pt': !full}]" />
 		</transition>
 	</div>
 </template>
@@ -11,7 +11,8 @@
 	export default {
 		data(){
 			return {
-				transitionName: ''
+				transitionName: '',
+				full: false,
 			}
 		},
 		watch:{
@@ -20,6 +21,7 @@
 				// const fromDepth = from.path.split('/').length
 				const toDepth = to.meta.back
 				const fromDepth = from.meta.back
+				this.full = to.meta.full
 				this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
 			}
 		},
@@ -67,8 +69,9 @@
 </script>
 
 <style lang="stylus">
-.app-router
+.pt
 	padding-top 1rem
+.app-router
 	position absolute
 	left 0
 	top 0
