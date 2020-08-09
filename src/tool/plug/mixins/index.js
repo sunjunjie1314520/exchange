@@ -1,7 +1,7 @@
 import filter from "./filter";
 import directive from "./directive";
-// import '@/assets/lib/mui/css/mui.css'
-// import mui from '@/assets/lib/mui/js/mui.js'
+import '@/assets/lib/mui/css/mui.css'
+import mui from '@/assets/lib/mui/js/mui.js'
 import assist from './assist.js'
 
 import Binput from "./component/Binput";
@@ -63,7 +63,7 @@ plug.install = function(Vue, options) {
     Vue.component(Berror.name, Berror)
 
     // 绑定mui框架
-    // Vue.prototype.mui = mui;
+    Vue.prototype.mui = mui;
     // 添加原型函数
     Vue.prototype.$BaseConfig = function(params) {
         // console.log(params);
