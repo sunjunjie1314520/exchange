@@ -17,7 +17,7 @@
 					</div>
 
 					<!-- 图表 -->
-					<div id="myChart" :style="{width: $width, height: '200px'}"></div>
+					<div id="myChart" :style="{width: countWidth, height: '200px'}"></div>
 
 					<div class="banner" v-if="false">
 						<img src="../../src/static/img/0fc7e1_690x335.jpg" alt="">
@@ -213,12 +213,12 @@ export default {
 	data(){
 		return {
 			show: false,
-			$width: 0,
+			countWidth: 0,
 		}
 	},
 	
 	mounted(){
-		this.drawLine();
+		
 		this.mui(".home-page").scroll({
 			scrollY: true, //是否竖向滚动
 			scrollX: false, //是否横向滚动
@@ -228,9 +228,13 @@ export default {
 			deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
 			bounce: true //是否启用回弹
 		})
-		var a = this.$assist.getScreenInfo()
-		this.$width = `${a.width}px`
-		console.log(this.$width);
+		var a = this.$assist.getScreenInfo();
+		this.countWidth = `${a.width}px`;
+		console.log(this.countWidth);
+
+		setTimeout(() => {
+			this.drawLine();
+		}, 10);
 	},
 	methods: {
 		drawLine(){
