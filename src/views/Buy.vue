@@ -5,13 +5,13 @@
 			<ul>
 				<li>
 					<div class="fl">
-						<span class="add i1"></span>
+						<span class="add i1" @click="jianHandle"></span>
 					</div>
 					<div class="box1">
 						<p>5.50(昨日均价+6% )</p>
 					</div>
 					<div class="fl ml32">
-						<span class="add i2"></span>
+						<span class="add i2" @click="addHandle"></span>
 					</div>
 				</li>
 				<li>
@@ -23,7 +23,7 @@
 				<li>
 					<span>总价</span>
 					<div class="box1">
-						<input type="text" v-model="formData.price" placeholder="总价">
+						<input readonly type="text" v-model="formData.price" placeholder="总价">
 					</div>
 				</li>
 			</ul>
@@ -59,6 +59,12 @@ export default {
 			.then(res=>{
 				console.log(res);
 			})
+		},
+		addHandle(){
+			console.log('++++');
+		},
+		jianHandle(){
+			console.log('----');
 		}
 	}
 }

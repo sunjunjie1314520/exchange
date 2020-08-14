@@ -212,6 +212,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  position: relative;
+}
+.home-page .details .tabs .item:nth-child(3n+1):after {
+  display: none;
+}
+.home-page .details .tabs .item:nth-child(3n+1):before {
+  display: none;
+}
+.home-page .details .tabs .item:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 1px;
+  height: 0.26rem;
+  background: #fff;
+  left: 0;
 }
 .home-page .details .tabs .item .txt {
   font-size: 0.28rem;

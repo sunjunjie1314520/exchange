@@ -12,7 +12,6 @@
 						</div>
 						<div class="func">
 							<div class="ico"><router-link to="/buy">买</router-link></div>
-							<div class="ico"><router-link to="/sell">卖</router-link></div>
 						</div>
 					</div>
 
@@ -86,14 +85,14 @@
 									<div :class="['bots', {active: filter1==1}]"></div>
 								</div>
 							</div>
-							<div class="item" @click="filter1 == 1 ? filter1=0 : filter1=1">
+							<div class="item" @click="filter2 == 1 ? filter2=0 : filter2=1">
 								<div class="txt">单价</div>
 								<div class="sta">
 									<div :class="['tops', {active: filter2==0}]"></div>
 									<div :class="['bots', {active: filter2==1}]"></div>
 								</div>
 							</div>
-							<div class="item" @click="filter2 == 1 ? filter2=0 : filter2=1">
+							<div class="item" @click="filter3 == 1 ? filter3=0 : filter3=1">
 								<div class="txt">数量</div>
 								<div class="sta">
 									<div :class="['tops', {active: filter3==0}]"></div>
@@ -255,7 +254,6 @@ export default {
 		this.userinfo();
 	},
 	mounted(){
-		
 		this.mui(".home-page").scroll({
 			scrollY: true, //是否竖向滚动
 			scrollX: false, //是否横向滚动
