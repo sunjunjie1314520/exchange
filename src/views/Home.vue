@@ -29,7 +29,7 @@
 									均价(昨/今)
 								</div>
 								<div class="number">
-									￥1.42/1.23
+									￥{{pageData.p1 | moneyFixed(2)}}/{{pageData.p2 | moneyFixed(2)}}
 								</div>
 							</div>
 							<div class="item">
@@ -37,7 +37,7 @@
 									最高(昨/今)
 								</div>
 								<div class="number">
-									￥1.50/1.50
+									￥{{pageData.p3 | moneyFixed(2)}}/{{pageData.p4 | moneyFixed(2)}}
 								</div>
 							</div>
 							<div class="item">
@@ -45,7 +45,7 @@
 									当前底价
 								</div>
 								<div class="number">
-									￥0.29
+									￥{{pageData.p5 | moneyFixed(2)}}
 								</div>
 							</div>
 						</div>
@@ -55,7 +55,7 @@
 									买量(音豆)
 								</div>
 								<div class="number">
-									10259046
+									{{pageData.p6}}
 								</div>
 							</div>
 							<div class="item">
@@ -63,7 +63,7 @@
 								成交(音豆)(昨/今)
 								</div>
 								<div class="number">
-									1564365/632891
+									{{pageData.p7}}/{{pageData.p8}}
 								</div>
 							</div>
 						</div>
@@ -73,36 +73,36 @@
 							<img src="../../src/static/img/1d1714_30x30.jpg" alt="">
 						</div>
 						<div class="text">
-							<input type="text" name="" id="" placeholder="请输入您要搜索的手机号">
-							<button>搜索</button>
+							<input type="text" v-model="phone" name="" id="" placeholder="请输入您要搜索的手机号">
+							<button @click="search">搜索</button>
 						</div>
 					</div>
 					<div class="details">
 						<div class="tabs">
-							<div class="item">
+							<div class="item" @click="filter1 == 1 ? filter1=0 : filter1=1">
 								<div class="txt">时间</div>
 								<div class="sta">
-									<div class="tops active"></div>
-									<div class="bots"></div>
+									<div :class="['tops', {active: filter1==0}]"></div>
+									<div :class="['bots', {active: filter1==1}]"></div>
 								</div>
 							</div>
-							<div class="item">
+							<div class="item" @click="filter1 == 1 ? filter1=0 : filter1=1">
 								<div class="txt">单价</div>
 								<div class="sta">
-									<div class="tops"></div>
-									<div class="bots"></div>
+									<div :class="['tops', {active: filter2==0}]"></div>
+									<div :class="['bots', {active: filter2==1}]"></div>
 								</div>
 							</div>
-							<div class="item">
+							<div class="item" @click="filter2 == 1 ? filter2=0 : filter2=1">
 								<div class="txt">数量</div>
 								<div class="sta">
-									<div class="tops"></div>
-									<div class="bots"></div>
+									<div :class="['tops', {active: filter3==0}]"></div>
+									<div :class="['bots', {active: filter3==1}]"></div>
 								</div>
 							</div>
 						</div>
 						<div class="list">
-							<div class="item">
+							<div class="item" v-for="item in list" :key="item.id">
 								<div class="user">
 									<div class="text">
 										<div class="imgs">
@@ -110,7 +110,7 @@
 										</div>
 										<div class="label">
 											<div class="txt">
-												155****8020
+												{{item.username | mobile}}
 											</div>
 											<div class="pays">
 												<img src="../../src/static/img/469592_34x34.png" alt="">
@@ -122,21 +122,21 @@
 											单价
 										</div>
 										<div class="num">
-											￥1.35
+											￥{{item.money | moneyFixed(2)}}
 										</div>
 									</div>
 								</div>
 								<div class="inform">
 									<div class="text">
 										<div class="p">
-											数量 1000 音豆
+											数量 {{item.dou}} 音豆
 										</div>
 										<div class="p">
-											最近7日成交3笔
+											最近7日成交{{item.bi}}笔
 										</div>
 									</div>
 									<div class="link">
-										<button>出售</button>
+										<button @click="sellHandle(item)">出售</button>
 									</div>
 								</div>
 							</div>
@@ -149,7 +149,7 @@
 			<div class="menu-content">
 				<div class="close" @click="show=false;">关闭</div>
 				<div class="id">
-					18665348631
+					150****1584
 				</div>
 				<div class="assets">
 					<div class="item">
@@ -214,9 +214,46 @@ export default {
 		return {
 			show: false,
 			countWidth: 0,
+			phone: '',
+
+			filter1: 1,
+			filter2: 1,
+			filter3: 1,
+			pageData:{
+				p1: 5,
+				p2: 6,
+				p3: 5.5,
+				p4: 6,
+				p5: 6,
+				p6: 545645646,
+				p7: 15456,
+				p8: 9554848
+			},
+			list: [
+				{
+					id: 1,
+					username: '15971345754',
+					type: 1,
+					money: 5,
+					dou:500,
+					bi: 30
+				},
+				{
+					id: 2,
+					username: '15971345754',
+					type: 1,
+					money: 5,
+					dou: 400,
+					bi: 10
+				}
+			]
 		}
 	},
-	
+	created(){
+		console.log(this.$route.query);
+		this.$store.commit('User/SET_TOKEN', this.$route.query);
+		this.userinfo();
+	},
 	mounted(){
 		
 		this.mui(".home-page").scroll({
@@ -228,15 +265,21 @@ export default {
 			deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
 			bounce: true //是否启用回弹
 		})
-		var a = this.$assist.getScreenInfo();
-		this.countWidth = `${a.width}px`;
-		console.log(this.countWidth);
-
+		var screen = this.$assist.getScreenInfo();
+		this.countWidth = `${screen.width}px`;
 		setTimeout(() => {
 			this.drawLine();
 		}, 10);
 	},
 	methods: {
+		// 出售
+		sellHandle(id){
+			this.$store.commit('User/SET_CURRENT_SELL', id)
+			this.$router.push('/sell');
+		},
+		search(){
+			this.$router.push({path: '/order', query:{phone: this.phone}})
+		},
 		drawLine(){
 			// 基于准备好的dom，初始化echarts实例
 			let myChart = this.$echarts.init(document.getElementById('myChart'))
@@ -271,7 +314,14 @@ export default {
 					data: [1, 8, 18, 30, 42, 60]
 				}],
 			});
-		}
+		},
+		// 获取用户信息
+		userinfo(){
+			this.$store.dispatch('User/userinfo', this.$user)
+			.then(res=>{
+				this.$toast('正在请求数据中~~~');
+			})
+		},
 	}
 }
 </script>

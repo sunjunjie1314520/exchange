@@ -10,7 +10,8 @@ let base = {
 
 if(process.env.NODE_ENV === 'development'){
     // 本地地址
-	serverURL = '/dev'
+	// serverURL = '/dev'
+	serverURL = 'http://www.dosmw.cn/index.php'
 
 }else{
     // 线上地址

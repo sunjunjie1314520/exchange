@@ -17,6 +17,13 @@ export default function FilterStore(Vue) {
         var s2 = str.substring(str.length - 3, str.length)
         return s1 + '****' + s2
     })
+    // 手机号隐藏
+    Vue.filter('mobile', function(data) {
+        var str = data
+        var s1 = str.substring(0, 3)
+        var s2 = str.substring(str.length - 4, str.length)
+        return s1 + '****' + s2
+    })
     // 资金记录 类型
     Vue.filter('zijin_type', data => {
         switch (data) {

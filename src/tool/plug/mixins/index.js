@@ -25,23 +25,13 @@ plug.install = function(Vue, options) {
         },
         computed: {
             ...mapState('Betting', {
-                playGroupId: state => state.playGroupId,
-                perMoney: state => state.perMoney,
-                totalMoney: state => state.totalMoney,
-                config: state => state.BaseConfig,
-                BaseConfig: state => state.BaseConfig,
-                
-                action: state => state.action,
-                oddsId: state => state.oddsId,
                 alertConfig: state => state.alertConfig,
-                sscBetList: state => state.sscBetList,
-                WinningAmount: state => state.WinningAmount,
-                mode_config: state => state.mode_config,
-                mode_config_result: state => state.mode_config_result,
-                PageActive: state => state.PageActive,
+            }),
+            ...mapState('User', {
+                $user: state => state.userToken
             }),
             ...mapState('Game', {
-                Opentime: state => state.getNewOpentime
+                
             })
         },
         created(){

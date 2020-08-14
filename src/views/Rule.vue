@@ -4,7 +4,7 @@
 			<div class="mui-scroll">
 				<div class="wrapper">
 					<div class="title">
-						<h2>总换规则</h2>
+						<h2>交易规则</h2>
 						<p>2020-04-09 15:02:02</p>
 					</div>
 					<div class="content">

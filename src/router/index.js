@@ -86,6 +86,15 @@ Vue.use(VueRouter)
 			title: '交易规则',
 			back: 4
 		}
+	},
+	{
+		path: '/order_info',
+		name: 'OrderInfo',
+		component: () => import('@/views/OrderInfo.vue'),
+		meta: {
+			title: '确认单',
+			back: 5
+		}
 	}
 ]
 

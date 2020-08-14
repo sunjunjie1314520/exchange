@@ -11,7 +11,7 @@ module.exports = {
             entry: 'src/main.js',
             template: 'public/index.html',
             filename: 'index.html',
-            title: '好逗逗',
+            title: '好逗短视频',
             chunks: ['chunk-vendors', 'chunk-common', 'index']
         },
     },

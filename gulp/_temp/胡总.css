@@ -181,6 +181,7 @@
 .home-page .search .text input {
   width: 70%;
   height: 74px;
+  line-height: 74px;
   border: none;
   font-size: 28px;
   color: #fff;

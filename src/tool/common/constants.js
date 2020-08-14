@@ -26,8 +26,8 @@ export const GAME = [
 
 
 // User.js
-export const USER_GET_MY_INFO = 'getMyInfo'
-export const USER = [USER_GET_MY_INFO]
+export const USER_INFO = 'userinfo'
+export const USER = [USER_INFO]
 
 // Betting.js
 export const BETTING = []

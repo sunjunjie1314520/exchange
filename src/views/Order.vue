@@ -8,10 +8,10 @@
 				</ul>
 			</div>
 			<div class="list">
-				<ul>
-					<li></li>
+				<ul v-if="list">
+					<li v-for="item in list" :key="item.id"></li>
 				</ul>
-				<div class="null-data1">
+				<div class="null-data1" v-else>
 					<img src="../../src/static/img/ae1e94_128x128.png" alt="">
 					<span>暂无记录</span>
 				</div>
@@ -43,21 +43,40 @@ export default {
 	data(){
 		return {
 			tabs: 0,
-			filter: 2,
+			filter: 0,
+			type: 0,
+			phone: '',
+			list: false,
 		}
 	},
 	methods: {
 		cancel(is){
-			this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is})
+			this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is});
 		},
 		confirm(){
 			this.cancel(false);
+			this.type = this.filter;
+			this.getNetWork();
 		},
 		toggle_filter(id){
 			this.filter = id
 		},
 		tabsToggle(id){
 			this.tabs = id
+			this.getNetWork();
+		},
+
+		getNetWork(){
+			var data = {
+				...this.$user,
+				type: this.type,
+				tabs: this.tabs,
+				phone: this.phone,
+			}
+			this.$api.user.orderRecord(data)
+			.then(res=>{
+				console.log(res);
+			})
 		}
 	}
 }
