@@ -17,7 +17,7 @@
 				<li>
 					<span>开户账号：</span>
 					<div class="fr">
-						<input type="text" v-model="field3" placeholder="请输入开户账号">
+						<b-input type="text" v-model="field3" placeholder="请输入开户账号"></b-input>
 					</div>
 				</li>
 				<li>

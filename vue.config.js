@@ -6,6 +6,18 @@ const webpack = require('webpack')
 module.exports = {
     runtimeCompiler: true,
     publicPath: './',
+    devServer: {
+        proxy: {
+            '/dev': {
+                target: 'http://www.dosmw.cn/index.php',
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/dev': ''
+                }
+            },
+        }
+    },
     pages: {
         index: {
             entry: 'src/main.js',

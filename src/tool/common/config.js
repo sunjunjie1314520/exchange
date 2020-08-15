@@ -10,12 +10,11 @@ let base = {
 
 if(process.env.NODE_ENV === 'development'){
     // 本地地址
-	// serverURL = '/dev'
-	serverURL = 'http://www.dosmw.cn/index.php'
-
+	serverURL = '/dev'
+	// serverURL = 'http://www.dosmw.cn/index.php'
 }else{
     // 线上地址
-    serverURL = 'http://cpapi.wz.nf:166/vueapi/v1'
+    serverURL = 'http://www.dosmw.cn/index.php'
 }
 
 export default serverURL

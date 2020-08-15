@@ -3,13 +3,13 @@
 		<div class="set-page">
 			<ul>
 				<li>
-					<router-link to="/changePass">修改交易密码</router-link>
-				</li>
-				<li>
 					<router-link to="/bind">绑定帐户信息</router-link>
 				</li>
 				<li>
 					<router-link to="/rule">交易规则</router-link>
+				</li>
+				<li>
+					<router-link to="/changePass">联系我们</router-link>
 				</li>
 			</ul>
 
