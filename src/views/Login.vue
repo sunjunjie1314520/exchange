@@ -40,6 +40,9 @@
         },
         methods: {
             loginSubmit(){
+                if(this.phone=='' || this.password == ''){
+                    return false;
+                }
                 this.$toast.loading({
                     duration: 0, // 持续展示 toast
                     forbidClick: true,

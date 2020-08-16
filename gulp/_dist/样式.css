@@ -136,7 +136,7 @@
   padding: 0 0.2rem;
   line-height: 1.5;
   font-size: 0.26rem;
-  white-space: nowrap;
+  text-align: justify;
 }
 .pub-button {
   position: fixed;
