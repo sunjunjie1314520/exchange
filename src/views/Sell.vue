@@ -1,12 +1,12 @@
 <template>
 	<div class="app">
 		<div class="sell-page">
-			<h2>可出售余额: 0.00 音豆</h2>
+			<h2>可出售余额: {{$info.user_amount}} 音豆</h2>
 			<ul>
 				<li>
 					<span>单价</span>
 					<div class="box1">
-						<p>￥5.5 (昨日均价50%)</p>
+						<p>￥{{$sell.odds}}</p>
 					</div>
 				</li>
 				<li>
@@ -18,7 +18,7 @@
 				<li>
 					<span>总价</span>
 					<div class="box1">
-						<input type="text" readonly v-model="formData.price" placeholder="总价">
+						<input type="text" readonly :value="formData.number * $sell.odds" placeholder="总价">
 					</div>
 				</li>
 			</ul>
@@ -35,7 +35,7 @@
 			</div>
 			
 			<div class="pub-button">
-				<button @click="submitFun">确认</button>
+				<button @click="submitFun">确认出售</button>
 			</div>
 		</div>
 	</div>
@@ -48,12 +48,28 @@ export default {
 	data(){
 		return {
 			formData:{
-				number: '1',
-				price:'2',
-				amount:'',
-				upload_product_id:''
+				from_id:1,
+				trade_id: 1,
+				order_number: 1,
+				to_from_id: 2,
+				number: '',
 			}
 		}
+	},
+	created(){
+
+	},
+	mounted(){
+		this.formData.number = this.$sell.number // 数量
+
+		this.formData.from_id = this.$sell.user_id,  //买方ID
+
+		this.formData.order_number = this.$sell.order_number // 订单编号
+
+		this.formData.trade_id = this.$sell.id
+
+		this.formData.to_from_id = this.$info.id
+
 	},
 	methods: {
 		submitFun(){
@@ -61,9 +77,14 @@ export default {
 				...this.formData,
 				...this.$user,
 			}
-			this.$api.user.product_save(data)
+			this.$api.user.trade_sellr(data)
 			.then(res=>{
 				console.log(res);
+				if(res.code){
+					this.$router.push({path: '/order'})
+				}else{
+					this.$toast(res.msg)
+				}
 			})
 		}
 	}

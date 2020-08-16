@@ -11,6 +11,9 @@ Vue.use(VueScroller)
 import VueClipboard from 'vue-clipboard2'
 Vue.use(VueClipboard)
 
+import md5 from 'js-md5';
+Vue.prototype.$md5 = md5;
+
 import {
     Swipe,
     SwipeItem,

@@ -28,7 +28,12 @@ plug.install = function(Vue, options) {
                 alertConfig: state => state.alertConfig,
             }),
             ...mapState('User', {
-                $user: state => state.userToken
+                $user: state => state.userToken,
+                $info: state => state.userinfo,
+                $sell: state => state.current_sell,
+                $trade: state => state.trade_index,
+                $chu: state => state.current_chu,
+                $coll: state => state.show_data
             }),
             ...mapState('Game', {
                 
@@ -41,7 +46,46 @@ plug.install = function(Vue, options) {
             
         },
         methods:{
-            
+            mai_status(id){
+                var str = ''
+                switch (id) {
+                    case 0:
+                        str = '进行中'
+                        break;
+                    case 2:
+                        str = '等待对方确认'
+                        break;
+                    case 3:
+                        str = '订单已完成'
+                        break;
+                    case 4:
+                        str = '订单已取消'
+                        break;
+                    default:
+                        break;
+                }
+                return str
+            },
+            mai_status1(id){
+                var str = ''
+                switch (id) {
+                    case 0:
+                        str = '进行中'
+                        break;
+                    case 2:
+                        str = '确认收款'
+                        break;
+                    case 3:
+                        str = '订单已完成'
+                        break;
+                    case 4:
+                        str = '订单已取消'
+                        break;
+                    default:
+                        break;
+                }
+                return str
+            }
         }
     })
 

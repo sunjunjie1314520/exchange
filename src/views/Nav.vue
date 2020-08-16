@@ -7,6 +7,7 @@
 		<h3><router-link to="/order">订单记录</router-link></h3>
 		<h3><router-link to="/set">设置</router-link></h3>
 		<h3><router-link to="/order_info">确认单</router-link></h3>
+		<h3><router-link to="/login">登录</router-link></h3>
 	</div>
 </template>
 

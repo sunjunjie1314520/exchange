@@ -1,14 +1,15 @@
 <template>
 	<div class="app">
 		<div class="sell-page">
-			<h2>单价￥5.50-6.00</h2>
+			<h2>单价￥{{min | moneyFixed(2)}} - {{max | moneyFixed(2)}}</h2>
+			<!-- <h2>单价￥{{$trade}}-{{$trade}}</h2> -->
 			<ul>
 				<li>
 					<div class="fl">
 						<span class="add i1" @click="jianHandle"></span>
 					</div>
 					<div class="box1">
-						<p>5.50(昨日均价+6% )</p>
+						<p>{{current | moneyFixed(2)}}(昨日均价{{bai | moneyFixed(3)}}% )</p>
 					</div>
 					<div class="fl ml32">
 						<span class="add i2" @click="addHandle"></span>
@@ -23,7 +24,7 @@
 				<li>
 					<span>总价</span>
 					<div class="box1">
-						<input readonly type="text" v-model="formData.price" placeholder="总价">
+						<input readonly type="text" v-model="price" placeholder="总价">
 					</div>
 				</li>
 			</ul>
@@ -47,24 +48,59 @@ export default {
 	name: 'Sell',
 	data(){
 		return {
-			formData:{
-				number: "",
-				price: 'x56456'
+			current: 0.0,
+			formData: {
+				number: 1,
+				from_id: 1,
+				float_range: 0.07,
 			}
 		}
 	},
+	created(){
+		this.current = this.min;
+	},
+	computed: {
+		price(){
+			var result = this.formData.number * this.current;
+			return result.toFixed(2)
+		},
+		min(){
+			return this.$trade.sys_amount * 1 - this.$trade.sys_amount * 1 / 100 * 5
+		},
+		max(){
+			return this.$trade.sys_amount * 1 + this.$trade.sys_amount * 1 / 100 * 5
+		},
+		bai(){
+			return 1 - (this.$trade.data[1].amount / this.$trade.data[1].volume) / this.current
+		}
+	},
+	watch:{
+
+	},
 	methods: {
 		submitFun(){
-			this.$api.user.order_save(this.formData)
+			this.$toast.loading({
+				duration: 0, // 持续展示 toast
+				forbidClick: true,
+				message: '正在加载中',
+			});
+			var data = {
+				...this.formData,
+				...this.$user
+			}
+			this.$api.user.order_order(data)
 			.then(res=>{
 				console.log(res);
+				this.$toast(res.msg);
 			})
 		},
 		addHandle(){
-			console.log('++++');
+			if(this.current < this.max)
+			this.current += 0.01
 		},
 		jianHandle(){
-			console.log('----');
+			if(this.current > this.min)
+			this.current = this.current - 0.01
 		}
 	}
 }

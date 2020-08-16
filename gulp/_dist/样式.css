@@ -160,46 +160,84 @@
   width: 100%;
   padding: 0 0.3rem;
 }
-.change-pass ul {
+.change-pass .code {
   float: left;
   width: 100%;
+  margin-top: 0.6rem;
+  text-align: center;
 }
-.change-pass ul li {
-  float: left;
-  width: 100%;
-  border-bottom: 0.1px solid #ccc;
-  padding: 0.2rem 0;
+.change-pass .code .pict {
+  margin-top: 0.2rem;
 }
-.change-pass ul li span {
-  float: left;
-  width: 1.4rem;
-  line-height: 0.6rem;
-}
-.change-pass ul li .fr {
-  width: calc(100% - 1.4rem);
-  height: 0.6rem;
-}
-.change-pass ul li .fr input {
-  height: 0.6rem;
-  border: none;
-  width: 100%;
-  float: left;
-}
-.change-pass ul li .fr input.short {
-  width: 50%;
-}
-.change-pass ul li .fr b {
-  float: right;
-  line-height: 0.6rem;
+.change-pass .code .pict img {
+  width: 3.2rem;
 }
 .change-pass .tips {
   float: left;
   width: 100%;
-  margin-top: 0.2rem;
+  text-align: center;
+  margin-top: 0.6rem;
 }
-.change-pass .tips p {
-  line-height: 1.6;
-  color: #f00;
+.order-page {
+  height: 100%;
+}
+.order-page .list {
+  float: left;
+  width: 100%;
+}
+.order-page .list .ul0 {
+  float: left;
+  width: 100%;
+}
+.order-page .list .ul0 li {
+  float: left;
+  width: 100%;
+  padding: 0.2rem 0.3rem;
+  background: #fff;
+}
+.order-page .list .ul0 .fl {
+  line-height: 0.5rem;
+}
+.order-page .list .ul0 .fr {
+  display: flex;
+  flex-direction: column;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+.order-page .list .ul0 .fr span {
+  margin-top: 0.1rem;
+  background: #3048ff;
+  display: inline-block;
+  padding: 0.08rem 0.12rem;
+  border-radius: 0.06rem;
+  color: #fff;
+}
+.order-page .list .ul0 .fr span:nth-of-type(1) {
+  margin-top: 0;
+}
+.order-page .list .ul1 li {
+  padding: 0.2rem 0;
+}
+.order-page .list .ul1 li span {
+  display: block;
+  line-height: 0.8rem;
+}
+.order-page .list .item {
+  border-bottom: 0.1px solid #ccc;
+}
+.order-page .list .item .user .text .label .txt {
+  color: #333;
+}
+.order-page .list .item .user .price .num {
+  color: #333;
+}
+.order-page .list .item .user .price .tit {
+  color: #333;
+}
+.order-page .list .item .inform .text,
+.order-page .list .item .inform .p {
+  color: #333;
 }
 .order-page .tabs {
   float: left;
@@ -249,6 +287,7 @@
   position: fixed;
   left: 0;
   right: 0;
+  top: 0.95rem;
 }
 .filter .layout {
   background: #2e3649;
@@ -259,6 +298,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding: 0 4%;
 }
 .filter .layout ul li {
   width: 1.88rem;
@@ -332,6 +372,7 @@
   opacity: 0;
   left: 0;
   top: 0;
+  z-index: 3;
 }
 .pub-upload input.active {
   -webkit-filter: blur(1px);
@@ -364,6 +405,7 @@
 .bind-page ul li .fr input[type="text"] {
   height: 0.9rem;
   border: none;
+  width: 100%;
 }
 .rule-page {
   float: left;
@@ -397,4 +439,111 @@
 .rule-page .content p {
   line-height: 1.5;
   margin-top: 0.06rem;
+}
+.clear {
+  clear: both;
+}
+.order-info {
+  float: left;
+  width: 100%;
+  padding: 0 0.3rem;
+}
+.order-info .box {
+  float: left;
+  width: 100%;
+  margin-top: 0.2rem;
+  background: #f7f7f7;
+  border-radius: 0.06rem;
+  padding: 0.2rem 0.35rem;
+}
+.order-info .box:nth-of-type(1) {
+  margin-top: 0.4rem;
+}
+.order-info .box h2 {
+  font-size: 0.34rem;
+}
+.order-info .box ul.mt {
+  margin-top: 0.3rem;
+}
+.order-info .box ul li {
+  float: left;
+  width: 100%;
+  line-height: 2;
+}
+.order-info .box .fr .ico-more {
+  margin-top: 0.16rem;
+}
+.order-info .pub-upload {
+  margin-top: 0.6rem;
+}
+.pict-show {
+  text-align: center;
+  margin-top: 0.6rem;
+}
+.upload-file {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.upload-file p {
+  margin-top: 0.3rem;
+}
+.login {
+  float: left;
+  width: 100%;
+  padding: 1.4rem 0.3rem 0;
+  background: #110b19;
+  height: 100%;
+}
+.login .logo {
+  text-align: center;
+}
+.login .logo img {
+  width: 1.2rem;
+}
+.login .logo p {
+  color: #fff;
+  margin-top: 0.26rem;
+  font-size: 0.34rem;
+}
+.login h2 {
+  font-size: 0.4rem;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 1.6rem;
+}
+.login ul {
+  margin-top: 0.4rem;
+}
+.login ul li {
+  float: left;
+  width: 100%;
+  margin-top: 0.2rem;
+}
+.login ul li input {
+  border: none;
+  background: #322840;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: 0.6rem;
+  padding: 0 0.28rem;
+  color: #fff;
+}
+.login ul li input::-webkit-input-placeholder {
+  color: rgba(255,255,255,0.6);
+}
+.login .btn {
+  float: left;
+  width: 100%;
+  margin-top: 0.6rem;
+}
+.login .btn button {
+  height: 1rem;
+  color: #fff;
+  background: -webkit-linear-gradient(left, #6c23e2, #ef3a6f);
+  width: 100%;
+  color: #fff;
+  border-radius: 0.6rem;
+  font-size: 0.36rem;
 }

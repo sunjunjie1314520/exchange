@@ -8,7 +8,8 @@
 							首页
 						</div>
 						<div class="home-user" @click="show=true">
-							<img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=251289958,1860898046&fm=26&gp=0.jpg" alt="">
+							<img v-if="$info && $info.avatar != '0'" :src="'http://api.ohtbmgn.cn/' + $info.avatar" alt="">
+							<img v-else src="../../src/static/img/bab103_77x77.jpg" alt="">
 						</div>
 						<div class="func">
 							<div class="ico"><router-link to="/buy">买</router-link></div>
@@ -21,14 +22,14 @@
 					<div class="banner" v-if="false">
 						<img src="../../src/static/img/0fc7e1_690x335.jpg" alt="">
 					</div>
-					<div class="data">
+					<div class="data" v-if="$trade">
 						<div class="today">
 							<div class="item">
 								<div class="tit">
 									均价(昨/今)
 								</div>
 								<div class="number">
-									￥{{pageData.p1 | moneyFixed(2)}}/{{pageData.p2 | moneyFixed(2)}}
+									￥{{ $trade.data[1].amount / $trade.data[1].volume | moneyFixed(2)}}/{{ $trade.data[0].amount / $trade.data[0].volume | moneyFixed(2)}}
 								</div>
 							</div>
 							<div class="item">
@@ -36,7 +37,7 @@
 									最高(昨/今)
 								</div>
 								<div class="number">
-									￥{{pageData.p3 | moneyFixed(2)}}/{{pageData.p4 | moneyFixed(2)}}
+									￥{{$trade.data[1].floor | moneyFixed(2)}}/{{$trade.data[0].floor | moneyFixed(2)}}
 								</div>
 							</div>
 							<div class="item">
@@ -44,7 +45,7 @@
 									当前底价
 								</div>
 								<div class="number">
-									￥{{pageData.p5 | moneyFixed(2)}}
+									￥{{$trade.data[0].max | moneyFixed(2)}}
 								</div>
 							</div>
 						</div>
@@ -54,7 +55,7 @@
 									买量(音豆)
 								</div>
 								<div class="number">
-									{{pageData.p6}}
+									{{$trade.data[0].buy}}
 								</div>
 							</div>
 							<div class="item">
@@ -62,7 +63,7 @@
 								成交(音豆)(昨/今)
 								</div>
 								<div class="number">
-									{{pageData.p7}}/{{pageData.p8}}
+									{{$trade.data[1].volume}}/{{$trade.data[0].volume}}
 								</div>
 							</div>
 						</div>
@@ -77,7 +78,7 @@
 						</div>
 					</div>
 					<div class="details">
-						<div class="tabs">
+						<div class="tabs" v-if="false">
 							<div class="item" @click="filter1 == 1 ? filter1=0 : filter1=1">
 								<div class="txt">时间</div>
 								<div class="sta">
@@ -100,7 +101,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="list">
+						<div class="pub-list">
 							<div class="item" v-for="item in list" :key="item.id">
 								<div class="user">
 									<div class="text">
@@ -109,10 +110,10 @@
 										</div>
 										<div class="label">
 											<div class="txt">
-												{{item.username | mobile}}
+												{{item.phone | mobile}}
 											</div>
 											<div class="pays">
-												<img src="../../src/static/img/469592_34x34.png" alt="">
+												<img v-for="item1 in item.UserBank" :key="item1.id" :src="getImgUrl(item1)" alt="">
 											</div>
 										</div>
 									</div>
@@ -121,21 +122,22 @@
 											单价
 										</div>
 										<div class="num">
-											￥{{item.money | moneyFixed(2)}}
+											￥{{ $trade.data[0].floor * (item.float_range + 1) | moneyFixed(2)}}
 										</div>
 									</div>
 								</div>
 								<div class="inform">
 									<div class="text">
 										<div class="p">
-											数量 {{item.dou}} 音豆
+											<!-- 数量 {{item.TradeDetail.length > 0 ? quantityHandle(item.TradeDetail): 0}} 音豆 -->
+											数量 {{item.number}} 音豆
 										</div>
 										<div class="p">
-											最近7日成交{{item.bi}}笔
+											最近7日成交{{item.TradeDetail.length > 0 ? resultHandle(item.TradeDetail): 0}}笔
 										</div>
 									</div>
 									<div class="link">
-										<button @click="sellHandle(item)">出售</button>
+										<button @click="sellHandle(item, $trade.data[0].floor * (item.float_range + 1))">出售</button>
 									</div>
 								</div>
 							</div>
@@ -148,7 +150,8 @@
 			<div class="menu-content">
 				<div class="close" @click="show=false;">关闭</div>
 				<div class="id">
-					150****1584
+					<h2>{{ $info.phone | mobile }}</h2>
+					<span>手续费: {{$info.Group.fee * 100}}%</span>
 				</div>
 				<div class="assets">
 					<div class="item">
@@ -156,7 +159,7 @@
 							账户资产(音豆)
 						</div>
 						<div class="num">
-							0.00
+							{{$info.user_amount}}
 						</div>
 						<!-- <div class="func">
 							<div class="txt">
@@ -172,7 +175,7 @@
 							冻结 <img src="../../src/static/img/371bdd_32x33.png" alt="">
 						</div>
 						<div class="num">
-							0.00
+							{{$info.lock_amount}}
 						</div>
 					</div>
 				</div>
@@ -229,29 +232,30 @@ export default {
 				p8: 9554848
 			},
 			list: [
-				{
-					id: 1,
-					username: '15971345754',
-					type: 1,
-					money: 5,
-					dou:500,
-					bi: 30
-				},
-				{
-					id: 2,
-					username: '15971345754',
-					type: 1,
-					money: 5,
-					dou: 400,
-					bi: 10
-				}
+				// {
+				// 	id: 1,
+				// 	username: '15971345754',
+				// 	type: 1,
+				// 	money: 5,
+				// 	dou:500,
+				// 	bi: 30
+				// },
+				// {
+				// 	id: 2,
+				// 	username: '15971345754',
+				// 	type: 1,
+				// 	money: 5,
+				// 	dou: 400,
+				// 	bi: 10
+				// }
 			]
 		}
 	},
 	created(){
-		console.log(this.$route.query);
-		this.$store.commit('User/SET_TOKEN', this.$route.query);
+		// console.log(this.$route.query);
+		// this.$store.commit('User/SET_TOKEN', this.$route.query);
 		this.userinfo();
+		this.orderRecord();
 	},
 	mounted(){
 		this.mui(".home-page").scroll({
@@ -264,15 +268,98 @@ export default {
 			bounce: true //是否启用回弹
 		})
 		var screen = this.$assist.getScreenInfo();
-		this.countWidth = `${screen.width}px`;
-		setTimeout(() => {
+		this.countWidth = `${screen.width - 20}px`;
+		// setTimeout(() => {
+		// 	this.drawLine();
+		// }, 10);
+	},
+	watch:{
+		data1(ee){
+			console.log(ee);
 			this.drawLine();
-		}, 10);
+		}
+	},
+	computed: {
+		min(){
+			return this.$trade.sys_amount * 1 - this.$trade.sys_amount * 1 / 100 * 5
+		},
+		max(){
+			return this.$trade.sys_amount * 1 + this.$trade.sys_amount * 1 / 100 * 5
+		},
+		data1(){
+			// var arr = [1, 8, 18, 30, 42, 60]
+			var arr = []
+			if(this.$trade){
+				this.$trade.data.forEach(item=>{
+					arr.push(item.amount)
+				})
+			}
+			return arr
+		},
+		week(){
+			// var arr = [1, 8, 18, 30, 42, 60]
+			var arr = []
+			if(this.$trade){
+				this.$trade.data.forEach(item=>{
+					var a = item.create_time.split(' ')
+					var str = a[0].split('-').splice(1,2).join('/')
+					arr.push(str)
+				})
+			}
+			return arr
+		}
 	},
 	methods: {
+		getImgUrl(item){
+			var str = ''
+			switch (item.id) {
+				case 1:
+					str = '68f55d_64x64.png'
+					break;
+				case 2:
+					str = 'dd2105_96x96.png'
+					break;
+				case 3:
+					str = '469592_34x34.png'
+					break;
+				default:
+					break;
+			}
+			return require(`../../src/static/img/${str}`)
+		},
+		resultHandle(list){
+			var bi = 0;
+			list.forEach(item=>{
+				if(item.status == 2){
+					bi += item.number
+				}
+			})
+			return bi
+		},
+		quantityHandle(list){
+			var bi = 0;
+			list.forEach(item=>{
+				// if(item.status == 2){
+					bi += item.amount * 1
+				// }
+			})
+			return bi
+		},
+		// 列表
+		orderRecord(){
+			var data = {
+				status: 0,
+				token: this.$user.token
+			}
+			this.$api.user.orderRecord(data)
+			.then(res=>{
+				console.log(res);
+				this.list = res.data
+			})
+		},
 		// 出售
-		sellHandle(id){
-			this.$store.commit('User/SET_CURRENT_SELL', id)
+		sellHandle(id, item){
+			this.$store.commit('User/SET_CURRENT_SELL', {...id, odds: item.toFixed(2)})
 			this.$router.push('/sell');
 		},
 		// 搜索
@@ -281,6 +368,8 @@ export default {
 		},
 		// 绘图
 		drawLine(){
+			const _this = this
+
 			// 基于准备好的dom，初始化echarts实例
 			let myChart = this.$echarts.init(document.getElementById('myChart'))
 			// 绘制图表
@@ -290,11 +379,11 @@ export default {
 					top: 20,
 					bottom: 40,
 					left: 20,
-					right: 0
+					right: 10
 				},
 				tooltip: {},
 				xAxis: {
-					data: ['8/8', '8/9', '8/10', '8/11', '8/12', '8/13'],
+					data: _this.week,
 					axisLine: {
 						lineStyle: {
 							color: "#fff",
@@ -311,16 +400,14 @@ export default {
 				series: [{
 					name: '价格',
 					type: 'line',
-					data: [1, 8, 18, 30, 42, 60]
+					data: _this.data1
 				}],
 			});
 		},
 		// 获取用户信息
 		userinfo(){
-			this.$store.dispatch('User/userinfo', this.$user)
-			.then(res=>{
-				this.$toast('正在请求数据中~~~');
-			})
+			this.$store.dispatch('User/userinfo', this.$user);
+			this.$store.dispatch('User/trade_index', this.$user);
 		},
 	}
 }

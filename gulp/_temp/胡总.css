@@ -199,7 +199,6 @@
 }
 .home-page .details {
   width: 100%;
-  padding-top: 30px;
 }
 .home-page .details .tabs {
   width: 100%;
@@ -266,12 +265,12 @@
 .home-page .details .tabs .item .sta .active {
   color: #3048ff;
 }
-.home-page .details .list {
+.pub-list {
   padding: 20px 0;
   float: left;
   width: 100%;
 }
-.home-page .details .list .item {
+.pub-list .item {
   width: 750px;
   position: relative;
   padding: 0 30px;
@@ -281,82 +280,83 @@
   padding-bottom: 40px;
   border-bottom: 0.1px solid #47577a;
 }
-.home-page .details .list .item .user {
+.pub-list .item .user {
   width: 100%;
   display: flex;
   float: left;
   justify-content: space-between;
 }
-.home-page .details .list .item .user .text {
+.pub-list .item .user .text {
   height: 142px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.home-page .details .list .item .user .text .imgs {
+.pub-list .item .user .text .imgs {
   width: 64px;
   height: 64px;
 }
-.home-page .details .list .item .user .text .imgs img {
+.pub-list .item .user .text .imgs img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
-.home-page .details .list .item .user .text .label {
+.pub-list .item .user .text .label {
   height: 142px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 25px;
 }
-.home-page .details .list .item .user .text .label .txt {
+.pub-list .item .user .text .label .txt {
   font-size: 28px;
   color: #fff;
   padding-right: 10px;
 }
-.home-page .details .list .item .user .text .label .pays {
+.pub-list .item .user .text .label .pays {
   height: 142px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.home-page .details .list .item .user .text .label .pays img {
+.pub-list .item .user .text .label .pays img {
   height: 34px;
+  margin-right: 15px;
 }
-.home-page .details .list .item .user .price {
+.pub-list .item .user .price {
   padding-top: 50px;
 }
-.home-page .details .list .item .user .price .tit {
+.pub-list .item .user .price .tit {
   line-height: 32px;
   font-size: 24px;
   color: #9caaca;
   text-align: right;
 }
-.home-page .details .list .item .user .price .num {
+.pub-list .item .user .price .num {
   line-height: 52px;
   font-size: 34px;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
 }
-.home-page .details .list .inform {
+.pub-list .inform {
   width: 100%;
   float: left;
   min-height: 100px;
   padding-top: 10px;
 }
-.home-page .details .list .inform .text {
+.pub-list .inform .text {
   float: left;
 }
-.home-page .details .list .inform .text .p {
+.pub-list .inform .text .p {
   line-height: 40px;
   font-size: 26px;
   color: #b4c3e9;
 }
-.home-page .details .list .inform .link {
+.pub-list .inform .link {
   padding-top: 15px;
   float: right;
 }
-.home-page .details .list .inform .link button {
+.pub-list .inform .link button {
   width: 136px;
   height: 58px;
   background-color: #3048ff;
@@ -391,16 +391,24 @@
 }
 .menu-slide .id {
   width: 100%;
-  line-height: 148px;
-  font-size: 34px;
   color: #fff;
+  padding-top: 80px;
+}
+.menu-slide .id h2 {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 34px;
+}
+.menu-slide .id span {
+  font-size: 26px;
+  display: block;
+  margin-top: 20px;
 }
 .menu-slide .assets {
   width: 100%;
   background-color: #1c222e;
   border-radius: 10px;
   padding: 20px 30px;
+  margin-top: 50px;
 }
 .menu-slide .assets .item {
   width: 100%;

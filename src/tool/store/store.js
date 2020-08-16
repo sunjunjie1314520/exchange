@@ -27,7 +27,7 @@ export function store(api, module, fp_state, fp_getters, fp_mutations, fp_action
             return new Promise((resolve, reject) => {
                 $api[api][item](payload)
                 .then(res => {
-                    commit(item, res.data ? res.data : false)
+                    commit(item, res)
                     resolve(res)
                 })
                 .catch(error => {

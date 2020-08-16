@@ -27,7 +27,9 @@ export const GAME = [
 
 // User.js
 export const USER_INFO = 'userinfo'
-export const USER = [USER_INFO]
+export const TRADE_INDEX = 'trade_index'
+
+export const USER = [USER_INFO, TRADE_INDEX]
 
 // Betting.js
 export const BETTING = []

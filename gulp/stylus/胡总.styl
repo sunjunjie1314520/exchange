@@ -172,7 +172,6 @@
                 height 74px
     .details
         width 100%
-        padding-top 30px
         .tabs
             width 100%
             display flex
@@ -222,87 +221,88 @@
                         margin-bottom -13px
                     .active
                         color theme
-        .list
-            padding 20px 0
-            fw 1
-            .item
-                width 750px
-                position relative
-                padding 0 30px
-                float left
-                left -30px
-                min-height 100px
-                padding-bottom 40px
-                border-bottom 0.1px solid #47577a
-                .user
-                    width 100%
+.pub-list
+    padding 20px 0
+    fw 1
+    .item
+        width 750px
+        position relative
+        padding 0 30px
+        float left
+        left -30px
+        min-height 100px
+        padding-bottom 40px
+        border-bottom 0.1px solid #47577a
+        .user
+            width 100%
+            display flex
+            float left
+            justify-content space-between
+            .text
+                height 142px
+                display flex
+                justify-content flex-start
+                align-items center
+                .imgs
+                    width 64px
+                    height 64px
+                    img
+                        width 100%
+                        height 100%
+                        border-radius 50%
+                .label
+                    height 142px
                     display flex
-                    float left
                     justify-content space-between
-                    .text
+                    align-items center
+                    padding-left 25px
+                    .txt
+                        font-size 28px
+                        color #fff
+                        padding-right 10px
+                    .pays
                         height 142px
                         display flex
-                        justify-content flex-start
+                        justify-content center
                         align-items center
-                        .imgs
-                            width 64px
-                            height 64px
-                            img
-                                width 100%
-                                height 100%
-                                border-radius 50%
-                        .label
-                            height 142px
-                            display flex
-                            justify-content space-between
-                            align-items center
-                            padding-left 25px
-                            .txt
-                                font-size 28px
-                                color #fff
-                                padding-right 10px
-                            .pays
-                                height 142px
-                                display flex
-                                justify-content center
-                                align-items center
-                                img
-                                    height 34px
-                    .price
-                        padding-top 50px
-                        .tit
-                            line-height 32px
-                            font-size 24px
-                            color #9caaca
-                            text-align right
-                        .num
-                            line-height 52px
-                            font-size 34px
-                            color #fff
-                            font-family Arial, Helvetica, sans-serif
-            .inform
-                width 100%
-                float left
-                min-height 100px
-                padding-top 10px
-                .text
-                    float left
-                    .p
-                        line-height 40px
-                        font-size 26px
-                        color #b4c3e9
-                    
-                .link
-                    padding-top 15px
-                    float right
-                    button
-                        width 136px
-                        height 58px
-                        background-color #3048ff
-                        color #fff
-                        border-radius 6px
-                        text-align center
-                        line-height 58px
+                        img
+                            height 34px
+                            margin-right 15px
+            .price
+                padding-top 50px
+                .tit
+                    line-height 32px
+                    font-size 24px
+                    color #9caaca
+                    text-align right
+                .num
+                    line-height 52px
+                    font-size 34px
+                    color #fff
+                    font-family Arial, Helvetica, sans-serif
+    .inform
+        width 100%
+        float left
+        min-height 100px
+        padding-top 10px
+        .text
+            float left
+            .p
+                line-height 40px
+                font-size 26px
+                color #b4c3e9
+            
+        .link
+            padding-top 15px
+            float right
+            button
+                width 136px
+                height 58px
+                background-color #3048ff
+                color #fff
+                border-radius 6px
+                text-align center
+                line-height 58px
 .menu-slide
     width 100vw
     height 100vh
@@ -326,15 +326,21 @@
         color #fff
     .id
         width 100%
-        line-height 148px
-        font-size 34px
         color #fff
-        font-family Arial, Helvetica, sans-serif
+        padding-top 80px
+        h2
+            font-family Arial, Helvetica, sans-serif
+            font-size 34px
+        span
+            font-size 26px
+            display block
+            margin-top 20px
     .assets
         width 100%
         background-color #1c222e
         border-radius 10px
         padding 20px 30px
+        margin-top 50px
         .item
             width 100%
             padding-bottom 10px

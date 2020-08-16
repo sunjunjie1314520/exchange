@@ -135,37 +135,70 @@
 .change-pass
     fw 1
     padding 0 30px
-    ul
+    .code
         fw 1
-        li
-            fw 1
-            border-bottom .1px solid #ccc
-            padding 20px 0
-            span
-                float left
-                width 140px
-                line-height 60px
-            .fr
-                widthC 140px
-                height 60px
-                input
-                    height 60px
-                    border none
-                    width 100%
-                    float left
-                    &.short
-                        width 50%
-                b
-                    float right
-                    line-height 60px
+        margin-top 60px
+        text-align center
+        .pict
+            margin-top 20px
+            img
+                width 320px
     .tips
         fw 1
-        margin-top 20px
-        p
-            line-height 1.6
-            color #f00
+        text-align center
+        margin-top 60px
 
 .order-page
+    height 100%
+    .list
+        fw 1
+        
+        .ul0
+            fw 1
+            li
+                fw 1
+                padding 20px 30px
+                background #fff
+            .fl
+                line-height 50px
+            
+            .fr
+                display flex
+                flex-direction column
+                height 150px
+                align-items center
+                justify-content center
+                span
+                    mt 0
+                    margin-top 10px
+                    background theme
+                    display inline-block
+                    padding 8px 12px
+                    border-radius 6px
+                    color #fff
+            
+        .ul1
+            li
+                padding 20px 0
+                span
+                    display block
+                    line-height 80px
+        .item
+            border-bottom .1px solid #ccc
+            .user
+                .text
+                    .label
+                        .txt
+                            color #333
+                .price
+                    .num
+                        color #333
+                    .tit
+                        color #333
+            .inform
+                .text
+                .p
+                    color #333
     .tabs
         fw 1
         border-bottom 1px solid #f7f7f7
@@ -201,6 +234,7 @@
     position fixed
     left 0
     right 0
+    top 95px
     .layout
         background #2e3649
         fw 1
@@ -208,6 +242,7 @@
             display flex
             justify-content space-between
             flex-wrap wrap
+            padding 0 4%
             li
                 width 188px
                 height 84px
@@ -267,7 +302,7 @@
         opacity 0
         left 0
         top 0
-
+        z-index 3
     img
         width 100%
         position relative
@@ -290,6 +325,7 @@
                 input[type="text"]
                     height 90px
                     border none
+                    width 100%
 
 .rule-page
     fw 1
@@ -315,3 +351,87 @@
             line-height 1.5
             margin-top 6px
     
+
+.clear
+    clear both
+
+
+.order-info
+    fw 1
+    padding 0 30px
+    .box
+        fw 1
+        margin-top 20px
+        background #f7f7f7
+        mt 40px
+        border-radius 6px
+        padding 20px 35px
+        h2
+            font-size 34px
+        ul
+            &.mt
+                margin-top 30px
+            li
+                fw 1
+                line-height 2
+        .fr
+            .ico-more
+                margin-top 16px
+                
+    .pub-upload
+        margin-top 60px
+
+.pict-show
+    text-align center
+    margin-top 60px
+
+.upload-file
+    display flex
+    justify-content center
+    flex-direction column
+    align-items center
+    p
+        margin-top 30px
+
+.login
+    fw 1
+    padding 140px 30px 0
+    background #110b19
+    height 100%
+    .logo
+        text-align center
+        img
+            width 120px
+        p
+            color #fff
+            margin-top 26px
+            font-size 34px
+    h2
+        font-size 40px
+        font-weight bold
+        color #fff
+        margin-top 160px
+    ul
+        margin-top 40px
+        li
+            fw 1
+            margin-top 20px
+            input
+                border none
+                background #322840
+                width 100%
+                height 80px
+                border-radius 60px
+                padding 0 28px
+                color #fff
+                inputW rgba(#fff, .6)
+    .btn
+        fw 1
+        margin-top 60px
+        button
+            height 100px
+            linear 1
+            width 100%
+            color #fff
+            border-radius 60px
+            font-size 36px

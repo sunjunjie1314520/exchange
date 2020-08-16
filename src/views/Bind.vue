@@ -31,7 +31,7 @@
 					<div class="fr">
 						<div class="pub-upload">
 							<input @change="upload_one" type="file" accept="image/gif, image/jpeg">
-							<img :src="img1" alt="">
+							<img :src="'http://api.ohtbmgn.cn/' + img1" alt="">
 						</div>
 					</div>
 				</li>
@@ -40,13 +40,13 @@
 					<div class="fr">
 						<div class="pub-upload">
 							<input @change="upload_two" type="file" accept="image/gif, image/jpeg">
-							<img :src="img2" alt="">
+							<img :src="'http://api.ohtbmgn.cn/' + img2" alt="">
 						</div>
 					</div>
 				</li>
 			</ul>
 			<div class="pub-button">
-				<button @click="submitFun">确定</button>
+				<button @click="submitFun">保存</button>
 			</div>
 		</div>
 	</div>
@@ -65,42 +65,138 @@ export default {
 
 			img1: '',
 			img2: '',
+			show: []
 		}
 	},
+	created(){
+		this.user_bank_index();
+	},
 	methods: {
-		upload_one(e){
-			console.log(e);
-			const _this = this;
-			var file = event.target.files;
-			var reader = new FileReader();//读取文件
-			reader.readAsDataURL(file[0]);
-			reader.onload = function() {
-				_this.img1= reader.result;
-			};
-		},
-		upload_two(e){
-			console.log(e);
-			const _this = this;
-			var file = event.target.files;
-			var reader = new FileReader();//读取文件
-			reader.readAsDataURL(file[0]);
-			reader.onload = function() {
-				_this.img2= reader.result;
-			};
-		},
-		submitFun(){
+		// 添加
+		user_bank_save(obj){
 			var data = {
-				a: this.field1,
-				b: this.field2,
-				c: this.field3,
-				d: this.field4,
-				e: this.img1,
-				f: this.img2,
+				...obj,
+				...this.$user
 			}
-			this.$api.user.bind_save(data)
+			this.$api.user.user_bank(data)
 			.then(res=>{
 				console.log(res);
 			})
+		},
+		// 显示
+		user_bank_index(){
+			this.$api.user.user_bank_index(this.$user)
+			.then(res=>{
+				console.log(res);
+				this.show = res
+				this.field1 = res[0].bank_name
+				this.field2 = res[0].bank_type
+				this.field3 = res[0].bank_number
+
+				this.field4 = res[1].bank_number
+				this.img1 = res[1].key_src
+				this.img2 = res[2].key_src
+			})
+		},
+		qiniuyun(){
+			
+		},
+		upload_one(e){
+			const _this = this
+			var file = event.target.files;
+			this.$api.user.qiniu(this.$user)
+			.then(res=>{
+				console.log(res);
+
+				var formData = new FormData()
+				formData.append('file', file[0])
+				formData.append('token', res.token)
+				// formData.append('key', file[0].name)
+				formData.append('fname', file[0].name)
+				formData.append('x:name', file[0].name)
+			
+				fetch('http://up-z2.qiniup.com', {
+					method: 'POST',
+					body: formData,
+					// credentials: 'same-origin',
+					"headers":new Headers({
+						// 'Content-Type': 'application/octet-stream',
+						'Authorization': res.token
+					})
+				})
+				.then(res => {
+					console.log(res);
+					return res.json()
+				})
+				.then(res => {               
+					console.log(res);
+					_this.img1= res.hash;
+				})
+				.catch(error => {
+					console.log(error);
+				})
+			})
+		},
+		upload_two(e){
+			const _this = this
+			var file = event.target.files;
+			this.$api.user.qiniu(this.$user)
+			.then(res=>{
+				console.log(res);
+
+				var formData = new FormData()
+				formData.append('file', file[0])
+				formData.append('token', res.token)
+				// formData.append('key', file[0].name)
+				formData.append('fname', file[0].name)
+				formData.append('x:name', file[0].name)
+			
+				fetch('http://up-z2.qiniup.com', {
+					method: 'POST',
+					body: formData,
+					// credentials: 'same-origin',
+					"headers":new Headers({
+						// 'Content-Type': 'application/octet-stream',
+						'Authorization': res.token
+					})
+				})
+				.then(res => {
+					console.log(res);
+					return res.json()
+				})
+				.then(res => {               
+					console.log(res);
+					_this.img2= res.hash;
+
+				})
+				.catch(error => {
+					console.log(error);
+				})
+			})
+		},
+		submitFun(){
+			this.user_bank_save({
+				id: this.show[0].id,
+				bank_name: this.field1,
+				bank_number: this.field3,
+				bank_type: this.field2,
+				key_src:''
+			});
+			this.user_bank_save({
+				id: this.show[1].id,
+				bank_name: 'wx',
+				bank_number: '',
+				bank_type: '',
+				key_src: this.img1
+			});
+			this.user_bank_save({
+				id: this.show[2].id,
+				bank_name: 'zfb',
+				bank_number: '',
+				bank_type: '',
+				key_src:this.img2
+			});
+			this.$toast('修改成功~')
 		}
 	}
 }

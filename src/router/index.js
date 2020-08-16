@@ -46,7 +46,7 @@ Vue.use(VueRouter)
 		name: 'ChangePass',
 		component: () => import('@/views/ChangePass.vue'),
 		meta: {
-			title: '修改交易密码',
+			title: '联系我们',
 			back: 4,
 		}
 	},
@@ -92,8 +92,36 @@ Vue.use(VueRouter)
 		name: 'OrderInfo',
 		component: () => import('@/views/OrderInfo.vue'),
 		meta: {
-			title: '确认单',
+			title: '订单详情',
 			back: 5
+		}
+	},
+	{
+		path: '/order_info1',
+		name: 'OrderInfo1',
+		component: () => import('@/views/OrderInfo1.vue'),
+		meta: {
+			title: '订单详情',
+			back: 5
+		}
+	},
+	{
+		path: '/show_data',
+		name: 'ShowData',
+		component: () => import('@/views/ShowData.vue'),
+		meta: {
+			title: '收款信息',
+			back: 6
+		}
+	},
+	{
+		path: '/login',
+		name: 'Login',
+		component: () => import('@/views/Login.vue'),
+		meta: {
+			title: '登录',
+			back: 1,
+			full: true,
 		}
 	}
 ]

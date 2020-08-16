@@ -160,46 +160,84 @@
   width: 100%;
   padding: 0 30px;
 }
-.change-pass ul {
+.change-pass .code {
   float: left;
   width: 100%;
+  margin-top: 60px;
+  text-align: center;
 }
-.change-pass ul li {
-  float: left;
-  width: 100%;
-  border-bottom: 0.1px solid #ccc;
-  padding: 20px 0;
+.change-pass .code .pict {
+  margin-top: 20px;
 }
-.change-pass ul li span {
-  float: left;
-  width: 140px;
-  line-height: 60px;
-}
-.change-pass ul li .fr {
-  width: calc(100% - 140px);
-  height: 60px;
-}
-.change-pass ul li .fr input {
-  height: 60px;
-  border: none;
-  width: 100%;
-  float: left;
-}
-.change-pass ul li .fr input.short {
-  width: 50%;
-}
-.change-pass ul li .fr b {
-  float: right;
-  line-height: 60px;
+.change-pass .code .pict img {
+  width: 320px;
 }
 .change-pass .tips {
   float: left;
   width: 100%;
-  margin-top: 20px;
+  text-align: center;
+  margin-top: 60px;
 }
-.change-pass .tips p {
-  line-height: 1.6;
-  color: #f00;
+.order-page {
+  height: 100%;
+}
+.order-page .list {
+  float: left;
+  width: 100%;
+}
+.order-page .list .ul0 {
+  float: left;
+  width: 100%;
+}
+.order-page .list .ul0 li {
+  float: left;
+  width: 100%;
+  padding: 20px 30px;
+  background: #fff;
+}
+.order-page .list .ul0 .fl {
+  line-height: 50px;
+}
+.order-page .list .ul0 .fr {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+}
+.order-page .list .ul0 .fr span {
+  margin-top: 10px;
+  background: #3048ff;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #fff;
+}
+.order-page .list .ul0 .fr span:nth-of-type(1) {
+  margin-top: 0;
+}
+.order-page .list .ul1 li {
+  padding: 20px 0;
+}
+.order-page .list .ul1 li span {
+  display: block;
+  line-height: 80px;
+}
+.order-page .list .item {
+  border-bottom: 0.1px solid #ccc;
+}
+.order-page .list .item .user .text .label .txt {
+  color: #333;
+}
+.order-page .list .item .user .price .num {
+  color: #333;
+}
+.order-page .list .item .user .price .tit {
+  color: #333;
+}
+.order-page .list .item .inform .text,
+.order-page .list .item .inform .p {
+  color: #333;
 }
 .order-page .tabs {
   float: left;
@@ -249,6 +287,7 @@
   position: fixed;
   left: 0;
   right: 0;
+  top: 95px;
 }
 .filter .layout {
   background: #2e3649;
@@ -259,6 +298,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding: 0 4%;
 }
 .filter .layout ul li {
   width: 188px;
@@ -332,6 +372,7 @@
   opacity: 0;
   left: 0;
   top: 0;
+  z-index: 3;
 }
 .pub-upload input.active {
   -webkit-filter: blur(1px);
@@ -364,6 +405,7 @@
 .bind-page ul li .fr input[type="text"] {
   height: 90px;
   border: none;
+  width: 100%;
 }
 .rule-page {
   float: left;
@@ -397,4 +439,111 @@
 .rule-page .content p {
   line-height: 1.5;
   margin-top: 6px;
+}
+.clear {
+  clear: both;
+}
+.order-info {
+  float: left;
+  width: 100%;
+  padding: 0 30px;
+}
+.order-info .box {
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+  background: #f7f7f7;
+  border-radius: 6px;
+  padding: 20px 35px;
+}
+.order-info .box:nth-of-type(1) {
+  margin-top: 40px;
+}
+.order-info .box h2 {
+  font-size: 34px;
+}
+.order-info .box ul.mt {
+  margin-top: 30px;
+}
+.order-info .box ul li {
+  float: left;
+  width: 100%;
+  line-height: 2;
+}
+.order-info .box .fr .ico-more {
+  margin-top: 16px;
+}
+.order-info .pub-upload {
+  margin-top: 60px;
+}
+.pict-show {
+  text-align: center;
+  margin-top: 60px;
+}
+.upload-file {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.upload-file p {
+  margin-top: 30px;
+}
+.login {
+  float: left;
+  width: 100%;
+  padding: 140px 30px 0;
+  background: #110b19;
+  height: 100%;
+}
+.login .logo {
+  text-align: center;
+}
+.login .logo img {
+  width: 120px;
+}
+.login .logo p {
+  color: #fff;
+  margin-top: 26px;
+  font-size: 34px;
+}
+.login h2 {
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 160px;
+}
+.login ul {
+  margin-top: 40px;
+}
+.login ul li {
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+}
+.login ul li input {
+  border: none;
+  background: #322840;
+  width: 100%;
+  height: 80px;
+  border-radius: 60px;
+  padding: 0 28px;
+  color: #fff;
+}
+.login ul li input::-webkit-input-placeholder {
+  color: rgba(255,255,255,0.6);
+}
+.login .btn {
+  float: left;
+  width: 100%;
+  margin-top: 60px;
+}
+.login .btn button {
+  height: 100px;
+  color: #fff;
+  background: -webkit-linear-gradient(left, #6c23e2, #ef3a6f);
+  width: 100%;
+  color: #fff;
+  border-radius: 60px;
+  font-size: 36px;
 }

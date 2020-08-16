@@ -14,7 +14,7 @@
 			</ul>
 
 			<div class="out-login">
-				<button>退出登录</button>
+				<button @click="quit">退出登录</button>
 			</div>
 		</div>
 	</div>
@@ -27,6 +27,12 @@ export default {
 	data(){
 		return {
 
+		}
+	},
+	methods: {
+		quit(){
+			this.$store.commit('User/SET_TOKEN', false);
+			this.$router.replace('/login')
 		}
 	}
 }
