@@ -32,7 +32,7 @@ export default {
 	methods: {
 		quit(){
 			this.$store.commit('User/SET_TOKEN', false);
-			this.$router.replace('/login')
+			this.$router.replace({name: 'Login'})
 		}
 	}
 }

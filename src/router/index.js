@@ -6,6 +6,16 @@ Vue.use(VueRouter)
 	const routes = [
 	{
 		path: '/',
+		name: 'Login',
+		component: () => import('@/views/Login.vue'),
+		meta: {
+			title: '登录',
+			back: 1,
+			full: true,
+		}
+	},
+	{
+		path: '/nav',
 		name: 'Nav',
 		component: () => import('@/views/Nav.vue'),
 		meta: {
@@ -112,16 +122,6 @@ Vue.use(VueRouter)
 		meta: {
 			title: '收款信息',
 			back: 6
-		}
-	},
-	{
-		path: '/login',
-		name: 'Login',
-		component: () => import('@/views/Login.vue'),
-		meta: {
-			title: '登录',
-			back: 1,
-			full: true,
 		}
 	}
 ]
