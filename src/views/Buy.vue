@@ -48,11 +48,12 @@ export default {
 	name: 'Sell',
 	data(){
 		return {
-			current: 0.0,
+			current: 0,
 			formData: {
 				number: 1,
 				from_id: '',
-				float_range: 0.07,
+				
+				
 			}
 		}
 	},
@@ -62,7 +63,7 @@ export default {
 	},
 	computed: {
 		price(){
-			var result = this.formData.number * this.current;
+			var result = this.formData.number * this.current.toFixed(2);
 			return result.toFixed(2)
 		},
 		min(){
@@ -87,7 +88,8 @@ export default {
 			});
 			var data = {
 				...this.formData,
-				...this.$user
+				...this.$user,
+				float_range: this.price,
 			}
 			this.$api.user.order_order(data)
 			.then(res=>{

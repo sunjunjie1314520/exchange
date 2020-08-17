@@ -25,12 +25,12 @@
     export default {
         data(){
             return {
-                // phone: '18871355300',
-                // password: '111111',
+                phone: '18871355300',
+                password: '111111',
                 // phone: '15327520204',
                 // password: 'Hao9562100'
-                phone: '',
-                password: '',
+                // phone: '',
+                // password: '',
             }
         },
         created(){

@@ -122,7 +122,8 @@
 											单价
 										</div>
 										<div class="num">
-											￥{{ $trade.data[0].floor * (item.float_range + 1) | moneyFixed(2)}}
+											<!-- ￥{{ $trade.data[0].floor * (item.float_range + 1) | moneyFixed(2)}} -->
+											￥{{item.float_range  | moneyFixed(2)}}
 										</div>
 									</div>
 								</div>
@@ -291,7 +292,7 @@ export default {
 			var arr = []
 			if(this.$trade){
 				this.$trade.data.forEach(item=>{
-					arr.push(item.floor)
+					arr.push(item.amount)
 				})
 			}
 			return arr
