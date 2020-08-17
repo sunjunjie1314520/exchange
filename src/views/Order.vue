@@ -9,8 +9,8 @@
 				</ul>
 			</div>
 			<div class="list" v-if="list_n && tabs==0">
-				<div class="list" v-if="list_n.length > 0">
-					<ul class="ul0">
+				<div class="list1 mui-wrapper" v-if="list_n.length > 0">
+					<ul class="ul0 mui-scroll">
 						<li v-for="item in list_n" :key="item.id">
 							<div class="fl" @click="gotoLink1(item)">
 								<h3>数量：{{item.number}}</h3>
@@ -31,21 +31,25 @@
 			</div>
 
 			<div class="list" v-if="list1_n && tabs==1">
-				<ul class="ul0" v-if="list1_n.length > 0">
-					<li v-for="item in list1_n" :key="item.id" @click="gotoLink(item)">
-						<div class="fl">
-							<h3>数量：{{item.number}}</h3>
-							<p>时间：{{item.create_time}}</p>
-							<p>状态：{{mai_status(item.status)}}</p>
+				<div class="mui-wrapper">
+					<div class="mui-scroll">
+						<ul class="ul0" v-if="list1_n.length > 0">
+							<li v-for="item in list1_n" :key="item.id" @click="gotoLink(item)">
+								<div class="fl">
+									<h3>数量：{{item.number}}</h3>
+									<p>时间：{{item.create_time}}</p>
+									<p>状态：{{mai_status(item.status)}}</p>
+								</div>
+								<div class="fr">
+									<span>查看详情</span>
+								</div>
+							</li>
+						</ul>
+						<div class="null-data1" v-else>
+							<img src="../../src/static/img/ae1e94_128x128.png" alt="">
+							<span>暂无记录</span>
 						</div>
-						<div class="fr">
-							<span>查看详情</span>
-						</div>
-					</li>
-				</ul>
-				<div class="null-data1" v-else>
-					<img src="../../src/static/img/ae1e94_128x128.png" alt="">
-					<span>暂无记录</span>
+					</div>
 				</div>
 			</div>
 			
@@ -139,6 +143,19 @@ export default {
 		}
 	},
 	methods: {
+		muiHan(){
+			setTimeout(() => {
+				this.mui(".mui-wrapper").scroll({
+					scrollY: true, //是否竖向滚动
+					scrollX: false, //是否横向滚动
+					startX: 0, //初始化时滚动至x
+					startY: 0, //初始化时滚动至y
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
+					bounce: true //是否启用回弹
+				})
+			}, 500);
+		},
 		cancelOrder(item){
 			var data2 = {
 				...this.$user,
@@ -196,7 +213,8 @@ export default {
 			this.$api.user.order_detail(data)
 			.then(res=>{
 				console.log(res);
-				this.list = res
+				this.list = res;
+				this.muiHan();
 			})
 		},
 		// getNetWork1(){
@@ -251,7 +269,8 @@ export default {
 			this.$api.user.order_detail(data)
 			.then(res=>{
 				console.log(res);
-				this.list1 = res
+				this.list1 = res;
+				this.muiHan();
 			})
 		}
 	},

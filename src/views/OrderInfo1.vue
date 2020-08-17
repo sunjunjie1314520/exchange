@@ -71,7 +71,7 @@
             <div class="clear"></div>
             <div class="upload-file">
                 <div class="pub-upload">
-                    <input @change="upload_one" type="file" accept="image/gif, image/jpeg">
+                    <input v-if="$chu.status != 3" @change="upload_one" type="file" accept="image/gif, image/jpeg">
 					<img v-if="img1" :src="'http://api.ohtbmgn.cn/' + img1" alt="">
                 </div>
                 <p>上传打款凭证</p>

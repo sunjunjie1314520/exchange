@@ -79,9 +79,7 @@
     export default {
         data(){
             return {
-                detail: {
-
-                },
+                detail: {},
                 params: {},
             }
         },

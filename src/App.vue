@@ -28,10 +28,13 @@
 		created(){
 			const _this = this
 			console.log('app created');
-			_this.fontSize(750)
+			_this.fontSize(750);
+
+			// 禁止应用
 			window.addEventListener('touchmove', function(e){
 				e.preventDefault()
-			}, { passive: false })
+			}, { passive: false });
+
 			window.onresize = function(){
 				_this.fontSize(750)
 			}
