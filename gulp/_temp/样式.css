@@ -145,6 +145,13 @@
   right: 0;
   padding: 0 52px 24px;
 }
+.pub-button .item {
+  width: 49%;
+  float: left;
+}
+.pub-button .item:nth-child(even) {
+  float: right;
+}
 .pub-button button {
   height: 105px;
   border-radius: 10px;
@@ -296,7 +303,6 @@
 }
 .filter .layout ul {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 4%;
 }
@@ -311,6 +317,10 @@
   align-items: center;
   justify-content: center;
   margin-top: 31px;
+  margin-left: 60px;
+}
+.filter .layout ul li:nth-child(3n+1) {
+  margin-left: 0;
 }
 .filter .layout ul li.active {
   background: rgba(0,0,0,0.3);

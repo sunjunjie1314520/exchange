@@ -133,9 +133,8 @@ const router = new VueRouter({
 })
 
 router.afterEach(to => {
-	console.log(to);
 	if (to.name != 'Login' && router.app.$options.store.state.User.userToken == false){
-		router.replace({name: 'Login'})
+		router.push({name: 'Login'})
 	}
 	var config = {
 		type: 1,

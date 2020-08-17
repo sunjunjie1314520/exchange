@@ -81,7 +81,7 @@ export default {
 			.then(res=>{
 				console.log(res);
 				if(res.code){
-					this.$router.push({path: '/order'})
+					this.$router.push({path: '/order', query: {tabs: 1}})
 				}else{
 					this.$toast(res.msg)
 				}

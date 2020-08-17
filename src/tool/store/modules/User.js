@@ -38,6 +38,10 @@ const mutations = {
     SET_CURRENT_SELL2(state, payload) {
         state.show_data = payload
     },
+    // 设置当前数据
+    SET_CURRENT_STATUS(state, payload) {
+        state.current_chu.status = payload
+    },
 }
 
 const actions = {

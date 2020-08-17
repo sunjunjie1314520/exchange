@@ -53,7 +53,7 @@ plug.install = function(Vue, options) {
                         str = '进行中'
                         break;
                     case 2:
-                        str = '等待对方确认'
+                        str = '确认收款'
                         break;
                     case 3:
                         str = '订单已完成'

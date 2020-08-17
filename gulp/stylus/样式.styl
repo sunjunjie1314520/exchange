@@ -122,6 +122,11 @@
     bottom 0
     right 0
     padding 0 52px 24px
+    .item
+        width 49%
+        float left
+        &:nth-child(even)
+            float right
     button
         height 105px
         border-radius 10px
@@ -240,7 +245,6 @@
         fw 1
         ul
             display flex
-            justify-content space-between
             flex-wrap wrap
             padding 0 4%
             li
@@ -252,6 +256,8 @@
                 df 1
                 justify-content center
                 margin-top 31px
+                margin-left 60px
+                ml 0 3
                 &.active
                     background rgba(#000, .3)
         .confirm

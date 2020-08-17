@@ -51,13 +51,14 @@ export default {
 			current: 0.0,
 			formData: {
 				number: 1,
-				from_id: 1,
+				from_id: '',
 				float_range: 0.07,
 			}
 		}
 	},
 	created(){
 		this.current = this.min;
+		this.formData.from_id = this.$user.user_id
 	},
 	computed: {
 		price(){
@@ -90,8 +91,10 @@ export default {
 			}
 			this.$api.user.order_order(data)
 			.then(res=>{
-				console.log(res);
 				this.$toast(res.msg);
+				setTimeout(() => {
+					this.$router.back();
+				}, 1800);
 			})
 		},
 		addHandle(){

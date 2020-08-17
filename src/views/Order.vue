@@ -14,7 +14,7 @@
 							<div class="fl" @click="gotoLink1(item)">
 								<h3>数量：{{item.number}}</h3>
 								<p>时间：{{item.create_time}}</p>
-								<p>状态：{{mai_status(item.status)}}</p>
+								<p>状态：{{mai_status1(item.status)}}</p>
 							</div>
 							<div class="fr">
 								<span @click="cancelOrder(item)" v-if="item.status < 2">取消订单</span>
@@ -52,9 +52,10 @@
 		<div class="filter" v-if="alertConfig.Order">
 			<div class="layout" v-if="tabs==0">
 				<ul>
-					<li @click="toggle_filter1(0)" :class="{active: filter1==0}">进行中</li>
-					<li @click="toggle_filter1(1)" :class="{active: filter1==1}">交易中</li>
-					<li @click="toggle_filter1(2)" :class="{active: filter1==2}">已完成</li>
+					<li @click="toggle_filter1('')" :class="{active: filter1===''}">全部</li>
+					<li @click="toggle_filter1(0)" :class="{active: filter1===0}">进行中</li>
+					<li @click="toggle_filter1(1)" :class="{active: filter1==2}">交易中</li>
+					<li @click="toggle_filter1(2)" :class="{active: filter1==3}">已完成</li>
 					<li @click="toggle_filter1(4)" :class="{active: filter1==4}">已取消</li>
 				</ul>
 				<div class="confirm">
@@ -64,9 +65,9 @@
 			</div>
 			<div class="layout"  v-if="tabs==1">
 				<ul>
-					<li @click="toggle_filter2(0)" :class="{active: filter2==0}">发布中</li>
-					<li @click="toggle_filter2(1)" :class="{active: filter2==1}">未付款</li>
-					<li @click="toggle_filter2(2)" :class="{active: filter2==2}">已付款</li>
+					<li @click="toggle_filter2('')" :class="{active: filter2===''}">全部</li>
+					<li @click="toggle_filter2(0)" :class="{active: filter2===0}">发布中</li>
+					<li @click="toggle_filter2(2)" :class="{active: filter2==2}">未付款</li>
 					<li @click="toggle_filter2(3)" :class="{active: filter2==3}">已完成</li>
 					<li @click="toggle_filter2(4)" :class="{active: filter2==4}">已取消</li>
 					<!-- <li @click="toggle_filter2(4)" :class="{active: filter2==4}">申诉中</li> -->
@@ -87,10 +88,11 @@ export default {
 	data(){
 		return {
 			tabs: 0,
-			filter1: 0,
-			filter2: 0,
-			state1: 0,
-			state2:0,
+			filter1: '',
+			filter2: '',
+
+			state1: '',
+			state2: '',
 
 			list: false,
 			list1: false,
@@ -100,34 +102,46 @@ export default {
 	},
 	created(){
 		this.params = this.$route.query
-		this.getNetWork1();
+		console.log(this.params);
+		if(this.params.tabs){
+			this.tabs = this.params.tabs;
+		}
+		this.tabsToggle(this.tabs);
 	},
 	computed: {
 		list_n(){
 			if(this.list){
-				return this.list.filter(item=>{
-					return item.status == this.state1
-				})
+				if(this.state1===''){
+					return this.list
+				}else{
+					return this.list.filter(item=>{
+						return item.status == this.state1
+					})
+				}
 			}else{
 				return false;
 			}
 		},
 		list1_n(){
 			if(this.list1){
-				return this.list1.filter(item=>{
-					return item.status == this.state2
-				})
+				if(this.state2===''){
+					return this.list1
+				}else{
+					return this.list1.filter(item=>{
+						return item.status == this.state2
+					})
+				}
 			}else{
 				return false;
 			}
 		}
 	},
 	methods: {
-		cancelOrder(){
+		cancelOrder(item){
 			var data2 = {
 				...this.$user,
-				trade_id:this.$chu.trade_id,
-				order_number:this.$chu.order_number,
+				trade_id:item.trade_id,
+				order_number:item.order_number,
 				status: 4,
 			}
 			this.$api.user.trade_status(data2)
@@ -173,7 +187,7 @@ export default {
 				...this.$user,
 				page: 1,
 				to_from_id: this.$info.id,
-				type:0,
+				type: 0,
 				// status: '',
 				// order_number:'',
 				// id:''

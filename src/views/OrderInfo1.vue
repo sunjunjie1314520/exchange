@@ -30,7 +30,7 @@
                     <li>
                         <span>订单状态：</span>
                         <div class="fr">
-                            <p>{{$chu.status == 0 ? '未付款' : '交易中'}}</p>
+                            <p>{{mai_status($chu.status)}}</p>
                         </div>
                     </li>
                 </ul>
@@ -72,12 +72,15 @@
             <div class="upload-file">
                 <div class="pub-upload">
                     <input @change="upload_one" type="file" accept="image/gif, image/jpeg">
-					<img :src="'http://api.ohtbmgn.cn/' + img1" alt="">
+					<img v-if="img1" :src="'http://api.ohtbmgn.cn/' + img1" alt="">
                 </div>
                 <p>上传打款凭证</p>
             </div>
-            <div class="pub-button" v-if="img1">
-                <button>{{mai_status($chu.status)}}</button>
+            <div class="pub-button" v-if="show1">
+                <button @click="confirm">确定上传</button>
+            </div>
+            <div class="pub-button" v-if="$chu.status > 0 && img1">
+                <button>等待对方确认</button>
             </div>
         </div>
     </div>
@@ -91,7 +94,8 @@
 
                 },
                 params: {},
-                img1: ''
+                img1: '',
+                show1: false,
             }
         },
         created(){
@@ -116,7 +120,7 @@
                     this.detail = res.data[0]
                 })
             },
-            upload_one(e){
+            upload_one(event){
                 const _this = this
                 var file = event.target.files;
                 this.$api.user.qiniu(this.$user)
@@ -146,33 +150,41 @@
                     .then(res => {               
                         console.log(res);
                         _this.img1= res.hash;
-                        var data1 = {
-                            ...this.$user,
-                            key_src: res.hash,
-                            trade_id:this.$chu.trade_id,
-                            order_number:this.$chu.order_number,
-                        }
-                        _this.$api.user.upload_pic(data1)
-                        .then(res1=>{
-                            console.log(res1);
-
-                            var data2 = {
-                                ...this.$user,
-                                trade_id:this.$chu.trade_id,
-                                order_number:this.$chu.order_number,
-                                status: 2,
-                            }
-                            this.$api.user.trade_status(data2)
-                            .then(res=>{
-                                console.log(res);
-                            })
-                        })
+                        this.show1 = true;
                     })
                     .catch(error => {
                         console.log(error);
                     })
                 })
             },
+            // 确认收款
+            confirm(){
+                var data1 = {
+                    ...this.$user,
+                    key_src: this.img1,
+                    trade_id:this.$chu.trade_id,
+                    order_number:this.$chu.order_number,
+                }
+                this.$api.user.upload_pic(data1)
+                .then(res1=>{
+                    console.log(res1);
+
+                    var data2 = {
+                        ...this.$user,
+                        trade_id:this.$chu.trade_id,
+                        order_number:this.$chu.order_number,
+                        to_from_id: this.$chu.to_from_id,
+                        trade_detail_id:this.$chu.id,
+                        status: 2,
+                    }
+                    this.$api.user.trade_status(data2)
+                    .then(res=>{
+                        this.$toast(res.msg);
+                        console.log(res);
+                        this.$store.commit('User/SET_CURRENT_STATUS', 2);
+                    })
+                })
+            }
         }
     }
 </script>

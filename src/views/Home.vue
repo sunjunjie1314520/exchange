@@ -29,7 +29,7 @@
 									均价(昨/今)
 								</div>
 								<div class="number">
-									￥{{ $trade.data[1].amount / $trade.data[1].volume | moneyFixed(2)}}/{{ $trade.data[0].amount / $trade.data[0].volume | moneyFixed(2)}}
+									￥{{ $trade.data[$trade.data.length-2].amount / $trade.data[$trade.data.length-2].volume | moneyFixed(2)}}/{{ $trade.data[$trade.data.length-1].amount / $trade.data[$trade.data.length-1].volume | moneyFixed(2)}}
 								</div>
 							</div>
 							<div class="item">
@@ -37,7 +37,7 @@
 									最高(昨/今)
 								</div>
 								<div class="number">
-									￥{{$trade.data[1].floor | moneyFixed(2)}}/{{$trade.data[0].floor | moneyFixed(2)}}
+									￥{{$trade.data[$trade.data.length-2].floor | moneyFixed(2)}}/{{$trade.data[$trade.data.length-1].floor | moneyFixed(2)}}
 								</div>
 							</div>
 							<div class="item">
@@ -45,7 +45,7 @@
 									当前底价
 								</div>
 								<div class="number">
-									￥{{$trade.data[0].max | moneyFixed(2)}}
+									￥{{$trade.data[$trade.data.length-1].max | moneyFixed(2)}}
 								</div>
 							</div>
 						</div>
@@ -55,7 +55,7 @@
 									买量(音豆)
 								</div>
 								<div class="number">
-									{{$trade.data[0].buy}}
+									{{$trade.data[$trade.data.length-1].amount}}
 								</div>
 							</div>
 							<div class="item">
@@ -63,7 +63,7 @@
 								成交(音豆)(昨/今)
 								</div>
 								<div class="number">
-									{{$trade.data[1].volume}}/{{$trade.data[0].volume}}
+									{{$trade.data[$trade.data.length-2].volume}}/{{$trade.data[$trade.data.length-1].volume}}
 								</div>
 							</div>
 						</div>
@@ -291,7 +291,7 @@ export default {
 			var arr = []
 			if(this.$trade){
 				this.$trade.data.forEach(item=>{
-					arr.push(item.amount)
+					arr.push(item.floor)
 				})
 			}
 			return arr
@@ -323,6 +323,7 @@ export default {
 					str = '469592_34x34.png'
 					break;
 				default:
+					str = '469592_34x34.png'
 					break;
 			}
 			return require(`../../src/static/img/${str}`)
@@ -348,7 +349,8 @@ export default {
 		// 列表
 		orderRecord(){
 			var data = {
-				status: 0,
+				page: 1,
+				status: '',
 				token: this.$user.token
 			}
 			this.$api.user.orderRecord(data)

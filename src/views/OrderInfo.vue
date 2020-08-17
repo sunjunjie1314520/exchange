@@ -30,7 +30,7 @@
                     <li>
                         <span>订单状态：</span>
                         <div class="fr">
-                            <p>{{$chu.status == 0 ? '买家未付款' : '交易中'}}</p>
+                            <p>{{mai_status1($chu.status)}}</p>
                         </div>
                     </li>
                 </ul>
@@ -59,11 +59,10 @@
                 </ul>
             </div>
             <div class="clear"></div>
-            <div class="pict-show">
-                <p v-if="!$chu.key_src">等待对方上传凭证</p>
-                <img :src="'xxx' + $chu.key_src" alt="">
+            <div class="pict-show" v-if="$chu.status==0 && !$chu.key_src">
+                <p>等待对方上传凭证</p>
             </div>
-            <div class="upload-file">
+            <div class="upload-file" v-if="$chu.status==3">
                 <div class="pub-upload">
 					<img :src="'http://api.ohtbmgn.cn/' + $chu.key_src" alt="">
                 </div>
@@ -93,16 +92,19 @@
         },
         methods: {
             success(){
-                if(this.$chu.id ==2){
+                if(this.$chu.status ==2){
                     var data2 = {
                         ...this.$user,
                         trade_id:this.$chu.trade_id,
                         order_number:this.$chu.order_number,
+                        to_from_id: this.$chu.to_from_id,
+                        trade_detail_id: this.$chu.id,
                         status: 3,
                     }
                     this.$api.user.trade_status(data2)
                     .then(res=>{
-                        console.log(res);
+                        this.$toast(res.msg);
+                        this.$store.commit('User/SET_CURRENT_STATUS', 3);
                     })
                 }
             },

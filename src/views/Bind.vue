@@ -46,7 +46,8 @@
 				</li>
 			</ul>
 			<div class="pub-button">
-				<button @click="submitFun">保存</button>
+				<div class="item"><button @click="submitFun1">添加</button></div>
+				<div class="item"><button @click="submitFun2">保存</button></div>
 			</div>
 		</div>
 	</div>
@@ -93,7 +94,7 @@ export default {
 				this.field2 = res[0].bank_type
 				this.field3 = res[0].bank_number
 
-				this.field4 = res[1].bank_number
+				this.field4 = res[2].bank_number
 				this.img1 = res[1].key_src
 				this.img2 = res[2].key_src
 			})
@@ -174,7 +175,55 @@ export default {
 				})
 			})
 		},
-		submitFun(){
+		add2(obj){
+			var data = {
+				...this.$user,
+				...obj
+			}
+			this.$api.user.user_bank_save(data)
+			.then(res=>{
+				console.log(res);
+			})
+		},
+		submitFun1(){
+			if(this.field1==''){
+				this.$toast('请输入姓名');
+				return
+			}
+			this.add2({
+				bank_name:this.field1,
+				bank_number: this.field3,
+				bank_type: this.field2,
+				filter: true,
+				key_src:'',
+			})
+			setTimeout(() => {
+				this.add2({
+					bank_name:this.field1,
+					bank_number: '',
+					bank_type: 'wx',
+					filter: true,
+					key_src: this.img1,
+				})
+			}, 500);
+			
+			setTimeout(() => {
+				this.add2({
+					bank_name: this.field1,
+					bank_number: this.field4,
+					bank_type: 'zfb',
+					filter: true,
+					key_src: this.img2,
+				})
+			}, 1000);
+			
+			this.$toast('添加成功~');
+		},
+		submitFun2(){
+			if(this.field1==''){
+				this.$toast('请输入姓名');
+				return
+			}
 			this.user_bank_save({
 				id: this.show[0].id,
 				bank_name: this.field1,
@@ -182,21 +231,25 @@ export default {
 				bank_type: this.field2,
 				key_src:''
 			});
-			this.user_bank_save({
-				id: this.show[1].id,
-				bank_name: 'wx',
-				bank_number: '',
-				bank_type: '',
-				key_src: this.img1
-			});
-			this.user_bank_save({
-				id: this.show[2].id,
-				bank_name: 'zfb',
-				bank_number: '',
-				bank_type: '',
-				key_src:this.img2
-			});
-			this.$toast('修改成功~')
+			setTimeout(() => {
+				this.user_bank_save({
+					id: this.show[1].id,
+					bank_name: this.field1,
+					bank_number: '',
+					bank_type: 'wx',
+					key_src: this.img1
+				});
+			}, 500);
+			setTimeout(() => {
+				this.user_bank_save({
+					id: this.show[2].id,
+					bank_name: this.field1,
+					bank_number: this.field4,
+					bank_type: 'zfb',
+					key_src:this.img2
+				});
+			}, 1000);
+			this.$toast('修改成功~');
 		}
 	}
 }

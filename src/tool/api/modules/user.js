@@ -20,7 +20,7 @@ config.orderRecord = params => request.globalRequest(`/Trade/public_index`, 'POS
 // 出售列表
 config.chuRecord = params => request.globalRequest(`/Trade/chuRecord`, 'POST', params, 3)
 
-// 保存
+// 添加银行卡保存
 config.user_bank_save = params => request.globalRequest(`/user_bank/save`, 'POST', params, 3)
 
 // 信息
