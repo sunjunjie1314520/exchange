@@ -89,7 +89,7 @@ export default {
 			var data = {
 				...this.formData,
 				...this.$user,
-				float_range: this.price,
+				float_range: this.current.toFixed(2),
 			}
 			this.$api.user.order_order(data)
 			.then(res=>{
