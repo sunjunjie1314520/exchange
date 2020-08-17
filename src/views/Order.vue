@@ -54,8 +54,8 @@
 				<ul>
 					<li @click="toggle_filter1('')" :class="{active: filter1===''}">全部</li>
 					<li @click="toggle_filter1(0)" :class="{active: filter1===0}">进行中</li>
-					<li @click="toggle_filter1(1)" :class="{active: filter1==2}">交易中</li>
-					<li @click="toggle_filter1(2)" :class="{active: filter1==3}">已完成</li>
+					<li @click="toggle_filter1(2)" :class="{active: filter1==2}">交易中</li>
+					<li @click="toggle_filter1(3)" :class="{active: filter1==3}">已完成</li>
 					<li @click="toggle_filter1(4)" :class="{active: filter1==4}">已取消</li>
 				</ul>
 				<div class="confirm">
@@ -103,8 +103,9 @@ export default {
 	created(){
 		this.params = this.$route.query
 		console.log(this.params);
+
 		if(this.params.tabs){
-			this.tabs = this.params.tabs;
+			this.tabs = this.params.tabs * 1;
 		}
 		this.tabsToggle(this.tabs);
 	},
@@ -168,12 +169,10 @@ export default {
 		confirm1(){
 			this.cancel(false);
 			this.state1 = this.filter1;
-			// this.getNetWork1();
 		},
 		confirm2(){
 			this.cancel(false);
 			this.state2 = this.filter2;
-			this.getNetWork2();
 		},
 		toggle_filter1(id){
 			this.filter1 = id
@@ -188,6 +187,7 @@ export default {
 				page: 1,
 				to_from_id: this.$info.id,
 				type: 0,
+				...this.params
 				// status: '',
 				// order_number:'',
 				// id:''
@@ -253,6 +253,9 @@ export default {
 				this.list1 = res
 			})
 		}
+	},
+	destroyed(){
+		this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: false});
 	}
 }
 </script>

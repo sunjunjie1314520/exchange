@@ -41,26 +41,26 @@
                     <li>
                         <span>卖方ID：</span>
                         <div class="fr">
-                            <p>{{$chu.from_id}}</p>
+                            <p>{{$chu.ToFrom.id}}</p>
                         </div>
                     </li>
                     <li>
                         <span>卖方昵称：</span>
                         <div class="fr">
-                            <p>{{$chu.From.username}}</p>
+                            <p>{{$chu.ToFrom.username}}</p>
                         </div>
                     </li>
                     <li>
                         <span>卖方手机：</span>
                         <div class="fr">
-                            <p>{{$chu.From.phone}}</p>
+                            <p>{{$chu.ToFrom.phone}}</p>
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="box">
                 <ul>
-                    <li @click="duiinfo($chu.From.UserBank)">
+                    <li @click="duiinfo($chu.ToFrom.UserBank)">
                         <span>对方收款信息：</span>
                         <div class="fr">
                             <span class="ico-more"></span>
@@ -79,8 +79,11 @@
             <div class="pub-button" v-if="show1">
                 <button @click="confirm">确定上传</button>
             </div>
-            <div class="pub-button" v-if="$chu.status > 0 && img1">
+            <div class="pub-button" v-if="$chu.status == 2 && img1">
                 <button>等待对方确认</button>
+            </div>
+            <div class="pub-button" v-if="$chu.status == 3">
+                <button>{{mai_status($chu.status)}}</button>
             </div>
         </div>
     </div>
@@ -175,12 +178,12 @@
                         order_number:this.$chu.order_number,
                         to_from_id: this.$chu.to_from_id,
                         trade_detail_id:this.$chu.id,
+                        result_user_amount:'',
                         status: 2,
                     }
                     this.$api.user.trade_status(data2)
                     .then(res=>{
                         this.$toast(res.msg);
-                        console.log(res);
                         this.$store.commit('User/SET_CURRENT_STATUS', 2);
                     })
                 })

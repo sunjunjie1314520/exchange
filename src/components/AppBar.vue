@@ -64,10 +64,10 @@
         },
         methods: {
             h1(is){
-                this.$store.commit('Betting/SET_ALERT_CONFIG', {SelectMode: is})
+                this.$store.commit('Betting/SET_ALERT_CONFIG', {SelectMode: is});
             },
             h2(is){
-                this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is})
+                this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is});
             },
         }
     }
