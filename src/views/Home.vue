@@ -138,7 +138,7 @@
 										</div>
 									</div>
 									<div class="link">
-										<button @click="sellHandle(item, $trade.data[0].floor * (item.float_range + 1))">出售</button>
+										<button @click="sellHandle(item, item.float_range)">出售</button>
 									</div>
 								</div>
 							</div>
