@@ -202,10 +202,10 @@ export default {
 		getNetWork1(){
 			var data = {
 				...this.$user,
+				...this.params,
 				page: 1,
 				to_from_id: this.$info.id,
-				type: 0,
-				...this.params
+				status: this.state1,
 				// status: '',
 				// order_number:'',
 				// id:''

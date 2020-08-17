@@ -351,7 +351,7 @@ export default {
 		orderRecord(){
 			var data = {
 				page: 1,
-				status: '',
+				status: 0,
 				token: this.$user.token
 			}
 			this.$api.user.orderRecord(data)
