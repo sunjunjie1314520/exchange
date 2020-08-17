@@ -69,6 +69,9 @@ plug.install = function(Vue, options) {
             mai_status1(id){
                 var str = ''
                 switch (id) {
+                    case -1:
+                        str = '发布中'
+                        break;
                     case 0:
                         str = '进行中'
                         break;

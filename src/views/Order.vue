@@ -5,6 +5,7 @@
 				<ul>
 					<li @click="tabsToggle(0)" :class="{active: tabs==0}">购买音豆</li>
 					<li @click="tabsToggle(1)" :class="{active: tabs==1}">出售音豆</li>
+					<!-- <li @click="tabsToggle(2)" :class="{active: tabs==2}">发布记录</li> -->
 				</ul>
 			</div>
 			<div class="list" v-if="list_n && tabs==0">
@@ -66,7 +67,7 @@
 			<div class="layout"  v-if="tabs==1">
 				<ul>
 					<li @click="toggle_filter2('')" :class="{active: filter2===''}">全部</li>
-					<li @click="toggle_filter2(0)" :class="{active: filter2===0}">发布中</li>
+					<li @click="toggle_filter2(0)" :class="{active: filter2===0}">进行中</li>
 					<li @click="toggle_filter2(2)" :class="{active: filter2==2}">未付款</li>
 					<li @click="toggle_filter2(3)" :class="{active: filter2==3}">已完成</li>
 					<li @click="toggle_filter2(4)" :class="{active: filter2==4}">已取消</li>
