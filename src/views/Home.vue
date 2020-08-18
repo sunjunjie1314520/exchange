@@ -348,10 +348,11 @@ export default {
 			return bi
 		},
 		// 列表
-		orderRecord(){
+		orderRecord(obj={}){
 			var data = {
 				page: 1,
 				status: 0,
+				...obj,
 				token: this.$user.token
 			}
 			this.$api.user.orderRecord(data)
@@ -367,7 +368,9 @@ export default {
 		},
 		// 搜索
 		search(){
-			this.$router.push({path: '/order', query:{phone: this.phone}})
+			// this.$router.push({path: '/order', query:{phone: this.phone}})
+			this.list = [];
+			this.orderRecord({phone: this.phone})
 		},
 		// 绘图
 		drawLine(){
@@ -381,7 +384,7 @@ export default {
 				grid: {
 					top: 20,
 					bottom: 40,
-					left: 20,
+					left: 30,
 					right: 10
 				},
 				tooltip: {},

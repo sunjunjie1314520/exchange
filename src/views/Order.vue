@@ -161,6 +161,7 @@ export default {
 				...this.$user,
 				trade_id:item.trade_id,
 				order_number:item.order_number,
+				type: 1,
 				status: 4,
 			}
 			this.$api.user.trade_status(data2)
@@ -175,7 +176,7 @@ export default {
 					this.getNetWork1();
 					break;
 				case 1:
-					this.order_detail();
+					this.getNetWork2();
 					break;
 				default:
 					break;
@@ -198,11 +199,12 @@ export default {
 		toggle_filter2(id){
 			this.filter2 = id
 		},
-		// 购买
+		// 购买记录
 		getNetWork1(){
 			var data = {
 				...this.$user,
 				...this.params,
+				type: 0,
 				page: 1,
 				to_from_id: this.$info.id,
 				status: this.state1,
@@ -217,18 +219,24 @@ export default {
 				this.muiHan();
 			})
 		},
-		// getNetWork1(){
-		// 	var data = {
-		// 		...this.$user,
-		// 		...this.params,
-		// 		status: this.state1,
-		// 	}
-		// 	this.$api.user.orderRecord(data)
-		// 	.then(res=>{
-		// 		console.log(res);
-		// 		this.list = res.data ? res.data : []
-		// 	})
-		// },
+		// 出售记录
+		getNetWork2(){
+			var data = {
+				...this.$user,
+				page: 1,
+				to_from_id: this.$info.id,
+				type:1,
+				status: this.state2,
+				// order_number:'',
+				// id:''
+			}
+			this.$api.user.order_detail(data)
+			.then(res=>{
+				console.log(res);
+				this.list1 = res;
+				this.muiHan();
+			})
+		},
 		resultHandle(list){
 			var bi = 0;
 			list.forEach(item=>{
@@ -255,24 +263,7 @@ export default {
 			this.$store.commit('User/SET_CURRENT_SELL1', item);
 			this.$router.push({path: '/order_info1'});
 		},
-		// 出售
-		order_detail(){
-			var data = {
-				...this.$user,
-				page: 1,
-				to_from_id: this.$info.id,
-				type:1,
-				// status: '',
-				// order_number:'',
-				// id:''
-			}
-			this.$api.user.order_detail(data)
-			.then(res=>{
-				console.log(res);
-				this.list1 = res;
-				this.muiHan();
-			})
-		}
+		
 	},
 	destroyed(){
 		this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: false});

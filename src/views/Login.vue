@@ -8,7 +8,7 @@
             <h2>登录好逗OTC</h2>
             <ul>
                 <li>
-                    <input type="text" v-model="phone" name="" placeholder="请输入账号" id="">
+                    <input type="number" v-model="phone" name="" placeholder="请输入账号" id="">
                 </li>
                 <li>
                     <input type="password" v-model="password" name="" placeholder="请输入密码" id="">

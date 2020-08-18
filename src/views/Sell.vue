@@ -18,7 +18,7 @@
 				<li>
 					<span>总价</span>
 					<div class="box1">
-						<input type="text" readonly :value="formData.number * $sell.odds" placeholder="总价">
+						<input type="text" readonly :value="price" placeholder="总价">
 					</div>
 				</li>
 			</ul>
@@ -58,6 +58,12 @@ export default {
 	},
 	created(){
 
+	},
+	computed: {
+		price(){
+			let a = this.formData.number * this.$sell.odds;
+			return a.toFixed(2)
+		}
 	},
 	mounted(){
 		this.formData.number = this.$sell.number // 数量
