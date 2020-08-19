@@ -35,6 +35,10 @@ export default {
         let result = window.localStorage.getItem(key)
         return result ? JSON.parse(result) : false
     },
+    // 删除缓存
+    removeLocalStorage(key){
+        window.localStorage.removeItem(key);
+    },
     // 调整顺序
     sortArray(source, sort) {
         let _sort = []

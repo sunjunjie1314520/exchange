@@ -51,7 +51,13 @@ config.upload_pic = params => request.globalRequest(`/Trade/upload_pic`, 'POST',
 // 变更
 config.trade_status = params => request.globalRequest(`/Trade/status`, 'POST', params, 3)
 
+// 登录
 config.sign = params => request.globalRequest(`/Login/username`, 'POST', params, 3)
+
+// 新接口
+
+// 用户记录
+    config.record = params => request.globalRequest(`/user/record`, 'POST', params, 3)
 
 
 export default config

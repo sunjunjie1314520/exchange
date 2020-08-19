@@ -169,6 +169,7 @@
                 fw 1
                 padding 20px 30px
                 background #fff
+                border-bottom .1px solid #ccc
             .fl
                 line-height 50px
             
@@ -183,9 +184,10 @@
                     margin-top 10px
                     background theme
                     display inline-block
-                    padding 8px 12px
+                    padding 20px 25px
                     border-radius 6px
                     color #fff
+                    font-size 26px
             
         .ul1
             li
@@ -278,6 +280,8 @@
                 border-radius 10px
                 background theme
                 color #fff
+                &:active
+                    background #2138ec
         
 .set-page
     ul
@@ -308,6 +312,8 @@
     position relative
     back1 '../../src/static/img/774498_162x128.png' 60px
     overflow hidden
+    &.noback
+        background none
     input
         position absolute
         width 100%
@@ -342,16 +348,15 @@
 
 .rule-page
     fw 1
-    
     overflow hidden
     position relative
     height 100%
     .wrapper
-        padding 0 30px 30px
+        padding 0 0 30px
         fw 1
     .title
         fw 1
-        padding-top 20px
+        padding 20px 30px 0
         h2
             line-height 90px
             font-size 34px
@@ -363,6 +368,7 @@
         p
             line-height 1.5
             margin-top 6px
+            padding 0 30px
     
 
 .clear
@@ -448,3 +454,44 @@
             color #fff
             border-radius 60px
             font-size 36px
+
+.scroller
+    height 100%
+    position relative
+
+.alert-show
+    fixed 1 .8
+    .layout
+        width 90%
+        background #fff
+        border-radius 18px
+        center 3
+        overflow hidden
+        h2
+            text-align center
+            line-height 100px
+            border-bottom 1px solid rgba(#ccc, .6)
+            font-size 38px
+            font-weight bold
+        .box
+            fw 1
+            padding 60px 10%
+            input
+                height 80px
+                border 1px solid #f2f2f2
+                width 100%
+                padding 0 20px
+        .btn
+            fw 1
+            border-top 1px solid #f2f2f2
+            button
+                width 50%
+                height 100px
+                background theme
+                color #fff
+                font-size 34px
+                float left
+                &.b1
+                    background #fff
+                    color theme
+                

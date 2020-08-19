@@ -30,7 +30,7 @@
                     <li>
                         <span>订单状态：</span>
                         <div class="fr">
-                            <p>{{mai_status1($chu.status)}}</p>
+                            <p>{{mai_status($chu.status)}}</p>
                         </div>
                     </li>
                 </ul>
@@ -47,13 +47,13 @@
                     <li>
                         <span>买方昵称：</span>
                         <div class="fr">
-                            <p>{{$chu.From.username}}</p>
+                            <p>{{$chu.sell_username}}</p>
                         </div>
                     </li>
                     <li>
                         <span>买方手机：</span>
                         <div class="fr">
-                            <p>{{$chu.From.phone}}</p>
+                            <p>{{$chu.sell_phone}}</p>
                         </div>
                     </li>
                 </ul>
@@ -69,9 +69,24 @@
                 <p>买家打款凭证</p>
             </div>
             <div class="pub-button">
-                <button @click="success">{{mai_status1($chu.status)}}</button>
+                <button @click="show=true">{{mai_status($chu.status)}}</button>
             </div>
         </div>
+
+        <!-- 交易密码 -->
+        <div class="alert-show" v-if="show">
+            <div class="layout">
+                <h2>交易密码</h2>
+                <div class="box">
+                    <input v-model="password" type="password" placeholder="请输入交易密码">
+                </div>
+                <div class="btn">
+                    <button @click="show=false" class="b1">取消</button>
+                    <button @click="success">确定</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -81,6 +96,8 @@
             return {
                 detail: {},
                 params: {},
+                show: false,
+                password: ''
             }
         },
         created(){
@@ -90,7 +107,8 @@
         },
         methods: {
             success(){
-                if(this.$chu.status ==2){
+                if(this.$chu.status == 2){
+                    this.loading();
                     var data2 = {
                         ...this.$user,
                         trade_id:this.$chu.trade_id,
@@ -98,11 +116,18 @@
                         to_from_id: this.$chu.to_from_id,
                         trade_detail_id: this.$chu.id,
                         status: 3,
+                        password: this.$md5(this.password),
                     }
                     this.$api.user.trade_status(data2)
                     .then(res=>{
                         this.$toast(res.msg);
-                        this.$store.commit('User/SET_CURRENT_STATUS', 3);
+                        this.show = false;
+                        if(res.code == 1){
+                            this.$store.commit('User/SET_CURRENT_STATUS', 3);
+                        }
+                    })
+                    .catch(err=>{
+                        this.$toast.clear();
                     })
                 }
             },

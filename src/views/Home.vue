@@ -1,8 +1,10 @@
 <template>
 	<div class="app">
 		<div class="home-page">
-			<div class="mui-scroll">
+			<!-- style="top: 0;" height='500' class="scroller" -->
+			<scroller :on-refresh="refresh" :on-infinite="infinite" ref="myscroller">
 				<div class="wrapper">
+
 					<div class="head">
 						<div class="text">
 							首页
@@ -15,13 +17,14 @@
 							<div class="ico"><router-link to="/buy">买</router-link></div>
 						</div>
 					</div>
-
+					
 					<!-- 图表 -->
 					<div id="myChart" :style="{width: countWidth, height: '200px'}"></div>
-
+					
 					<div class="banner" v-if="false">
 						<img src="../../src/static/img/0fc7e1_690x335.jpg" alt="">
 					</div>
+
 					<div class="data" v-if="$trade">
 						<div class="today">
 							<div class="item">
@@ -68,6 +71,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="search">
 						<div class="ico">
 							<img src="../../src/static/img/1d1714_30x30.jpg" alt="">
@@ -77,6 +81,7 @@
 							<button @click="search">搜索</button>
 						</div>
 					</div>
+
 					<div class="details">
 						<div class="tabs" v-if="false">
 							<div class="item" @click="filter1 == 1 ? filter1=0 : filter1=1">
@@ -102,7 +107,7 @@
 							</div>
 						</div>
 						<div class="pub-list">
-							<div class="item" v-for="item in list" :key="item.id">
+							<div class="item" v-for="item in orderList" :key="item.id">
 								<div class="user">
 									<div class="text">
 										<div class="imgs">
@@ -145,7 +150,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				<div class="clear"></div>
+			</scroller>
         </div>
 		<div :class="['menu-slide', {active: show}]" v-if="show">
 			<div class="menu-content">
@@ -222,54 +228,22 @@ export default {
 			filter1: 1,
 			filter2: 1,
 			filter3: 1,
-			pageData:{
-				p1: 5,
-				p2: 6,
-				p3: 5.5,
-				p4: 6,
-				p5: 6,
-				p6: 545645646,
-				p7: 15456,
-				p8: 9554848
-			},
-			list: [
-				// {
-				// 	id: 1,
-				// 	username: '15971345754',
-				// 	type: 1,
-				// 	money: 5,
-				// 	dou:500,
-				// 	bi: 30
-				// },
-				// {
-				// 	id: 2,
-				// 	username: '15971345754',
-				// 	type: 1,
-				// 	money: 5,
-				// 	dou: 400,
-				// 	bi: 10
-				// }
-			]
+
+			status:'all',
+			orderList:[],
+			page: 0,
+			all_page: 1,
 		}
 	},
 	created(){
 		// console.log(this.$route.query);
 		// this.$store.commit('User/SET_TOKEN', this.$route.query);
 		this.userinfo();
-		this.orderRecord();
+
 	},
 	mounted(){
-		this.mui(".home-page").scroll({
-			scrollY: true, //是否竖向滚动
-			scrollX: false, //是否横向滚动
-			startX: 0, //初始化时滚动至x
-			startY: 0, //初始化时滚动至y
-			indicators: true, //是否显示滚动条
-			deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
-			bounce: true //是否启用回弹
-		})
 		var screen = this.$assist.getScreenInfo();
-		this.countWidth = `${screen.width - 20}px`;
+		this.countWidth = `${screen.width}px`;
 		// setTimeout(() => {
 		// 	this.drawLine();
 		// }, 10);
@@ -348,17 +322,30 @@ export default {
 			return bi
 		},
 		// 列表
-		orderRecord(obj={}){
+		getorderList(done){
 			var data = {
 				page: 1,
 				status: 0,
-				...obj,
+				phone: this.phone,
 				token: this.$user.token
 			}
 			this.$api.user.orderRecord(data)
 			.then(res=>{
+				if(res.code == 1){
+					this.orderList.push.apply(this.orderList, res.data)
+					this.$refs.myscroller.finishInfinite(true)
+					this.page = this.page + 1
+					if(res.data.length >= 10){
+						this.all_page = this.page + 1
+					}else{
+						this.all_page = this.page
+					}
+					done();
+				}else{
+					this.$refs.myscroller.finishInfinite(true);
+				}
 				console.log(res);
-				this.list = res.data
+				// this.list = res.data
 			})
 		},
 		// 出售
@@ -369,8 +356,7 @@ export default {
 		// 搜索
 		search(){
 			// this.$router.push({path: '/order', query:{phone: this.phone}})
-			this.list = [];
-			this.orderRecord({phone: this.phone})
+			this.goodsAll();
 		},
 		// 绘图
 		drawLine(){
@@ -383,9 +369,9 @@ export default {
 				color: ['#45cfae'],
 				grid: {
 					top: 20,
-					bottom: 40,
-					left: 30,
-					right: 10
+					bottom: 30,
+					left: 25,
+					right: 35
 				},
 				tooltip: {},
 				xAxis: {
@@ -414,6 +400,35 @@ export default {
 		userinfo(){
 			this.$store.dispatch('User/userinfo', this.$user);
 			this.$store.dispatch('User/trade_index', this.$user);
+		},
+		refresh (done) {
+			setTimeout(()=>{
+				this.goodsAll();
+				done();
+			},1500)
+		},
+		//下拉触发
+		infinite (done) {
+			console.log('infinite');
+			console.log(this.page, this.all_page);
+
+			if(this.page>=this.all_page){
+				setTimeout(()=>{
+					this.$refs.myscroller.finishInfinite(true);
+				},1500)
+			}else{
+				setTimeout(()=>{
+					this.page++;
+					this.getorderList(done);
+				},500);
+			}
+		},
+		goodsAll(){
+			this.status = 'all'
+			this.page = 0
+			this.all_page = 1
+			this.$refs.myscroller.finishInfinite(false);
+			this.orderList = []
 		},
 	}
 }

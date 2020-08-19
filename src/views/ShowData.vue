@@ -31,7 +31,7 @@
 				<li v-if="item.bank_type=='zfb'">
 					<span>支付宝收款码：</span>
 					<div class="fr">
-						<div class="pub-upload">
+						<div class="pub-upload noback">
 							<img :src="'http://api.ohtbmgn.cn/' + item.key_src" alt="">
 						</div>
 					</div>
@@ -39,7 +39,7 @@
 				<li v-if="item.bank_type=='wx'">
 					<span>微信收款码：</span>
 					<div class="fr">
-						<div class="pub-upload">
+						<div class="pub-upload noback">
 							<img :src="'http://api.ohtbmgn.cn/' + item.key_src" alt="">
 						</div>
 					</div>

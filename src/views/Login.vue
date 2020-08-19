@@ -25,10 +25,10 @@
     export default {
         data(){
             return {
-                phone: '18871355300',
-                password: '111111',
-                // phone: '15327520204',
-                // password: 'Hao9562100'
+                // phone: '18871355300',
+                // password: '111111',
+                phone: '15327520204',
+                password: 'hao956210'
                 // phone: '',
                 // password: '',
             }
@@ -61,13 +61,14 @@
                     this.$toast(res.msg)
                     if(res.code){
                         this.$store.commit('User/SET_TOKEN', res.data);
+                        this.$assist.setLocalStorage('dd_user', res.data);
                         setTimeout(() => {
                             this.$router.replace('/home')
                         }, 2000);
                     }
                 })
                 .catch(err=>{
-                    this.$toast.clear()
+                    this.$toast.clear();
                 })
             }
         }

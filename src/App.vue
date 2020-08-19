@@ -41,6 +41,15 @@
 			window.getMetaParams = function(e){
 				
 			}
+			
+			let dd_user = this.$assist.getLocalStorage('dd_user')
+			console.log(dd_user);
+			
+			if(dd_user){
+				this.$store.commit('User/SET_TOKEN', dd_user);
+			}else {
+				this.$router.push({name: 'Login'});
+			}
 		},
 		mounted(){
 			const _this = this

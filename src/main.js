@@ -5,6 +5,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 
+// 上拉加载，下拉刷新
 import VueScroller from 'vue-scroller'
 Vue.use(VueScroller)
 

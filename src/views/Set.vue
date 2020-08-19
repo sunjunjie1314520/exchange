@@ -32,7 +32,8 @@ export default {
 	methods: {
 		quit(){
 			this.$store.commit('User/SET_TOKEN', false);
-			this.$router.replace({name: 'Login'})
+			this.$assist.removeLocalStorage('dd_user');
+			this.$router.replace({name: 'Login'});
 		}
 	}
 }

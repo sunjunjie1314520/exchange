@@ -123,6 +123,15 @@ Vue.use(VueRouter)
 			title: '收款信息',
 			back: 6
 		}
+	},
+	{
+		path: '/demo',
+		name: 'Demo',
+		component: () => import('@/views/demo.vue'),
+		meta: {
+			title: '演示',
+			back: 6
+		}
 	}
 ]
 
@@ -133,9 +142,6 @@ const router = new VueRouter({
 })
 
 router.afterEach(to => {
-	if (to.name != 'Login' && router.app.$options.store.state.User.userToken == false){
-		router.push({name: 'Login'})
-	}
 	var config = {
 		type: 1,
 		...to.meta

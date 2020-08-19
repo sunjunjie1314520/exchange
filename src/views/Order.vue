@@ -12,14 +12,14 @@
 				<div class="list1 mui-wrapper" v-if="list_n.length > 0">
 					<ul class="ul0 mui-scroll">
 						<li v-for="item in list_n" :key="item.id">
-							<div class="fl" @click="gotoLink1(item)">
+							<div class="fl">
 								<h3>数量：{{item.number}}</h3>
 								<p>时间：{{item.create_time}}</p>
 								<p>状态：{{mai_status1(item.status)}}</p>
 							</div>
 							<div class="fr">
-								<span @click="cancelOrder(item)" v-if="item.status < 2">取消订单</span>
-								<span @click="gotoLink1(item)">查看详情</span>
+								<span @click="cancelOrder(item)" v-if="item.status == 0">取消订单</span>
+								<span v-if="item.status != 0 && item.status != 5" @click="gotoLink1(item)">查看详情</span>
 							</div>
 						</li>
 					</ul>
@@ -58,10 +58,11 @@
 			<div class="layout" v-if="tabs==0">
 				<ul>
 					<li @click="toggle_filter1('')" :class="{active: filter1===''}">全部</li>
-					<li @click="toggle_filter1(0)" :class="{active: filter1===0}">进行中</li>
-					<li @click="toggle_filter1(2)" :class="{active: filter1==2}">交易中</li>
+					<li @click="toggle_filter1(0)" :class="{active: filter1===0}">发布中</li>
+					<li @click="toggle_filter1(1)" :class="{active: filter1==1}">交易中</li>
 					<li @click="toggle_filter1(3)" :class="{active: filter1==3}">已完成</li>
-					<li @click="toggle_filter1(4)" :class="{active: filter1==4}">已取消</li>
+					<li @click="toggle_filter1(4)" :class="{active: filter1==4}">订单取消</li>
+					<li @click="toggle_filter1(5)" :class="{active: filter1==5}">发布取消</li>
 				</ul>
 				<div class="confirm">
 					<button @click="cancel(false)">取消</button>
@@ -71,7 +72,7 @@
 			<div class="layout"  v-if="tabs==1">
 				<ul>
 					<li @click="toggle_filter2('')" :class="{active: filter2===''}">全部</li>
-					<li @click="toggle_filter2(0)" :class="{active: filter2===0}">进行中</li>
+					<li @click="toggle_filter2(1)" :class="{active: filter2===1}">交易中</li>
 					<li @click="toggle_filter2(2)" :class="{active: filter2==2}">未付款</li>
 					<li @click="toggle_filter2(3)" :class="{active: filter2==3}">已完成</li>
 					<li @click="toggle_filter2(4)" :class="{active: filter2==4}">已取消</li>
@@ -112,7 +113,8 @@ export default {
 		if(this.params.tabs){
 			this.tabs = this.params.tabs * 1;
 		}
-		this.tabsToggle(this.tabs);
+
+		this.getNetWork3();
 	},
 	computed: {
 		list_n(){
@@ -154,36 +156,33 @@ export default {
 					deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
 					bounce: true //是否启用回弹
 				})
-			}, 500);
+			}, 1000);
 		},
-		cancelOrder(item){
-			var data2 = {
-				...this.$user,
-				trade_id:item.trade_id,
-				order_number:item.order_number,
-				type: 1,
-				status: 4,
-			}
-			this.$api.user.trade_status(data2)
-			.then(res=>{
-				console.log(res);
-			})
-		},
+		
 		tabsToggle(id){
 			this.tabs = id
-			switch (id) {
-				case 0:
-					this.getNetWork1();
-					break;
-				case 1:
-					this.getNetWork2();
-					break;
-				default:
-					break;
-			}
+			// switch (id) {
+			// 	case 0:
+			// 		this.getNetWork1();
+			// 		break;
+			// 	case 1:
+			// 		this.getNetWork2();
+			// 		break;
+			// 	default:
+			// 		break;
+			// }
+			this.muiscroll();
 		},
+
 		cancel(is){
 			this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is});
+		},
+		
+		toggle_filter1(id){
+			this.filter1 = id
+		},
+		toggle_filter2(id){
+			this.filter2 = id
 		},
 		confirm1(){
 			this.cancel(false);
@@ -192,12 +191,6 @@ export default {
 		confirm2(){
 			this.cancel(false);
 			this.state2 = this.filter2;
-		},
-		toggle_filter1(id){
-			this.filter1 = id
-		},
-		toggle_filter2(id){
-			this.filter2 = id
 		},
 		// 购买记录
 		getNetWork1(){
@@ -219,6 +212,7 @@ export default {
 				this.muiHan();
 			})
 		},
+
 		// 出售记录
 		getNetWork2(){
 			var data = {
@@ -237,6 +231,47 @@ export default {
 				this.muiHan();
 			})
 		},
+
+		getNetWork3(){
+			this.$api.user.record(this.$user)
+			.then(res=>{
+				console.log(res);
+				this.list = res.data.buy
+				this.list1 = res.data.sell
+				
+				this.muiscroll();
+			})
+		},
+		muiscroll(){
+			setTimeout(() => {
+				this.mui(".mui-wrapper").scroll({
+					scrollY: true, //是否竖向滚动
+					scrollX: false, //是否横向滚动
+					startX: 0, //初始化时滚动至x
+					startY: 0, //初始化时滚动至y
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
+					bounce: true //是否启用回弹
+				})
+			}, 500);
+		},
+		// 取消订单
+		cancelOrder(item){
+			this.loading('正在取消');
+			var data2 = {
+				...this.$user,
+				// trade_id: item.trade_id,
+				order_number: item.order_number,
+				// type: 1,
+				status: 5,
+			}
+			this.$api.user.trade_status(data2)
+			.then(res=>{
+				console.log(res);
+				this.$toast(res.msg);
+			})
+		},
+		// 计算1
 		resultHandle(list){
 			var bi = 0;
 			list.forEach(item=>{
@@ -246,6 +281,7 @@ export default {
 			})
 			return bi
 		},
+		// 计算2
 		quantityHandle(list){
 			var bi = 0;
 			list.forEach(item=>{
@@ -255,10 +291,12 @@ export default {
 			})
 			return bi
 		},
+		// 跳转1
 		gotoLink(item){
 			this.$store.commit('User/SET_CURRENT_SELL1', item);
 			this.$router.push({path: '/order_info'});
 		},
+		// 跳转2
 		gotoLink1(item){
 			this.$store.commit('User/SET_CURRENT_SELL1', item);
 			this.$router.push({path: '/order_info1'});
@@ -266,7 +304,7 @@ export default {
 		
 	},
 	destroyed(){
-		this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: false});
+		this.cancel(false);
 	}
 }
 </script>

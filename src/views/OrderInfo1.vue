@@ -6,31 +6,31 @@
                     <li>
                         <span>订单时间：</span>
                         <div class="fr">
-                            <p>{{$chu.create_time}}</p>
+                            <p>{{$chu.TradeSell.create_time}}</p>
                         </div>
                     </li>
                     <li>
                         <span>订单编号：</span>
                         <div class="fr">
-                            <p>{{$chu.order_number}}</p>
+                            <p>{{$chu.TradeSell.order_number}}</p>
                         </div>
                     </li>
                     <li>
                         <span>交易数量：</span>
                         <div class="fr">
-                            <p>{{$chu.number}}</p>
+                            <p>{{$chu.TradeSell.number}}</p>
                         </div>
                     </li>
                     <li>
                         <span>交易金额：</span>
                         <div class="fr">
-                            <p>{{$chu.amount}}</p>
+                            <p>{{$chu.TradeSell.amount}}</p>
                         </div>
                     </li>
                     <li>
                         <span>订单状态：</span>
                         <div class="fr">
-                            <p>{{mai_status($chu.status)}}</p>
+                            <p>{{mai_status1($chu.status)}}</p>
                         </div>
                     </li>
                 </ul>
@@ -41,26 +41,26 @@
                     <li>
                         <span>卖方ID：</span>
                         <div class="fr">
-                            <p>{{$chu.ToFrom.id}}</p>
+                            <p>{{$chu.TradeSell.to_from_id}}</p>
                         </div>
                     </li>
                     <li>
                         <span>卖方昵称：</span>
                         <div class="fr">
-                            <p>{{$chu.ToFrom.username}}</p>
+                            <p>{{$chu.TradeSell.sell_username}}</p>
                         </div>
                     </li>
                     <li>
                         <span>卖方手机：</span>
                         <div class="fr">
-                            <p>{{$chu.ToFrom.phone}}</p>
+                            <p>{{$chu.TradeSell.sell_phone}}</p>
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="box">
                 <ul>
-                    <li @click="duiinfo($chu.ToFrom.UserBank)">
+                    <li @click="duiinfo($chu.TradeSell.SellUserBank)">
                         <span>对方收款信息：</span>
                         <div class="fr">
                             <span class="ico-more"></span>
@@ -83,7 +83,7 @@
                 <button>等待对方确认</button>
             </div>
             <div class="pub-button" v-if="$chu.status == 3">
-                <button>{{mai_status($chu.status)}}</button>
+                <button>{{mai_status1($chu.status)}}</button>
             </div>
         </div>
     </div>
@@ -103,7 +103,7 @@
         },
         created(){
             this.params = this.$route.query
-            this.img1 = this.$chu.key_src
+            this.img1 = this.$chu.TradeSell.key_src
             // this.orderRecord();
         },
         methods: {
@@ -165,7 +165,7 @@
                 var data1 = {
                     ...this.$user,
                     key_src: this.img1,
-                    trade_id:this.$chu.trade_id,
+                    trade_id:this.$chu.TradeSell.trade_id,
                     order_number:this.$chu.order_number,
                 }
                 this.$api.user.upload_pic(data1)
@@ -174,11 +174,11 @@
 
                     var data2 = {
                         ...this.$user,
-                        trade_id:this.$chu.trade_id,
-                        order_number:this.$chu.order_number,
-                        to_from_id: this.$chu.to_from_id,
-                        trade_detail_id:this.$chu.id,
-                        result_user_amount:'',
+                        trade_id:this.$chu.TradeSell.trade_id,
+                        order_number:this.$chu.TradeSell.order_number,
+                        to_from_id: this.$chu.TradeSell.to_from_id,
+                        trade_detail_id: this.$chu.TradeSell.id,
+                        number: this.$chu.TradeSell.number,
                         status: 2,
                     }
                     this.$api.user.trade_status(data2)

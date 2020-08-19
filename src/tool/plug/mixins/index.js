@@ -46,12 +46,45 @@ plug.install = function(Vue, options) {
             
         },
         methods:{
-            mai_status(id){
+            loading(text) {
+                this.$toast.loading({
+                    duration: 0, // 持续展示 toast
+                    forbidClick: true,
+                    message: text || '正在加载中',
+                });
+            },
+            mai_status1(id) {
                 var str = ''
                 switch (id) {
                     case 0:
-                        str = '进行中'
+                        str = '发布中'
                         break;
+                    case 1:
+                        str = '交易中'
+                        break;
+                    case 2:
+                        str = '等待对方确认收款'
+                        break;
+                    case 3:
+                        str = '订单已完成'
+                        break;
+                    case 4:
+                        str = '订单已取消'
+                        break;
+                    case 5:
+                        str = '发布取消'
+                        break;
+                    default:
+                        break;
+                }
+                return str
+            },
+            mai_status(id){
+                var str = ''
+                switch (id) {
+                    case 1:
+                        str = '交易中'
+                    break;
                     case 2:
                         str = '确认收款'
                         break;
@@ -66,29 +99,7 @@ plug.install = function(Vue, options) {
                 }
                 return str
             },
-            mai_status1(id){
-                var str = ''
-                switch (id) {
-                    case -1:
-                        str = '发布中'
-                        break;
-                    case 0:
-                        str = '进行中'
-                        break;
-                    case 2:
-                        str = '确认收款'
-                        break;
-                    case 3:
-                        str = '订单已完成'
-                        break;
-                    case 4:
-                        str = '订单已取消'
-                        break;
-                    default:
-                        break;
-                }
-                return str
-            }
+            
         }
     })
 
