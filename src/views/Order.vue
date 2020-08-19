@@ -83,7 +83,7 @@ export default {
 	data(){
 		return {
 			tabs: 0,
-			
+
 			filter1: '',
 			filter2: '',
 
@@ -226,14 +226,16 @@ export default {
 			this.loading('正在取消');
 			var data2 = {
 				...this.$user,
-				// trade_id: item.trade_id,
+				trade_id: item.id,
 				order_number: item.order_number,
-				// type: 1,
 				status: 5,
 			}
 			this.$api.user.trade_status(data2)
 			.then(res=>{
 				console.log(res);
+				if(res.code == 1){
+					item.status = 5
+				}
 				this.$toast(res.msg);
 			})
 		},

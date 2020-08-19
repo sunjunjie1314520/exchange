@@ -92,7 +92,7 @@ export default {
 				this.$toast(res.msg);
 				setTimeout(() => {
 					this.$router.back();
-				}, 1800);
+				}, 1600);
 			})
 		},
 		addHandle(){
