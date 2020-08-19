@@ -244,8 +244,8 @@ export default {
 
 			status:'all',
 			orderList:[],
-			page: 0,
 			all_page: 1,
+			page: 0,
 		}
 	},
 	created(){

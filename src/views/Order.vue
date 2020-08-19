@@ -9,7 +9,7 @@
 				</ul>
 			</div>
 			<div class="list-wrppaer">
-				<scroller height='400' :on-refresh="refresh" :on-infinite="infinite" ref="myscroller">
+				<scroller :on-refresh="refresh" :on-infinite="infinite" ref="myscroller">
 					<div class="list" v-if="list_n && tabs==0">
 						<ul>
 							<li v-for="item in list_n" :key="item.id">
@@ -89,15 +89,17 @@ export default {
 			state1: 1,
 			state2: 1,
 
-			list: false,
-			list1: false,
+			list: [],
+			list1: [],
 
 			params: {},
 
 			status:'all',
-			orderList:[],
+
 			page: 0,
-			all_page: 1,
+
+			buy_all_page: 1,
+			sell_all_page: 1,
 		}
 	},
 	created(){
@@ -138,7 +140,8 @@ export default {
 	},
 	methods: {
 		tabsToggle(id){
-			this.tabs = id
+			this.tabs = id;
+			this.goodsAll();
 		},
 		cancel(is){
 			this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is});
@@ -197,14 +200,22 @@ export default {
 		},
 
 		getNetWork3(done){
-			this.$api.user.record(this.$user)
+			let data = {
+				...this.$user,
+				page: this.page,
+			}
+			this.$api.user.record(data)
 			.then(res=>{
 				console.log(res);
 				if(res.code == 1){
-					this.list = res.data.buy;
-					this.list1 = res.data.sell;
-					this.$refs.myscroller.finishInfinite(true);
-					this.page = 1;
+					if(this.tabs==0){
+						this.list.push.apply(this.list, res.data.buy)
+						this.buy_all_page = res.data.buy_all_page
+					}else{
+						this.list1.push.apply(this.list1, res.data.sell)
+						this.sell_all_page = res.data.sell_all_page
+					}
+					this.$refs.myscroller.finishInfinite(true)
 					done();
 				}
 			})
@@ -257,24 +268,51 @@ export default {
 		},
 		refresh (done) {
 			setTimeout(()=>{
+				this.goodsAll();
 				done();
 			},1500)
 		},
 		//下拉触发
 		infinite (done) {
 			console.log('infinite');
-			if(this.page>=this.all_page){
-				setTimeout(()=>{
-					this.$refs.myscroller.finishInfinite(true);
-				},1500)
+			if(this.tabs == 0){
+				console.log(this.page, this.buy_all_page);
 			}else{
-				setTimeout(()=>{
-					this.page++;
-					this.getNetWork3(done);
-				},500);
+				console.log(this.page, this.sell_all_page);
+			}
+			if(this.tabs == 0){
+				if(this.page>=this.buy_all_page){
+					setTimeout(()=>{
+						this.$refs.myscroller.finishInfinite(true);
+					},1500)
+				}else{
+					setTimeout(()=>{
+						this.page++;
+						this.getNetWork3(done);
+					},500);
+				}
+			}else{
+				if(this.page>=this.sell_all_page){
+					setTimeout(()=>{
+						this.$refs.myscroller.finishInfinite(true);
+					},1500)
+				}else{
+					setTimeout(()=>{
+						this.page++;
+						this.getNetWork3(done);
+					},500);
+				}
 			}
 		},
-		
+		goodsAll(){
+			this.status = 'all'
+			this.page = 0
+			this.buy_all_page= 1,
+			this.sell_all_page= 1,
+			this.$refs.myscroller.finishInfinite(false);
+			this.list = []
+			this.list1 = []
+		},
 	},
 	destroyed(){
 		this.cancel(false);

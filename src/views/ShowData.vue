@@ -8,7 +8,7 @@
 						<input type="text" v-model="item.bank_name" placeholder="开户姓名">
 					</div>
 				</li>
-				<div class="box" v-if="item.bank_type!='zfb' && item.bank_type!='wx'">
+				<div class="box">
 					<li>
 						<span>开户银行：</span>
 						<div class="fr">
@@ -22,25 +22,25 @@
 						</div>
 					</li>
 				</div>
-				<li v-if="item.bank_type=='zfb'">
+				<li>
 					<span>支付宝账号：</span>
 					<div class="fr">
-						<input type="text" v-model="item.bank_number" placeholder="支付宝账号">
+						<input type="text" v-model="item.zfb_name" placeholder="支付宝账号">
 					</div>
 				</li>
-				<li v-if="item.bank_type=='zfb'">
+				<li>
 					<span>支付宝收款码：</span>
 					<div class="fr">
 						<div class="pub-upload noback">
-							<img :src="'http://api.ohtbmgn.cn/' + item.key_src" alt="">
+							<img :src="'http://api.ohtbmgn.cn/' + item.wx_number" alt="">
 						</div>
 					</div>
 				</li>
-				<li v-if="item.bank_type=='wx'">
+				<li>
 					<span>微信收款码：</span>
 					<div class="fr">
 						<div class="pub-upload noback">
-							<img :src="'http://api.ohtbmgn.cn/' + item.key_src" alt="">
+							<img :src="'http://api.ohtbmgn.cn/' + item.zfb_number" alt="">
 						</div>
 					</div>
 				</li>
