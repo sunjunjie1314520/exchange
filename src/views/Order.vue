@@ -83,11 +83,12 @@ export default {
 	data(){
 		return {
 			tabs: 0,
-			filter1: 1,
-			filter2: 1,
+			
+			filter1: '',
+			filter2: '',
 
-			state1: 1,
-			state2: 1,
+			state1: '',
+			state2: '',
 
 			list: [],
 			list1: [],

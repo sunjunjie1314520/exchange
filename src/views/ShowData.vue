@@ -1,6 +1,6 @@
 <template>
 	<div class="app">
-		<div class="bind-page">
+		<div class="bind-page" v-if="$coll.length > 0">
 			<ul v-for="item in $coll" :key="item.id">
 				<li>
 					<span>开户姓名：</span>
@@ -46,6 +46,7 @@
 				</li>
 			</ul>
 		</div>
+		<div v-else class="bind-null-data">对方没有绑定任何收款信息</div>
 	</div>
 </template>
 

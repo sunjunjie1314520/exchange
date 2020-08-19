@@ -70,7 +70,7 @@
                 <p>买家打款凭证</p>
             </div>
             <div class="pub-button">
-                <button @click="show=true">{{mai_status($chu.status)}}</button>
+                <button @click="$chu.status==2 ? show=true : ''">{{mai_status($chu.status)}}</button>
             </div>
         </div>
 

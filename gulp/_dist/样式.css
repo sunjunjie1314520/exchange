@@ -634,3 +634,9 @@
 #myChart svg {
   width: 0.9rem;
 }
+.bind-null-data {
+  text-align: center;
+  padding-top: 1rem;
+  float: left;
+  width: 100%;
+}
