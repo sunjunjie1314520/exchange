@@ -24,7 +24,7 @@ config.chuRecord = params => request.globalRequest(`/Trade/chuRecord`, 'POST', p
 config.user_bank_save = params => request.globalRequest(`/user_bank/save`, 'POST', params, 3)
 
 // 信息
-config.user_bank_index = params => request.globalRequest(`/user_bank/index`, 'POST', params, 3)
+config.user_bank_index = params => request.globalRequest(`/user_bank/page_index`, 'POST', params, 3)
 
 // 首页系统信息
 config.trade_index = params => request.globalRequest(`/Trade/index`, 'POST', params, 3)
@@ -58,6 +58,7 @@ config.sign = params => request.globalRequest(`/Login/username`, 'POST', params,
 
 // 用户记录
     config.record = params => request.globalRequest(`/user/record`, 'POST', params, 3)
+    config.add_bank = params => request.globalRequest(`/user/add_bank`, 'POST', params, 3)
 
 
 export default config

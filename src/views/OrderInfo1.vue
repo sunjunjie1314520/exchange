@@ -183,7 +183,8 @@
                     }
                     this.$api.user.trade_status(data2)
                     .then(res=>{
-                        this.$toast(res.msg);
+                        console.log(res);
+                        this.$toast(res1.msg);
                         this.$store.commit('User/SET_CURRENT_STATUS', 2);
                     })
                 })

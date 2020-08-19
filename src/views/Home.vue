@@ -4,81 +4,92 @@
 			<!-- style="top: 0;" height='500' class="scroller" -->
 			<scroller :on-refresh="refresh" :on-infinite="infinite" ref="myscroller">
 				<div class="wrapper">
-
+						
 					<div class="head">
-						<div class="text">
-							首页
-						</div>
+						<div class="text">首页</div>
 						<div class="home-user" @click="show=true">
 							<img v-if="$info && $info.avatar != '0'" :src="'http://api.ohtbmgn.cn/' + $info.avatar" alt="">
-							<img v-else src="../../src/static/img/bab103_77x77.jpg" alt="">
+							<img v-else src="../../src/static/img/77aee2_72x72.png" alt="">
 						</div>
 						<div class="func">
 							<div class="ico"><router-link to="/buy">买</router-link></div>
 						</div>
 					</div>
+
+					<div class="clear"></div>
 					
 					<!-- 图表 -->
-					<div id="myChart" :style="{width: countWidth, height: '200px'}"></div>
+					<div id="myChart" :style="{width: countWidth, height: '200px'}">
+						<!-- <img src="../../src/static/img/loadding.svg" alt=""> -->
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+							<circle cx="50" cy="50" r="32" stroke-width="8" stroke="#c5c5c5" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round" transform="rotate(29.9862 50 50)">
+								<animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
+							</circle>
+						</svg>
+					</div>
 					
 					<div class="banner" v-if="false">
 						<img src="../../src/static/img/0fc7e1_690x335.jpg" alt="">
 					</div>
+					
+					<div class="w">
+						<div class="data" v-if="$trade">
+							<div class="today">
+								<div class="item">
+									<div class="tit">
+										均价(昨/今)
+									</div>
+									<div class="number">
+										￥{{ $trade.data[$trade.data.length-2].amount / $trade.data[$trade.data.length-2].volume | moneyFixed(2)}}/{{ $trade.data[$trade.data.length-1].amount / $trade.data[$trade.data.length-1].volume | moneyFixed(2)}}
+									</div>
+								</div>
+								<div class="item">
+									<div class="tit">
+										最高(昨/今)
+									</div>
+									<div class="number">
+										￥{{$trade.data[$trade.data.length-2].floor | moneyFixed(2)}}/{{$trade.data[$trade.data.length-1].floor | moneyFixed(2)}}
+									</div>
+								</div>
+								<div class="item">
+									<div class="tit">
+										当前底价
+									</div>
+									<div class="number">
+										￥{{$trade.data[$trade.data.length-1].max | moneyFixed(2)}}
+									</div>
+								</div>
+							</div>
+							<div class="deal">
+								<div class="item">
+									<div class="tit">
+										买量(音豆)
+									</div>
+									<div class="number">
+										{{$trade.data[$trade.data.length-1].amount}}
+									</div>
+								</div>
+								<div class="item">
+									<div class="tit">
+									成交(音豆)(昨/今)
+									</div>
+									<div class="number">
+										{{$trade.data[$trade.data.length-2].volume}}/{{$trade.data[$trade.data.length-1].volume}}
+									</div>
+								</div>
+							</div>
+						</div>
 
-					<div class="data" v-if="$trade">
-						<div class="today">
-							<div class="item">
-								<div class="tit">
-									均价(昨/今)
+						<div class="search">
+							<div class="box">
+								<div class="ico">
+									<img src="../../src/static/img/1d1714_30x30.jpg" alt="">
 								</div>
-								<div class="number">
-									￥{{ $trade.data[$trade.data.length-2].amount / $trade.data[$trade.data.length-2].volume | moneyFixed(2)}}/{{ $trade.data[$trade.data.length-1].amount / $trade.data[$trade.data.length-1].volume | moneyFixed(2)}}
-								</div>
-							</div>
-							<div class="item">
-								<div class="tit">
-									最高(昨/今)
-								</div>
-								<div class="number">
-									￥{{$trade.data[$trade.data.length-2].floor | moneyFixed(2)}}/{{$trade.data[$trade.data.length-1].floor | moneyFixed(2)}}
+								<div class="text">
+									<input type="text" v-model="phone" name="" id="" placeholder="请输入您要搜索的手机号">
+									<button @click="search">搜索</button>
 								</div>
 							</div>
-							<div class="item">
-								<div class="tit">
-									当前底价
-								</div>
-								<div class="number">
-									￥{{$trade.data[$trade.data.length-1].max | moneyFixed(2)}}
-								</div>
-							</div>
-						</div>
-						<div class="deal">
-							<div class="item">
-								<div class="tit">
-									买量(音豆)
-								</div>
-								<div class="number">
-									{{$trade.data[$trade.data.length-1].amount}}
-								</div>
-							</div>
-							<div class="item">
-								<div class="tit">
-								成交(音豆)(昨/今)
-								</div>
-								<div class="number">
-									{{$trade.data[$trade.data.length-2].volume}}/{{$trade.data[$trade.data.length-1].volume}}
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="search">
-						<div class="ico">
-							<img src="../../src/static/img/1d1714_30x30.jpg" alt="">
-						</div>
-						<div class="text">
-							<input type="text" v-model="phone" name="" id="" placeholder="请输入您要搜索的手机号">
-							<button @click="search">搜索</button>
 						</div>
 					</div>
 
@@ -117,8 +128,10 @@
 											<div class="txt">
 												{{item.phone | mobile}}
 											</div>
-											<div class="pays">
-												<img v-for="item1 in item.UserBank" :key="item1.id" :src="getImgUrl(item1)" alt="">
+											<div class="pays" v-if="item.UserBank.length > 0">
+												<img :src="getImgUrl(0, item.UserBank[0].bank_number)" alt="">
+												<img :src="getImgUrl(1, item.UserBank[0].wx_number)" alt="">
+												<img :src="getImgUrl(2, item.UserBank[0].zfb_number)" alt="">
 											</div>
 										</div>
 									</div>
@@ -251,10 +264,12 @@ export default {
 	watch:{
 		data1(ee){
 			console.log(ee);
-			this.drawLine();
 		}
 	},
 	computed: {
+		yAxis_Max(){
+			return Math.max.apply(null, this.data1)
+		},
 		min(){
 			return this.$trade.sys_amount * 1 - this.$trade.sys_amount * 1 / 100 * 5
 		},
@@ -262,17 +277,16 @@ export default {
 			return this.$trade.sys_amount * 1 + this.$trade.sys_amount * 1 / 100 * 5
 		},
 		data1(){
-			// var arr = [1, 8, 18, 30, 42, 60]
+			// var arr = [0, 5.5, 10, 15, 20, 25, 30]
 			var arr = []
 			if(this.$trade){
 				this.$trade.data.forEach(item=>{
-					arr.push(item.amount)
+					arr.push(item.floor)
 				})
 			}
 			return arr
 		},
 		week(){
-			// var arr = [1, 8, 18, 30, 42, 60]
 			var arr = []
 			if(this.$trade){
 				this.$trade.data.forEach(item=>{
@@ -285,23 +299,13 @@ export default {
 		}
 	},
 	methods: {
-		getImgUrl(item){
-			var str = ''
-			switch (item.id) {
-				case 1:
-					str = '68f55d_64x64.png'
-					break;
-				case 2:
-					str = 'dd2105_96x96.png'
-					break;
-				case 3:
-					str = '469592_34x34.png'
-					break;
-				default:
-					str = '469592_34x34.png'
-					break;
+		getImgUrl(index, fields){
+			var arr = ['68f55d_64x64.png', 'dd2105_96x96.png', '469592_34x34.png'];
+			if(fields){
+				return require(`../../src/static/img/${arr[index]}`)
+			}else{
+				return ''
 			}
-			return require(`../../src/static/img/${str}`)
 		},
 		resultHandle(list){
 			var bi = 0;
@@ -324,7 +328,7 @@ export default {
 		// 列表
 		getorderList(done){
 			var data = {
-				page: 1,
+				page: this.page,
 				status: 0,
 				phone: this.phone,
 				token: this.$user.token
@@ -334,13 +338,9 @@ export default {
 				if(res.code == 1){
 					this.orderList.push.apply(this.orderList, res.data)
 					this.$refs.myscroller.finishInfinite(true)
-					this.page = this.page + 1
-					if(res.data.length >= 10){
-						this.all_page = this.page + 1
-					}else{
-						this.all_page = this.page
-					}
-					done();
+					this.all_page = res.all_page
+					// this.page = this.page + 1
+					done();					
 				}else{
 					this.$refs.myscroller.finishInfinite(true);
 				}
@@ -370,8 +370,8 @@ export default {
 				grid: {
 					top: 20,
 					bottom: 30,
-					left: 25,
-					right: 35
+					left: '10%',
+					right: 15
 				},
 				tooltip: {},
 				xAxis: {
@@ -383,6 +383,8 @@ export default {
 					}
 				},
 				yAxis: {
+					min: 0,
+					max: _this.yAxis_Max * 5,
 					axisLine: {
 						lineStyle: {
 							color: "#fff",
@@ -399,7 +401,14 @@ export default {
 		// 获取用户信息
 		userinfo(){
 			this.$store.dispatch('User/userinfo', this.$user);
-			this.$store.dispatch('User/trade_index', this.$user);
+
+			this.$store.dispatch('User/trade_index', this.$user)
+			.then(res=>{
+				console.log(res);
+				setTimeout(() => {
+					this.drawLine();
+				}, 500);
+			})
 		},
 		refresh (done) {
 			setTimeout(()=>{
@@ -420,7 +429,7 @@ export default {
 				setTimeout(()=>{
 					this.page++;
 					this.getorderList(done);
-				},500);
+				}, 200);
 			}
 		},
 		goodsAll(){

@@ -145,6 +145,7 @@
   bottom: 0;
   right: 0;
   padding: 0 0.52rem 0.24rem;
+  z-index: 2;
 }
 .pub-button .item {
   width: 49%;
@@ -189,38 +190,44 @@
 .order-page {
   height: 100%;
 }
+.order-page .list-wrppaer {
+  position: relative;
+  height: 4rem;
+  float: left;
+  width: 100%;
+}
 .order-page .list {
   float: left;
   width: 100%;
   height: 100%;
 }
-.order-page .list .mui-wrapper {
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-.order-page .list .ul0 {
+.order-page .list ul {
   float: left;
   width: 100%;
 }
-.order-page .list .ul0 li {
+.order-page .list ul li {
   float: left;
   width: 100%;
-  padding: 0.2rem 0.3rem;
+  padding: 0 0.3rem;
   background: #fff;
   border-bottom: 0.1px solid #ccc;
 }
-.order-page .list .ul0 .fl {
-  line-height: 0.5rem;
+.order-page .list ul .fl {
+  padding-top: 0.15rem;
 }
-.order-page .list .ul0 .fr {
+.order-page .list ul .fl h3,
+.order-page .list ul .fl p {
+  font-size: 0.26rem;
+  line-height: 1.6;
+}
+.order-page .list ul .fr {
   display: flex;
   flex-direction: column;
   height: 1.5rem;
   align-items: center;
   justify-content: center;
 }
-.order-page .list .ul0 .fr span {
+.order-page .list ul .fr span {
   margin-top: 0.1rem;
   background: #3048ff;
   display: inline-block;
@@ -229,15 +236,8 @@
   color: #fff;
   font-size: 0.26rem;
 }
-.order-page .list .ul0 .fr span:nth-of-type(1) {
+.order-page .list ul .fr span:nth-of-type(1) {
   margin-top: 0;
-}
-.order-page .list .ul1 li {
-  padding: 0.2rem 0;
-}
-.order-page .list .ul1 li span {
-  display: block;
-  line-height: 0.8rem;
 }
 .order-page .list .item {
   border-bottom: 0.1px solid #ccc;
@@ -468,9 +468,6 @@
   margin-top: 0.06rem;
   padding: 0 0.3rem;
 }
-.clear {
-  clear: both;
-}
 .order-info {
   float: left;
   width: 100%;
@@ -633,4 +630,7 @@
 .alert-show .layout .btn button.b1 {
   background: #fff;
   color: #3048ff;
+}
+#myChart svg {
+  width: 0.9rem;
 }

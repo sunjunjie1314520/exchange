@@ -123,6 +123,7 @@
     bottom 0
     right 0
     padding 0 52px 24px
+    z-index 2
     .item
         width 49%
         float left
@@ -156,23 +157,26 @@
 
 .order-page
     height 100%
+    .list-wrppaer
+        position relative
+        height 400px
+        fw 1
     .list
         fw 1
         height 100%
-        .mui-wrapper
-            height 100%
-            position relative
-            overflow hidden
-        .ul0
+        ul
             fw 1
             li
                 fw 1
-                padding 20px 30px
+                padding 0 30px
                 background #fff
                 border-bottom .1px solid #ccc
             .fl
-                line-height 50px
-            
+                padding-top 15px
+                h3
+                p
+                    font-size 26px
+                    line-height 1.6
             .fr
                 display flex
                 flex-direction column
@@ -188,13 +192,7 @@
                     border-radius 6px
                     color #fff
                     font-size 26px
-            
-        .ul1
-            li
-                padding 20px 0
-                span
-                    display block
-                    line-height 80px
+        
         .item
             border-bottom .1px solid #ccc
             .user
@@ -370,11 +368,6 @@
             margin-top 6px
             padding 0 30px
     
-
-.clear
-    clear both
-
-
 .order-info
     fw 1
     padding 0 30px
@@ -494,4 +487,7 @@
                 &.b1
                     background #fff
                     color theme
-                
+
+#myChart
+    svg
+        width 90px

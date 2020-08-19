@@ -81,11 +81,7 @@ export default {
 	},
 	methods: {
 		submitFun(){
-			this.$toast.loading({
-				duration: 0, // 持续展示 toast
-				forbidClick: true,
-				message: '正在加载中',
-			});
+			this.loading('正在创建');
 			var data = {
 				...this.formData,
 				...this.$user,

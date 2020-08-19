@@ -1,3 +1,8 @@
+.w {
+  padding: 0 0.3rem;
+  float: left;
+  width: 100%;
+}
 .home-page {
   width: 100%;
   height: 100%;
@@ -8,12 +13,10 @@
   overflow: hidden;
 }
 .home-page .wrapper {
-  padding: 0 0.3rem;
   float: left;
   width: 100%;
 }
 .home-page .head {
-  width: 100%;
   height: 1.14rem;
   position: relative;
   z-index: 3;
@@ -27,7 +30,7 @@
 }
 .home-page .head .func {
   position: absolute;
-  right: 0;
+  right: 0.3rem;
   top: 0;
   height: 1.14rem;
   display: flex;
@@ -52,11 +55,10 @@
   width: 0.74rem;
   height: 0.74rem;
   position: absolute;
-  left: 0;
+  left: 0.3rem;
   top: 50%;
   margin-top: -0.37rem;
   border-radius: 0.37rem;
-  border: 1px solid #fff;
 }
 .home-page .head .home-user img {
   width: 100%;
@@ -157,7 +159,7 @@
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 }
-.home-page .search {
+.home-page .search .box {
   width: 100%;
   height: 0.74rem;
   background-color: #2e3649;
@@ -279,7 +281,7 @@
   position: relative;
   padding: 0 0.3rem;
   float: left;
-  left: -0.3rem;
+  left: 0;
   min-height: 1rem;
   padding-bottom: 0.4rem;
   border-bottom: 0.1px solid #47577a;

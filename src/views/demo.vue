@@ -14,7 +14,7 @@
             return {
                 status:'all',
                 orderList:[],
-                page:0,
+                page: 0,
                 all_page: 1,
             }
         },
@@ -46,7 +46,7 @@
                         jwt:this.jwt,
                         status:this.status,
                         page:this.page,
-                        page_size:5
+                        page_size: 5
                     }
                 }).then(res=>{
                     if(res.data.code == 0){

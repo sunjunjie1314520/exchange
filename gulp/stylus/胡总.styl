@@ -1,6 +1,10 @@
 
 @import "fn.styl"
 @import "theme.styl"
+.w
+    padding 0 30px
+    float left
+    width 100%
 
 .home-page
     width 100%
@@ -11,10 +15,8 @@
     position relative
     overflow hidden
     .wrapper
-        padding 0 30px
         fw 1
     .head
-        width 100%
         height 114px
         position relative
         z-index 3
@@ -26,7 +28,7 @@
             text-align center
         .func
             position absolute
-            right 0
+            right 30px
             top 0
             height 114px
             display flex
@@ -48,11 +50,10 @@
             width 74px
             height 74px
             position absolute
-            left 0
+            left 30px
             top 50%
             margin-top -37px
             border-radius 37px
-            border 1px solid #fff
             img
                 width 100%
                 height 100%
@@ -139,14 +140,16 @@
                     font-weight bold
                     font-family Arial, Helvetica, sans-serif
     .search
-        width 100%
-        height 74px
-        background-color #2e3649
-        border-radius 8px
-        margin-top 20px
-        padding 0 32px
-        display flex
-        justify-content space-between
+        
+        .box
+            width 100%
+            height 74px
+            background-color #2e3649
+            border-radius 8px
+            margin-top 20px
+            padding 0 32px
+            display flex
+            justify-content space-between
         .ico
             width 38px
             height 100%
@@ -231,7 +234,7 @@
         position relative
         padding 0 30px
         float left
-        left -30px
+        left 0
         min-height 100px
         padding-bottom 40px
         border-bottom 0.1px solid #47577a

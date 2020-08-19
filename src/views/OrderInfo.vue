@@ -54,6 +54,7 @@
                         <span>买方手机：</span>
                         <div class="fr">
                             <p>{{$chu.sell_phone}}</p>
+
                         </div>
                     </li>
                 </ul>
@@ -62,7 +63,7 @@
             <div class="pict-show" v-if="$chu.status==0 && !$chu.key_src">
                 <p>等待对方上传凭证</p>
             </div>
-            <div class="upload-file" v-if="$chu.status==3">
+            <div class="upload-file" v-if="$chu.status==2">
                 <div class="pub-upload">
 					<img :src="'http://api.ohtbmgn.cn/' + $chu.key_src" alt="">
                 </div>
@@ -78,7 +79,7 @@
             <div class="layout">
                 <h2>交易密码</h2>
                 <div class="box">
-                    <input v-model="password" type="password" placeholder="请输入交易密码">
+                    <input v-model="password" maxlength="20" type="password" placeholder="请输入交易密码">
                 </div>
                 <div class="btn">
                     <button @click="show=false" class="b1">取消</button>
@@ -124,6 +125,8 @@
                         this.show = false;
                         if(res.code == 1){
                             this.$store.commit('User/SET_CURRENT_STATUS', 3);
+                        }else{
+                            this.password = '';
                         }
                     })
                     .catch(err=>{

@@ -8,32 +8,25 @@
 					<!-- <li @click="tabsToggle(2)" :class="{active: tabs==2}">发布记录</li> -->
 				</ul>
 			</div>
-			<div class="list" v-if="list_n && tabs==0">
-				<div class="list1 mui-wrapper" v-if="list_n.length > 0">
-					<ul class="ul0 mui-scroll">
-						<li v-for="item in list_n" :key="item.id">
-							<div class="fl">
-								<h3>数量：{{item.number}}</h3>
-								<p>时间：{{item.create_time}}</p>
-								<p>状态：{{mai_status1(item.status)}}</p>
-							</div>
-							<div class="fr">
-								<span @click="cancelOrder(item)" v-if="item.status == 0">取消订单</span>
-								<span v-if="item.status != 0 && item.status != 5" @click="gotoLink1(item)">查看详情</span>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="null-data1" v-else>
-					<img src="../../src/static/img/ae1e94_128x128.png" alt="">
-					<span>暂无记录</span>
-				</div>
-			</div>
-
-			<div class="list" v-if="list1_n && tabs==1">
-				<div class="mui-wrapper">
-					<div class="mui-scroll">
-						<ul class="ul0" v-if="list1_n.length > 0">
+			<div class="list-wrppaer">
+				<scroller height='400' :on-refresh="refresh" :on-infinite="infinite" ref="myscroller">
+					<div class="list" v-if="list_n && tabs==0">
+						<ul>
+							<li v-for="item in list_n" :key="item.id">
+								<div class="fl">
+									<h3>数量：{{item.number}}</h3>
+									<p>时间：{{item.create_time}}</p>
+									<p>状态：{{mai_status1(item.status)}}</p>
+								</div>
+								<div class="fr">
+									<span @click="cancelOrder(item)" v-if="item.status == 0">取消订单</span>
+									<span v-if="item.status != 0 && item.status != 5" @click="gotoLink1(item)">查看详情</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="list" v-if="list1_n && tabs==1">
+						<ul>
 							<li v-for="item in list1_n" :key="item.id" @click="gotoLink(item)">
 								<div class="fl">
 									<h3>数量：{{item.number}}</h3>
@@ -45,14 +38,10 @@
 								</div>
 							</li>
 						</ul>
-						<div class="null-data1" v-else>
-							<img src="../../src/static/img/ae1e94_128x128.png" alt="">
-							<span>暂无记录</span>
-						</div>
 					</div>
-				</div>
+					<div class="clear"></div>
+				</scroller>
 			</div>
-			
 		</div>
 		<div class="filter" v-if="alertConfig.Order">
 			<div class="layout" v-if="tabs==0">
@@ -73,7 +62,7 @@
 				<ul>
 					<li @click="toggle_filter2('')" :class="{active: filter2===''}">全部</li>
 					<li @click="toggle_filter2(1)" :class="{active: filter2===1}">交易中</li>
-					<li @click="toggle_filter2(2)" :class="{active: filter2==2}">未付款</li>
+					<li @click="toggle_filter2(2)" :class="{active: filter2==2}">待确认</li>
 					<li @click="toggle_filter2(3)" :class="{active: filter2==3}">已完成</li>
 					<li @click="toggle_filter2(4)" :class="{active: filter2==4}">已取消</li>
 					<!-- <li @click="toggle_filter2(4)" :class="{active: filter2==4}">申诉中</li> -->
@@ -94,16 +83,21 @@ export default {
 	data(){
 		return {
 			tabs: 0,
-			filter1: '',
-			filter2: '',
+			filter1: 1,
+			filter2: 1,
 
-			state1: '',
-			state2: '',
+			state1: 1,
+			state2: 1,
 
 			list: false,
 			list1: false,
 
 			params: {},
+
+			status:'all',
+			orderList:[],
+			page: 0,
+			all_page: 1,
 		}
 	},
 	created(){
@@ -113,8 +107,6 @@ export default {
 		if(this.params.tabs){
 			this.tabs = this.params.tabs * 1;
 		}
-
-		this.getNetWork3();
 	},
 	computed: {
 		list_n(){
@@ -145,35 +137,9 @@ export default {
 		}
 	},
 	methods: {
-		muiHan(){
-			setTimeout(() => {
-				this.mui(".mui-wrapper").scroll({
-					scrollY: true, //是否竖向滚动
-					scrollX: false, //是否横向滚动
-					startX: 0, //初始化时滚动至x
-					startY: 0, //初始化时滚动至y
-					indicators: true, //是否显示滚动条
-					deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
-					bounce: true //是否启用回弹
-				})
-			}, 1000);
-		},
-		
 		tabsToggle(id){
 			this.tabs = id
-			// switch (id) {
-			// 	case 0:
-			// 		this.getNetWork1();
-			// 		break;
-			// 	case 1:
-			// 		this.getNetWork2();
-			// 		break;
-			// 	default:
-			// 		break;
-			// }
-			this.muiscroll();
 		},
-
 		cancel(is){
 			this.$store.commit('Betting/SET_ALERT_CONFIG', {Order: is});
 		},
@@ -209,7 +175,6 @@ export default {
 			.then(res=>{
 				console.log(res);
 				this.list = res;
-				this.muiHan();
 			})
 		},
 
@@ -228,32 +193,21 @@ export default {
 			.then(res=>{
 				console.log(res);
 				this.list1 = res;
-				this.muiHan();
 			})
 		},
 
-		getNetWork3(){
+		getNetWork3(done){
 			this.$api.user.record(this.$user)
 			.then(res=>{
 				console.log(res);
-				this.list = res.data.buy
-				this.list1 = res.data.sell
-				
-				this.muiscroll();
+				if(res.code == 1){
+					this.list = res.data.buy;
+					this.list1 = res.data.sell;
+					this.$refs.myscroller.finishInfinite(true);
+					this.page = 1;
+					done();
+				}
 			})
-		},
-		muiscroll(){
-			setTimeout(() => {
-				this.mui(".mui-wrapper").scroll({
-					scrollY: true, //是否竖向滚动
-					scrollX: false, //是否横向滚动
-					startX: 0, //初始化时滚动至x
-					startY: 0, //初始化时滚动至y
-					indicators: true, //是否显示滚动条
-					deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
-					bounce: true //是否启用回弹
-				})
-			}, 500);
 		},
 		// 取消订单
 		cancelOrder(item){
@@ -300,6 +254,25 @@ export default {
 		gotoLink1(item){
 			this.$store.commit('User/SET_CURRENT_SELL1', item);
 			this.$router.push({path: '/order_info1'});
+		},
+		refresh (done) {
+			setTimeout(()=>{
+				done();
+			},1500)
+		},
+		//下拉触发
+		infinite (done) {
+			console.log('infinite');
+			if(this.page>=this.all_page){
+				setTimeout(()=>{
+					this.$refs.myscroller.finishInfinite(true);
+				},1500)
+			}else{
+				setTimeout(()=>{
+					this.page++;
+					this.getNetWork3(done);
+				},500);
+			}
 		},
 		
 	},
