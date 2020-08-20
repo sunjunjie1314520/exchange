@@ -108,7 +108,17 @@
         },
         methods: {
             duiinfo(item){
-                this.$store.commit('User/SET_CURRENT_SELL2', item)
+                var arr = ''
+
+                console.log(item);
+
+                if(item.length > 0){
+                    arr = [item[0]]
+                }else {
+                    arr = []
+                }
+
+                this.$store.commit('User/SET_CURRENT_SELL2', arr)
                 this.$router.push({path:'/show_data',})
             },
             orderRecord(){

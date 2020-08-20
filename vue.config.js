@@ -6,6 +6,7 @@ const webpack = require('webpack')
 module.exports = {
     runtimeCompiler: true,
     publicPath: './',
+    outputDir: 'jiaoyi',
     devServer: {
         proxy: {
             '/dev': {

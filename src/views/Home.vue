@@ -40,7 +40,7 @@
 										均价(昨/今)
 									</div>
 									<div class="number">
-										￥{{ $trade.data[$trade.data.length-2].amount / $trade.data[$trade.data.length-2].volume | moneyFixed(2)}}/{{ $trade.data[$trade.data.length-1].amount / $trade.data[$trade.data.length-1].volume | moneyFixed(2)}}
+										￥{{ $trade.data[$trade.data.length-2].amount / $trade.data[$trade.data.length-2].volume | moneyFixed(2)}}/{{ deal }}
 									</div>
 								</div>
 								<div class="item">
@@ -66,7 +66,7 @@
 										买量(音豆)
 									</div>
 									<div class="number">
-										{{$trade.data[$trade.data.length-1].amount}}
+										{{$trade.data[$trade.data.length-1].buy}}
 									</div>
 								</div>
 								<div class="item">
@@ -267,6 +267,19 @@ export default {
 		}
 	},
 	computed: {
+		deal(){
+			if(this.$trade.data[this.$trade.data.length-1].volume > 0){
+				var val = this.$trade.data[this.$trade.data.length-1].amount / this.$trade.data[this.$trade.data.length-1].volume
+				return val.toFixed(2)
+			}else{
+				console.log(this.orderList);
+				if(this.orderList.length > 0){
+					return this.orderList[0].float_range
+				}else{
+					return '0.00'
+				}
+			}
+		},
 		yAxis_Max(){
 			return Math.max.apply(null, this.data1)
 		},
