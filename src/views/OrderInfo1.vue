@@ -30,7 +30,7 @@
                     <li>
                         <span>交易总金额：</span>
                         <div class="fr">
-                            <p>{{$chu.TradeSell.number * $chu.TradeSell.amount}}</p>
+                            <p>{{($chu.TradeSell.number * $chu.TradeSell.amount) | moneyFixed(2)}}</p>
                         </div>
                     </li>
                     <li>
