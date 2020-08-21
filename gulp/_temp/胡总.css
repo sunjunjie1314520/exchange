@@ -347,19 +347,16 @@
 .pub-list .inform {
   width: 100%;
   float: left;
-  min-height: 100px;
-  padding-top: 10px;
 }
 .pub-list .inform .text {
   float: left;
 }
 .pub-list .inform .text .p {
-  line-height: 40px;
+  line-height: 58px;
   font-size: 26px;
   color: #b4c3e9;
 }
 .pub-list .inform .link {
-  padding-top: 15px;
   float: right;
 }
 .pub-list .inform .link button {

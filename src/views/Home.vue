@@ -48,15 +48,15 @@
 										最高(昨/今)
 									</div>
 									<div class="number">
-										￥{{$trade.data[$trade.data.length-2].floor | moneyFixed(2)}}/{{$trade.data[$trade.data.length-1].floor | moneyFixed(2)}}
+										￥{{$trade.data[$trade.data.length-2].max | moneyFixed(2)}}/{{$trade.data[$trade.data.length-1].max | moneyFixed(2)}}
 									</div>
 								</div>
 								<div class="item">
 									<div class="tit">
-										当前底价
+										当前价格
 									</div>
 									<div class="number">
-										￥{{$trade.data[$trade.data.length-1].max | moneyFixed(2)}}
+										￥{{$trade.data[$trade.data.length-1].floor | moneyFixed(2)}}
 									</div>
 								</div>
 							</div>
@@ -66,7 +66,8 @@
 										买量(音豆)
 									</div>
 									<div class="number">
-										{{$trade.data[$trade.data.length-1].buy}}
+										<!-- {{$trade.data[$trade.data.length-1].buy}} -->
+										{{sumBuy}}
 									</div>
 								</div>
 								<div class="item">
@@ -129,9 +130,9 @@
 												{{item.phone | mobile}}
 											</div>
 											<div class="pays" v-if="item.UserBank.length > 0">
-												<img :src="getImgUrl(0, item.UserBank[0].bank_number)" alt="">
-												<img :src="getImgUrl(1, item.UserBank[0].wx_number)" alt="">
-												<img :src="getImgUrl(2, item.UserBank[0].zfb_number)" alt="">
+												<img v-if="item.UserBank[0].bank_number" :src="getImgUrl(0, item.UserBank[0].bank_number)" alt="">
+												<img v-if="item.UserBank[0].wx_number" :src="getImgUrl(1, item.UserBank[0].wx_number)" alt="">
+												<img v-if="item.UserBank[0].zfb_number" :src="getImgUrl(2, item.UserBank[0].zfb_number)" alt="">
 											</div>
 										</div>
 									</div>
@@ -151,9 +152,9 @@
 											<!-- 数量 {{item.TradeDetail.length > 0 ? quantityHandle(item.TradeDetail): 0}} 音豆 -->
 											数量 {{item.number}} 音豆
 										</div>
-										<div class="p">
+										<!-- <div class="p">
 											最近7日成交{{item.TradeDetail.length > 0 ? resultHandle(item.TradeDetail): 0}}笔
-										</div>
+										</div> -->
 									</div>
 									<div class="link">
 										<button @click="sellHandle(item, item.float_range)">出售</button>
@@ -267,6 +268,15 @@ export default {
 		}
 	},
 	computed: {
+		sumBuy(){
+			var sum = 0;
+			if(this.$trade){
+				this.$trade.data.forEach(item=>{
+					sum = sum + item.buy;
+				})
+			}
+			return sum;
+		},
 		deal(){
 			if(this.$trade.data[this.$trade.data.length-1].volume > 0){
 				var val = this.$trade.data[this.$trade.data.length-1].amount / this.$trade.data[this.$trade.data.length-1].volume
@@ -281,7 +291,7 @@ export default {
 			}
 		},
 		yAxis_Max(){
-			return Math.max.apply(null, this.data1)
+			return Math.ceil(Math.max.apply(null, this.data1))
 		},
 		min(){
 			return this.$trade.sys_amount * 1 - this.$trade.sys_amount * 1 / 100 * 5
@@ -293,7 +303,15 @@ export default {
 			// var arr = [0, 5.5, 10, 15, 20, 25, 30]
 			var arr = []
 			if(this.$trade){
-				this.$trade.data.forEach(item=>{
+				var source = this.$assist.deepClone(this.$trade.data);
+				var len = source.length;
+				var five = []
+				if(len > 5){
+					five = source.splice(len - 5, len);
+				}else{
+					five = source
+				}
+				five.forEach(item=>{
 					arr.push(item.floor)
 				})
 			}
@@ -302,7 +320,15 @@ export default {
 		week(){
 			var arr = []
 			if(this.$trade){
-				this.$trade.data.forEach(item=>{
+				var source = this.$assist.deepClone(this.$trade.data);
+				var len = source.length;
+				var five = []
+				if(len > 5){
+					five = source.splice(len - 5, len);
+				}else{
+					five = source
+				}
+				five.forEach(item=>{
 					var a = item.create_time.split(' ')
 					var str = a[0].split('-').splice(1,2).join('/')
 					arr.push(str)
@@ -333,7 +359,7 @@ export default {
 			var bi = 0;
 			list.forEach(item=>{
 				// if(item.status == 2){
-					bi += item.amount * 1
+					bi += item.amount * 5
 				// }
 			})
 			return bi
@@ -384,7 +410,7 @@ export default {
 					top: 20,
 					bottom: 30,
 					left: '10%',
-					right: 15
+					right: 15,
 				},
 				tooltip: {},
 				xAxis: {
@@ -397,7 +423,7 @@ export default {
 				},
 				yAxis: {
 					min: 0,
-					max: _this.yAxis_Max * 5,
+					max: _this.yAxis_Max * 2,
 					axisLine: {
 						lineStyle: {
 							color: "#fff",
