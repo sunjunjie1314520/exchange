@@ -18,7 +18,7 @@
 				<li>
 					<span>数量</span>
 					<div class="box1">
-						<input type="text" v-model="formData.number" placeholder="请输入交易数量">
+						<b-input :maxLength="5" :maxNumber="50000" v-model="formData.number" placeholder="请输入交易数量"></b-input>
 					</div>
 				</li>
 				<li>
@@ -52,8 +52,6 @@ export default {
 			formData: {
 				number: 1,
 				from_id: '',
-				
-				
 			}
 		}
 	},
@@ -73,7 +71,11 @@ export default {
 			return this.$trade.sys_amount * 1 + this.$trade.sys_amount * 1 / 100 * 5
 		},
 		bai(){
-			return 1 - (this.$trade.data[1].amount / this.$trade.data[1].volume) / this.current
+			try {
+				return 1 - (this.$trade.data[1].amount / this.$trade.data[1].volume) / this.current
+			} catch (error) {
+				return 0
+			}
 		}
 	},
 	watch:{
@@ -81,7 +83,12 @@ export default {
 	},
 	methods: {
 		submitFun(){
+
+			// if(this.formData.number != '' && this.formData.number > 50000)
+			// return false;
+
 			this.loading('正在创建');
+
 			var data = {
 				...this.formData,
 				...this.$user,

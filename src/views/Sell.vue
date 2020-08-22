@@ -24,7 +24,6 @@
 			</ul>
 			<div class="tips">
 				<div class="money">
-					<p>单笔交易额1000音豆</p>
 					<p>每日可交易5000音豆 (不含手续费)</p>
 				</div>
 				<div class="box">
