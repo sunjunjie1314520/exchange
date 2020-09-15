@@ -14,7 +14,7 @@ if(process.env.NODE_ENV === 'development'){
 	// serverURL = 'http://www.dosmw.cn/index.php'
 }else{
     // 线上地址
-    serverURL = 'http://www.dosmw.cn/index.php'
+    serverURL = 'http://hd.ohtbmgn.cn/index.php'
 }
 
 export default serverURL
