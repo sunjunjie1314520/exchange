@@ -85,18 +85,16 @@ export default {
 			}
 			this.$api.user.user_bank_index(data)
 			.then(res=>{
-				console.log(res);
-				if(res.code){
-					this.is_id = res.data.id
-					this.formData.bank_name = res.data.bank_name
-					this.formData.bank_type = res.data.bank_type
-					this.formData.bank_number = res.data.bank_number
 
-					this.formData.zfb_name = res.data.zfb_name
-					this.formData.zfb_number = res.data.zfb_number
-					this.formData.wx_name = res.data.wx_name
-					this.formData.wx_number = res.data.wx_number
-				}
+				this.is_id = res.list.id
+				this.formData.bank_name = res.list.bank_name
+				this.formData.bank_type = res.list.bank_type
+				this.formData.bank_number = res.list.bank_number
+
+				this.formData.zfb_name = res.list.zfb_name
+				this.formData.zfb_number = res.list.zfb_number
+				this.formData.wx_name = res.list.wx_name
+				this.formData.wx_number = res.list.wx_number
 			})
 		},
 		submitFun(){
@@ -108,7 +106,7 @@ export default {
 			if(this.is_id){
 				data.id = this.is_id
 			}
-			this.$api.user.add_bank(data)
+			this.$api.user.user_bank_save(data)
 			.then(res=>{
 				console.log(res);
 				this.$toast('保存成功');

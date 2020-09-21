@@ -10,7 +10,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/dev': {
-                target: 'http://hd.ohtbmgn.cn/index.php',
+                target: 'http://hzasdbf.cn/public/index.php',
                 ws: true,
                 changeOrigin: true,
                 pathRewrite: {

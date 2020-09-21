@@ -1,7 +1,6 @@
 import Vue from "vue";
 
 import serverUrl, { base } from '../common/config.js'
-
 // const _this = Vue.prototype
 
 const request = {}
@@ -25,7 +24,8 @@ request.globalRequest = (url, method, data = {}, type, power) => {
     }
 
     const headers = {
-
+        'Content-Type': "text/plain",
+        'Accept': "*/*",
     }
 
     let form = new FormData()
@@ -49,15 +49,12 @@ request.globalRequest = (url, method, data = {}, type, power) => {
             break;
     }
     if (power){
-        console.log('权限');
-        headers['Authorization'] = 'Token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        let result = window.localStorage.getItem('dd_user')
+        headers['x2-token'] = result ? JSON.parse(result)['token'] : false
     }
     const machiningData = {
         body: formData,
-        headers: {
-            'Content-Type':"text/plain",
-            'Accept' :"*/*",
-        },
+        headers: headers,
         mode: "cors",
         // mode: "no-cors", // 如果不使世界跨域通过的话， 设置为 no-cors 但是responnse 中是没有值得
         cache: "force-cache",

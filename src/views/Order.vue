@@ -113,7 +113,7 @@ export default {
 	},
 	computed: {
 		list_n(){
-			if(this.list){
+			if(this.list.length > 0){
 				if(this.state1===''){
 					return this.list
 				}else{
@@ -126,7 +126,7 @@ export default {
 			}
 		},
 		list1_n(){
-			if(this.list1){
+			if(this.list1.length > 0){
 				if(this.state2===''){
 					return this.list1
 				}else{
@@ -209,12 +209,13 @@ export default {
 			.then(res=>{
 				console.log(res);
 				if(res.code == 1){
-					if(this.tabs==0){
-						this.list.push.apply(this.list, res.data.buy)
-						this.buy_all_page = res.data.buy_all_page
+					if(this.tabs == 0){
+						this.list.push.apply(this.list, res.data.buy.data)
+						console.log(this.list);
+						this.buy_all_page = res.data.buy.all_page
 					}else{
-						this.list1.push.apply(this.list1, res.data.sell)
-						this.sell_all_page = res.data.sell_all_page
+						this.list1.push.apply(this.list1, res.data.sell.data)
+						this.sell_all_page = res.data.sell.all_page
 					}
 					this.$refs.myscroller.finishInfinite(true)
 					done();
@@ -284,7 +285,7 @@ export default {
 				console.log(this.page, this.sell_all_page);
 			}
 			if(this.tabs == 0){
-				if(this.page>=this.buy_all_page){
+				if(this.page >= this.buy_all_page){
 					setTimeout(()=>{
 						this.$refs.myscroller.finishInfinite(true);
 					},1500)
@@ -295,7 +296,7 @@ export default {
 					},500);
 				}
 			}else{
-				if(this.page>=this.sell_all_page){
+				if(this.page >= this.sell_all_page){
 					setTimeout(()=>{
 						this.$refs.myscroller.finishInfinite(true);
 					},1500)

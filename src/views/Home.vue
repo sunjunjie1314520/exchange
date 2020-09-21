@@ -33,7 +33,7 @@
 					</div>
 					
 					<div class="w">
-						<div class="data" v-if="$trade">
+						<div class="data" v-if="$trade && $trade.data.length > 0">
 							<div class="today">
 								<div class="item">
 									<div class="tit">
@@ -172,7 +172,7 @@
 				<div class="close" @click="show=false;">关闭</div>
 				<div class="id">
 					<h2>{{ $info.phone | mobile }}</h2>
-					<span>手续费: {{$info.Group.fee * 100}}%</span>
+					<span>手续费: {{$info.group_fee * 100}}%</span>
 				</div>
 				<div class="assets">
 					<div class="item">
