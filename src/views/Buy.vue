@@ -5,15 +5,17 @@
 			<!-- <h2>单价￥{{$trade}}-{{$trade}}</h2> -->
 			<ul>
 				<li>
-					<div class="fl">
+					<!-- <div class="fl">
 						<span class="add i1" @click="jianHandle"></span>
-					</div>
+					</div> -->
+					<span>均价</span>
 					<div class="box1">
-						<p>{{current | moneyFixed(2)}}(昨日均价{{bai | moneyFixed(3)}}% )</p>
+						<!-- <p>{{current | moneyFixed(2)}}(昨日均价{{bai | moneyFixed(3)}}% )</p> -->
+						<input type="text" v-model="current1" placeholder="请输入均价">
 					</div>
-					<div class="fl ml32">
+					<!-- <div class="fl ml32">
 						<span class="add i2" @click="addHandle"></span>
-					</div>
+					</div> -->
 				</li>
 				<li>
 					<span>数量</span>
@@ -49,6 +51,7 @@ export default {
 	data(){
 		return {
 			current: 0,
+			current1: '',
 			formData: {
 				number: 1,
 				from_id: '',
@@ -86,7 +89,10 @@ export default {
 
 			// if(this.formData.number != '' && this.formData.number > 50000)
 			// return false;
-
+			if(this.current1 * 1 < this.min || this.current1 * 1 > this.max){
+				this.$toast('均价填写错误');
+				return false;
+			}
 			this.loading('正在创建');
 
 			var data = {

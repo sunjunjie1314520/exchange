@@ -59,6 +59,7 @@
 .sell-page ul li span {
   float: left;
   line-height: 104px;
+  width: 80px;
 }
 .sell-page ul li .box {
   float: left;
