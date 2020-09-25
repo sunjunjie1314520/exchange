@@ -1,7 +1,7 @@
 <template>
 	<div class="app">
 		<div class="sell-page">
-			<h2>单价￥{{min | moneyFixed(2)}} - {{max | moneyFixed(2)}}</h2>
+			<h2>单价￥{{min}} - {{max}}</h2>
 			<!-- <h2>单价￥{{$trade}}-{{$trade}}</h2> -->
 			<ul>
 				<li>
@@ -64,14 +64,16 @@ export default {
 	},
 	computed: {
 		price(){
-			var result = this.formData.number * this.current.toFixed(2);
+			var result = this.formData.number * this.current1;
 			return result.toFixed(2)
 		},
 		min(){
-			return this.$trade.sys_amount * 1 - this.$trade.sys_amount * 1 / 100 * 5
+			let sum = this.$trade.sys_amount * 1 - this.$trade.sys_amount * 1 / 100 * 5
+			return sum.toFixed(2) * 1
 		},
 		max(){
-			return this.$trade.sys_amount * 1 + this.$trade.sys_amount * 1 / 100 * 5
+			let sum = this.$trade.sys_amount * 1 + this.$trade.sys_amount * 1 / 100 * 5
+			return sum.toFixed(2) * 1
 		},
 		bai(){
 			try {
@@ -89,6 +91,10 @@ export default {
 
 			// if(this.formData.number != '' && this.formData.number > 50000)
 			// return false;
+
+			console.log(this.current1 * 1);
+			console.log(this.max);
+
 			if(this.current1 * 1 < this.min || this.current1 * 1 > this.max){
 				this.$toast('均价填写错误');
 				return false;
@@ -98,7 +104,7 @@ export default {
 			var data = {
 				...this.formData,
 				...this.$user,
-				float_range: this.current.toFixed(2),
+				float_range: this.current1,
 			}
 			this.$api.user.order_order(data)
 			.then(res=>{

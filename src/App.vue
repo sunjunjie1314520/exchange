@@ -17,12 +17,14 @@
 		},
 		watch:{
 			'$route' (to, from) {
-				// const toDepth = to.path.split('/').length
-				// const fromDepth = from.path.split('/').length
+
 				const toDepth = to.meta.back
 				const fromDepth = from.meta.back
+				
 				this.full = to.meta.full
-				this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+				if(from.name){
+					this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+				}
 			}
 		},
 		created(){

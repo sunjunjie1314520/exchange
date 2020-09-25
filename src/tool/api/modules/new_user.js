@@ -53,6 +53,6 @@ config.trade_status = params => request.globalRequest(`/trade_ase/status`, 'POST
 config.sign = params => request.globalRequest(`/Login/username_sign2`, 'POST', params, 3, 0)
 
 // 音豆
-config.record = params => request.globalRequest(`/user/record`, 'POST', params, 3, 1)
+config.record = params => request.globalRequest(`/user/record_ase`, 'POST', params, 3, 1)
 
 export default config

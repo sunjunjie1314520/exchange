@@ -40,8 +40,9 @@
 										均价(昨/今)
 									</div>
 									<div class="number">
-										￥{{ $trade.data[$trade.data.length-2].amount / $trade.data[$trade.data.length-2].volume | moneyFixed(2)}}/{{ deal }}
+										￥{{$trade.block[0]}}
 									</div>
+									<!-- {{ $trade.data[$trade.data.length-2].amount / $trade.data[$trade.data.length-2].volume | moneyFixed(2)}}/{{ deal }} -->
 								</div>
 								<div class="item">
 									<div class="tit">
