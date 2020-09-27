@@ -68,11 +68,13 @@ export default {
 			return result.toFixed(2)
 		},
 		min(){
-			let sum = this.$trade.sys_amount * 1 - this.$trade.sys_amount * 1 / 100 * 5
+			var len = this.$trade.data.length
+			let sum = this.$trade.data[len-1].max * 1 - this.$trade.data[len-1].max * 1 / 100 * 5
 			return sum.toFixed(2) * 1
 		},
 		max(){
-			let sum = this.$trade.sys_amount * 1 + this.$trade.sys_amount * 1 / 100 * 5
+			var len = this.$trade.data.length
+			let sum = this.$trade.data[len-1].max * 1 + this.$trade.data[len-1].max * 1 / 100 * 5
 			return sum.toFixed(2) * 1
 		},
 		bai(){
