@@ -5,7 +5,7 @@ import user from "./modules/user.js";
 import new_user from "./modules/new_user.js";
 
 
-const version = false
+const version = true
 
 let modules = {
     ...{

@@ -6,8 +6,8 @@ const webpack = require('webpack')
 module.exports = {
     runtimeCompiler: true,
     publicPath: './',
-    // outputDir: 'jiaoyi',
-    outputDir: 'trade',
+    outputDir: 'jiaoyi',
+    // outputDir: 'trade',
     devServer: {
         proxy: {
             '/dev': {
