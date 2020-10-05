@@ -59,6 +59,7 @@
                 var data = {
                     phone: this.phone,
                     password: this.$md5(this.password)
+                    // password: this.password
                 }
                 this.$api.user.sign(data)
                 .then(res=>{
