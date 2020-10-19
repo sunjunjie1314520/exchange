@@ -1,6 +1,10 @@
 <template>
 	<div class="app">
-		<div class="home-page">
+		<div class="home-flex" v-if="xiushi.code == -1">
+			<h2>{{xiushi.msg}}</h2>
+			<!-- <p>开放时间：<span>周一</span>至<span>周五10:00-18:00</span></p> -->
+		</div>
+		<div class="home-page" v-else>
 			<!-- style="top: 0;" height='500' class="scroller" -->
 			<scroller :on-refresh="refresh" :on-infinite="infinite" ref="myscroller">
 				<div class="wrapper">
@@ -8,7 +12,7 @@
 					<div class="head">
 						<div class="text">首页</div>
 						<div class="home-user" @click="show=true">
-							<img v-if="$info && $info.avatar != '0'" :src="'http://api.ohtbmgn.cn/' + $info.avatar" alt="">
+							<img v-if="$info && $info.avatar != '0' && $info.code != -1" :src="'http://api.ohtbmgn.cn/' + $info.avatar" alt="">
 							<img v-else src="../../src/static/img/77aee2_72x72.png" alt="">
 						</div>
 						<div class="func">
@@ -236,6 +240,7 @@ export default {
 	name: 'Home',
 	data(){
 		return {
+			xiushi: false,
 			show: false,
 			countWidth: 0,
 			phone: '',
@@ -383,8 +388,9 @@ export default {
 					done();					
 				}else{
 					this.$refs.myscroller.finishInfinite(true);
+					this.xiushi = res
 				}
-				console.log(res);
+				// console.log(res);
 				// this.list = res.data
 			})
 		},
@@ -441,13 +447,14 @@ export default {
 		// 获取用户信息
 		userinfo(){
 			this.$store.dispatch('User/userinfo', this.$user);
-
 			this.$store.dispatch('User/trade_index', this.$user)
 			.then(res=>{
-				console.log(res);
-				setTimeout(() => {
-					this.drawLine();
-				}, 500);
+				console.log(res, 'trade_index');
+				if(res.code == 1){
+					setTimeout(() => {
+						this.drawLine();
+					}, 500);
+				}
 			})
 		},
 		refresh (done) {
@@ -482,3 +489,14 @@ export default {
 	}
 }
 </script>
+
+<style lang="stylus" scoped>
+	.home-flex
+		height 100vh
+		display flex
+		justify-content center
+		align-items center
+		flex-direction column
+		text-align center
+		font-size .22rem
+</style>

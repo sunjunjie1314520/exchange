@@ -3,11 +3,12 @@ const webpack = require('webpack')
 // const autoprefixer = require('autoprefixer');
 // const pxtorem = require('postcss-pxtorem');
 
+const putDir = true
+
 module.exports = {
     runtimeCompiler: true,
     publicPath: './',
-    outputDir: 'jiaoyi',
-    // outputDir: 'trade',
+    outputDir: putDir ? 'jiaoyi' : 'trade',
     devServer: {
         proxy: {
             '/dev': {
