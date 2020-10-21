@@ -450,11 +450,9 @@ export default {
 			this.$store.dispatch('User/trade_index', this.$user)
 			.then(res=>{
 				console.log(res, 'trade_index');
-				if(res.code == 1){
-					setTimeout(() => {
-						this.drawLine();
-					}, 500);
-				}
+				setTimeout(() => {
+					this.drawLine();
+				}, 500);
 			})
 		},
 		refresh (done) {
